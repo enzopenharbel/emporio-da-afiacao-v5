@@ -80,18 +80,22 @@ export default function App() {
           </div>
 
           {/* BUSCA CENTRAL */}
-          <div className="hidden md:flex flex-1 justify-center">
-            <div className="relative w-[350px]">
-              <span className="absolute left-4 top-2.5 text-yellow-400">🔍</span>
-              <input
-                placeholder="Diga o que você procura"
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-                className="w-full pl-10 pr-4 py-2 rounded-full bg-black border border-yellow-400/20 shadow-lg focus:shadow-yellow-400/40 focus:border-yellow-400 outline-none text-sm transition-all duration-300"
-              />
-            </div>
-          </div>
+         <div className="hidden md:flex flex-1 justify-center">
+  <div className="flex items-center w-[380px] bg-black border border-yellow-400/30 rounded-full overflow-hidden shadow-lg hover:shadow-yellow-400/20 transition">
 
+    <input
+      placeholder="Diga o que você procura"
+      value={search}
+      onChange={(e) => setSearch(e.target.value)}
+      className="flex-1 px-4 py-2 bg-transparent text-sm outline-none placeholder-gray-400 focus:text-yellow-400"
+    />
+
+    <button className="bg-yellow-400 text-black px-4 py-2 font-semibold hover:bg-yellow-300 transition-all duration-300">
+      🔍
+    </button>
+
+  </div>
+</div>
           {/* MENU */}
           <nav className="hidden md:flex gap-8 text-sm">
             <button className="menu-link">Início</button>
