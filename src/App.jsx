@@ -45,48 +45,46 @@ export default function App() {
 
       {/* BANNER TOP (ESTILO IMAGEM ORIGINAL) */}
       <section className="p-6">
-        <div className="relative rounded-3xl overflow-hidden shadow-2xl">
+  <div className="relative rounded-3xl overflow-hidden shadow-2xl">
 
-          <img
-            src={banners[i]}
-            className="w-full h-[420px] object-cover transition duration-700"
-          />
+    <img
+      src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9"
+      className="w-full h-[480px] object-cover"
+    />
 
-          {/* OVERLAY */}
-          <div className="absolute inset-0 bg-black/70" />
+    {/* OVERLAY FORTE */}
+    <div className="absolute inset-0 bg-black/75" />
 
-          {/* TEXTO CENTRAL */}
-          <div className="absolute inset-0 flex flex-col justify-center items-center text-center px-6">
+    {/* CONTEÚDO */}
+    <div className="absolute inset-0 flex flex-col justify-center items-center text-center px-6">
 
-            <h2 className="text-4xl md:text-6xl font-bold mb-4 text-yellow-400">
-              Afiação Profissional
-            </h2>
+      <h2 className="text-5xl md:text-7xl font-extrabold mb-4 text-yellow-400 tracking-tight">
+        Afiação Profissional
+      </h2>
 
-            <p className="text-gray-300 max-w-xl mb-6 text-lg">
-              Alicates, tesouras e instrumentos com acabamento impecável para profissionais exigentes.
-            </p>
+      <p className="text-gray-300 max-w-xl mb-8 text-lg">
+        Alicates, tesouras e instrumentos com acabamento impecável para profissionais exigentes.
+      </p>
 
-            <div className="flex gap-4">
+      <div className="flex gap-4">
 
-              <a
-                href="https://wa.me/5511979626107"
-                target="_blank"
-                className="bg-yellow-400 text-black px-6 py-3 rounded-full font-semibold hover:scale-105 transition shadow-lg"
-              >
-                Solicitar Agora
-              </a>
+        <a
+          href="https://wa.me/5511979626107"
+          target="_blank"
+          className="bg-yellow-400 text-black px-8 py-4 rounded-full font-bold hover:scale-105 transition shadow-xl"
+        >
+          Solicitar Agora
+        </a>
 
-              <button
-                className="border border-white/30 px-6 py-3 rounded-full hover:bg-white/10 transition"
-              >
-                Ver Serviços
-              </button>
+        <button className="border border-white/30 px-8 py-4 rounded-full hover:bg-white/10 transition">
+          Ver Serviços
+        </button>
 
-            </div>
+      </div>
 
-          </div>
-        </div>
-      </section>
+    </div>
+  </div>
+</section>
 
     </div>
   );
