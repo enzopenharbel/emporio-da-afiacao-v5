@@ -65,39 +65,61 @@ export default function App() {
       </header>
 
       {/* BANNER ROTATIVO */}
-      <section className="pt-28 px-6">
-        <div className="relative rounded-3xl overflow-hidden shadow-2xl">
+     <section className="pt-28 px-6">
+  <div className="relative rounded-3xl overflow-hidden shadow-2xl">
 
-          <img
-            src={banners[index].img}
-            className="w-full h-[500px] object-cover transition duration-700"
-          />
+    <img
+      src={banners[index].img}
+      className="w-full h-[500px] object-cover transition duration-700"
+    />
 
-          {/* OVERLAY */}
-          <div className="absolute inset-0 bg-black/70" />
+    {/* OVERLAY */}
+    <div className="absolute inset-0 bg-black/70" />
 
-          {/* TEXTO */}
-          <div className="absolute inset-0 flex flex-col justify-center items-center text-center px-6">
+    {/* TEXTO */}
+    <div className="absolute inset-0 flex flex-col justify-center items-center text-center px-6">
 
-            <h2 className="text-4xl md:text-6xl font-bold text-yellow-400 mb-4">
-              {banners[index].title}
-            </h2>
+      <h2 className="text-4xl md:text-6xl font-bold text-yellow-400 mb-4">
+        {banners[index].title}
+      </h2>
 
-            <p className="text-gray-300 max-w-xl mb-6 text-lg">
-              {banners[index].text}
-            </p>
+      <p className="text-gray-300 max-w-xl mb-6 text-lg">
+        {banners[index].text}
+      </p>
 
-            <a
-              href="https://wa.me/5511979626107"
-              target="_blank"
-              className="bg-yellow-400 text-black px-6 py-3 rounded-full font-semibold hover:scale-105 transition shadow-lg"
-            >
-              Falar no WhatsApp
-            </a>
+    </div>
 
-          </div>
-        </div>
-      </section>
+    {/* SETA ESQUERDA */}
+    <button
+      onClick={() => setIndex((index - 1 + banners.length) % banners.length)}
+      className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black text-white p-3 rounded-full"
+    >
+      ‹
+    </button>
+
+    {/* SETA DIREITA */}
+    <button
+      onClick={() => setIndex((index + 1) % banners.length)}
+      className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black text-white p-3 rounded-full"
+    >
+      ›
+    </button>
+
+    {/* BOLINHAS */}
+    <div className="absolute bottom-4 w-full flex justify-center gap-2">
+      {banners.map((_, i) => (
+        <div
+          key={i}
+          onClick={() => setIndex(i)}
+          className={`w-3 h-3 rounded-full cursor-pointer ${
+            i === index ? "bg-yellow-400" : "bg-white/40"
+          }`}
+        />
+      ))}
+    </div>
+
+  </div>
+</section>
 
     </div>
   );
