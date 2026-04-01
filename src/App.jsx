@@ -1,9 +1,37 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+
+const banners = [
+  {
+    img: "https://images.unsplash.com/photo-1585747860715-2ba37e788b70",
+    title: "Afiação Profissional",
+    text: "Alicates, tesouras e facas com acabamento impecável.",
+  },
+  {
+    img: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9",
+    title: "Promoção Especial",
+    text: "A cada 10 alicates afiados, o 11º sai de graça.",
+  },
+  {
+    img: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d",
+    title: "Seja um Parceiro",
+    text: "Tenha nosso serviço no seu comércio e aumente seus ganhos.",
+  },
+];
 
 export default function App() {
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIndex((prev) => (prev + 1) % banners.length);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <div className="bg-black text-white min-h-screen">
 
+      {/* HEADER */}
       <header className="fixed w-full z-50 bg-black border-b border-yellow-400/20 shadow-lg">
         <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
 
@@ -11,8 +39,7 @@ export default function App() {
             <div className="bg-yellow-400 text-black p-2 rounded-xl font-bold shadow-md">
               ✦
             </div>
-
-            <div className="leading-tight">
+            <div>
               <h1 className="text-yellow-400 font-bold text-lg">
                 Empório da Afiação
               </h1>
@@ -30,19 +57,47 @@ export default function App() {
             <button>Contato</button>
           </nav>
 
-          <div>
-            <input
-              placeholder="Diga o que você procura"
-              className="w-40 focus:w-72 transition-all duration-300 bg-[#0f172a] px-4 py-2 rounded-full shadow-md focus:shadow-2xl outline-none border border-yellow-400/20 focus:border-yellow-400 text-sm"
-            />
-          </div>
-
+          <input
+            placeholder="Diga o que você procura"
+            className="w-40 focus:w-72 transition-all duration-300 bg-[#0f172a] px-4 py-2 rounded-full shadow-md focus:shadow-2xl outline-none border border-yellow-400/20 focus:border-yellow-400 text-sm"
+          />
         </div>
       </header>
 
-      <div className="pt-32 text-center">
-        <h2 className="text-4xl text-yellow-400">Site em construção</h2>
-      </div>
+      {/* BANNER ROTATIVO */}
+      <section className="pt-28 px-6">
+        <div className="relative rounded-3xl overflow-hidden shadow-2xl">
+
+          <img
+            src={banners[index].img}
+            className="w-full h-[500px] object-cover transition duration-700"
+          />
+
+          {/* OVERLAY */}
+          <div className="absolute inset-0 bg-black/70" />
+
+          {/* TEXTO */}
+          <div className="absolute inset-0 flex flex-col justify-center items-center text-center px-6">
+
+            <h2 className="text-4xl md:text-6xl font-bold text-yellow-400 mb-4">
+              {banners[index].title}
+            </h2>
+
+            <p className="text-gray-300 max-w-xl mb-6 text-lg">
+              {banners[index].text}
+            </p>
+
+            <a
+              href="https://wa.me/5511979626107"
+              target="_blank"
+              className="bg-yellow-400 text-black px-6 py-3 rounded-full font-semibold hover:scale-105 transition shadow-lg"
+            >
+              Falar no WhatsApp
+            </a>
+
+          </div>
+        </div>
+      </section>
 
     </div>
   );
