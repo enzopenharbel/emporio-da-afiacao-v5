@@ -38,8 +38,7 @@ export default function App() {
   const [search, setSearch] = useState("");
   const [bannerIndex, setBannerIndex] = useState(0);
 
-  const servicosRef = useRef(null);
-  const avaliacoesRef = useRef(null);
+  const sectionsRef = useRef([]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -48,14 +47,17 @@ export default function App() {
     return () => clearInterval(interval);
   }, []);
 
+  // 🔥 OBSERVER GLOBAL
   useEffect(() => {
-    const elements = [servicosRef.current, avaliacoesRef.current];
-
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            entry.target.classList.remove("opacity-0", "translate-x-20", "-translate-x-20");
+            entry.target.classList.remove(
+              "opacity-0",
+              "translate-x-20",
+              "-translate-x-20"
+            );
             entry.target.classList.add("opacity-100", "translate-x-0");
           }
         });
@@ -63,13 +65,25 @@ export default function App() {
       { threshold: 0.2 }
     );
 
-    elements.forEach((el) => el && observer.observe(el));
+    sectionsRef.current.forEach((el) => el && observer.observe(el));
   }, []);
 
   const filteredServices = useMemo(() => {
-    const term = search.toLowerCase();
-    return services.filter((s) => s.title.toLowerCase().includes(term));
+    return services.filter((s) =>
+      s.title.toLowerCase().includes(search.toLowerCase())
+    );
   }, [search]);
+
+  const nextBanner = () =>
+    setBannerIndex((prev) => (prev + 1) % banners.length);
+  const prevBanner = () =>
+    setBannerIndex((prev) =>
+      prev === 0 ? banners.length - 1 : prev - 1
+    );
+
+  const handleScroll = (id) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+  };
 
   return (
     <div className="bg-black text-white min-h-screen">
@@ -83,29 +97,43 @@ export default function App() {
             <h1 className="text-yellow-400 font-bold">Empório da Afiação</h1>
           </div>
 
-          {/* BUSCA */}
+          {/* BUSCA TAMANHO ORIGINAL */}
           <div className="hidden md:flex flex-1 justify-center">
-            <div className="flex w-full max-w-[600px]">
+            <div className="flex w-full max-w-[420px]">
 
               <input
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 placeholder="Buscar serviços..."
-                className="flex-1 bg-black border border-yellow-400/40 border-r-0 rounded-l-xl px-4 py-3 text-yellow-200 outline-none"
+                className="flex-1 bg-black border border-yellow-400/40 border-r-0 rounded-l-xl px-4 py-2 text-yellow-200 outline-none"
               />
 
-              <button className="bg-yellow-400 px-5 rounded-r-xl">
-                <Search className="text-black" />
+              <button className="bg-yellow-400 px-4 rounded-r-xl hover:bg-yellow-300">
+                <Search className="text-black" size={18} />
               </button>
 
             </div>
           </div>
 
+          {/* MENU RESTAURADO */}
+          <nav className="hidden md:flex gap-8 text-sm">
+            {["Início", "Serviços", "Produtos", "Avaliações", "Contato"].map((item, i) => (
+              <button
+                key={i}
+                onClick={() => handleScroll(item.toLowerCase())}
+                className="relative group hover:text-yellow-400 transition"
+              >
+                {item}
+                <span className="absolute left-0 -bottom-1 w-0 h-[2px] bg-yellow-400 group-hover:w-full transition-all"></span>
+              </button>
+            ))}
+          </nav>
+
         </div>
       </header>
 
       {/* BANNER */}
-      <section className="pt-28">
+      <section id="início" className="pt-28">
         <div className="relative">
 
           <div
@@ -119,24 +147,29 @@ export default function App() {
 
           <div className="absolute inset-0 bg-black/60" />
 
-          <div className="absolute inset-0 flex flex-col items-center justify-center text-center animate-fade">
-            <h2 className="text-5xl text-yellow-400 font-bold mb-4">
+          <div className="absolute inset-0 flex items-center justify-center">
+            <h2 className="text-5xl text-yellow-400 font-bold">
               Afiação Profissional
             </h2>
           </div>
+
+          <button onClick={prevBanner} className="absolute left-6 top-1/2 text-6xl opacity-30">❮</button>
+          <button onClick={nextBanner} className="absolute right-6 top-1/2 text-6xl opacity-30">❯</button>
 
         </div>
       </section>
 
       {/* SERVIÇOS */}
       <section
-        ref={servicosRef}
+        id="serviços"
+        ref={(el) => (sectionsRef.current[0] = el)}
         className="max-w-7xl mx-auto px-6 py-16 opacity-0 translate-x-20 transition-all duration-700"
       >
         <div className="grid md:grid-cols-4 gap-6">
 
           {filteredServices.map((s, i) => {
             const Icon = s.icon;
+
             return (
               <a
                 key={i}
@@ -145,6 +178,7 @@ export default function App() {
                 className="relative overflow-hidden rounded-xl group hover:scale-105 transition"
               >
                 <img src={s.image} className="h-[240px] w-full object-cover group-hover:scale-110 transition" />
+
                 <div className="absolute inset-0 bg-black/60" />
 
                 <div className="absolute bottom-4 left-4">
@@ -160,7 +194,8 @@ export default function App() {
 
       {/* AVALIAÇÕES */}
       <section
-        ref={avaliacoesRef}
+        id="avaliações"
+        ref={(el) => (sectionsRef.current[1] = el)}
         className="max-w-7xl mx-auto px-6 pb-16 opacity-0 -translate-x-20 transition-all duration-700"
       >
         <h2 className="text-yellow-400 mb-6 text-2xl">Avaliações</h2>
