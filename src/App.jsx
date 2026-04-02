@@ -35,19 +35,33 @@ export default function App() {
       <header className="fixed w-full z-50 bg-black border-b border-yellow-400/20">
         <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
 
-          {/* LOGO */}
+          {/* LOGO NOVO */}
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-yellow-400 rounded-lg flex items-center justify-center text-black font-bold">
-              ✦
+            <div className="w-11 h-11 bg-yellow-400 rounded-xl flex items-center justify-center shadow-lg">
+              {/* Ícone moderno */}
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="w-6 h-6 text-black"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth={2}
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" d="M14 4l6 6-10 10H4v-6L14 4z" />
+              </svg>
             </div>
             <h1 className="text-yellow-400 font-bold text-lg">
               Empório da Afiação
             </h1>
           </div>
 
-          {/* BARRA DE PESQUISA */}
+          {/* BARRA DE PESQUISA CORRIGIDA */}
           <div className="hidden md:flex flex-1 justify-center">
-            <div className="w-[400px] rounded-xl border-2 border-yellow-400/40 bg-black shadow-md transition-all duration-300 hover:shadow-[0_0_18px_rgba(250,204,21,0.25)] focus-within:border-yellow-400 focus-within:shadow-[0_0_22px_rgba(250,204,21,0.35)] overflow-hidden">
+            <div className="w-[420px] rounded-xl border-[2.5px] border-yellow-400/60 bg-black transition-all duration-300 overflow-hidden
+              shadow-[0_0_10px_rgba(250,204,21,0.15)]
+              hover:shadow-[0_0_20px_rgba(250,204,21,0.35)]
+              focus-within:border-yellow-400
+              focus-within:shadow-[0_0_25px_rgba(250,204,21,0.6)]">
 
               <div className="flex items-stretch">
                 <input
@@ -59,7 +73,7 @@ export default function App() {
 
                 <button
                   type="button"
-                  className="flex items-center justify-center bg-yellow-400 px-4 text-black transition hover:bg-yellow-300"
+                  className="flex items-center justify-center bg-yellow-400 px-5 text-black transition hover:bg-yellow-300"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -84,10 +98,7 @@ export default function App() {
           {/* MENU */}
           <nav className="hidden md:flex gap-8 text-sm">
             {["Início", "Serviços", "Produtos", "Avaliações", "Contato"].map((item, i) => (
-              <span
-                key={i}
-                className="cursor-pointer relative group"
-              >
+              <span key={i} className="cursor-pointer relative group">
                 {item}
                 <span className="absolute left-0 -bottom-1 w-0 h-[2px] bg-yellow-400 transition-all duration-300 group-hover:w-full"></span>
               </span>
@@ -117,19 +128,19 @@ export default function App() {
             </p>
           </div>
 
-          {/* SETAS */}
+          {/* SETAS GRANDES E TRANSPARENTES */}
           <button
             onClick={prevBanner}
-            className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/60 px-3 py-2 rounded-full"
+            className="absolute left-6 top-1/2 -translate-y-1/2 text-white text-4xl opacity-40 hover:opacity-100 transition"
           >
-            ◀
+            ❮
           </button>
 
           <button
             onClick={nextBanner}
-            className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/60 px-3 py-2 rounded-full"
+            className="absolute right-6 top-1/2 -translate-y-1/2 text-white text-4xl opacity-40 hover:opacity-100 transition"
           >
-            ▶
+            ❯
           </button>
 
           {/* BOLINHAS */}
