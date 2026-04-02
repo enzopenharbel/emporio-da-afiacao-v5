@@ -38,9 +38,9 @@ export default function App() {
           {/* LOGO REAL */}
           <div className="flex items-center gap-3">
             <img
-              src="https://ibb.co/fGy8y3T0"
-              alt="logo"
-              className="w-12 h-12 object-contain"
+              src="/logo.png"
+  alt="Logo Empório da Afiação"
+  className="w-12 h-12 object-contain"
             />
             <h1 className="text-yellow-400 font-bold text-lg">
               Empório da Afiação
