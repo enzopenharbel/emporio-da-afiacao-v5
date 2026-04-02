@@ -81,7 +81,7 @@ export default function App() {
 
           {/* BUSCA CORRIGIDA */}
 <div className="hidden md:flex flex-1 justify-center">
-  <div className="flex w-full max-w-[500px]">
+  <div className="flex w-full max-w-[600px]">
 
     {/* INPUT */}
     <input
