@@ -80,19 +80,43 @@ export default function App() {
 
       {/* HEADER */}
       <header className="fixed top-0 left-0 w-full z-50 bg-black/90 backdrop-blur-md border-b border-yellow-400/20">
-        <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
+        <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-4 gap-6">
 
+          {/* LOGO */}
           <div className="flex items-center gap-3">
             <img
               src="/logo.png"
               alt="Logo"
-              className="h-14 md:h-18 scale-110 drop-shadow-[0_0_14px_rgba(250,204,21,0.5)]"
+              className="h-14 scale-110 drop-shadow-[0_0_14px_rgba(250,204,21,0.5)]"
             />
             <h1 className="text-yellow-400 font-bold text-lg md:text-xl">
               Empório da Afiação
             </h1>
           </div>
 
+          {/* BUSCA (NOVA E MODERNA) */}
+          <div className="hidden md:flex flex-1 justify-center">
+            <div className="w-full max-w-[400px] relative group">
+
+              <input
+                type="text"
+                placeholder="Buscar serviços..."
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                className="w-full bg-black border border-yellow-400/30 rounded-full pl-12 pr-4 py-2 text-sm text-yellow-200 outline-none
+                focus:border-yellow-400
+                focus:shadow-[0_0_15px_rgba(250,204,21,0.4)] transition"
+              />
+
+              <Search
+                size={18}
+                className="absolute left-4 top-1/2 -translate-y-1/2 text-yellow-400 opacity-70 group-focus-within:opacity-100"
+              />
+
+            </div>
+          </div>
+
+          {/* MENU */}
           <nav className="hidden md:flex gap-8 text-sm">
             {[
               { label: "Início", id: "inicio" },
@@ -111,6 +135,7 @@ export default function App() {
             ))}
           </nav>
 
+          {/* WHATSAPP */}
           <a
             href="https://wa.me/5511979626107"
             target="_blank"
@@ -119,6 +144,7 @@ export default function App() {
           >
             WhatsApp
           </a>
+
         </div>
       </header>
 
@@ -131,11 +157,7 @@ export default function App() {
             style={{ transform: `translateX(-${bannerIndex * 100}%)` }}
           >
             {banners.map((img, i) => (
-              <img
-                key={i}
-                src={img}
-                className="w-full h-[520px] object-cover flex-shrink-0"
-              />
+              <img key={i} src={img} className="w-full h-[520px] object-cover flex-shrink-0" />
             ))}
           </div>
 
@@ -150,59 +172,35 @@ export default function App() {
               Alicates, tesouras e facas com acabamento impecável.
             </p>
 
-            <div className="flex gap-4 flex-wrap justify-center">
+            <div className="flex gap-4">
               <a
                 href="https://wa.me/5511979626107"
                 target="_blank"
-                rel="noreferrer"
-                className="bg-green-500 hover:bg-green-400 px-6 py-3 rounded-full text-black font-semibold"
+                className="bg-green-500 px-6 py-3 rounded-full text-black font-semibold"
               >
                 Falar no WhatsApp
               </a>
 
               <button
                 onClick={() => handleScroll("servicos")}
-                className="border border-yellow-400 text-yellow-400 px-6 py-3 rounded-full hover:bg-yellow-400 hover:text-black transition"
+                className="border border-yellow-400 px-6 py-3 rounded-full text-yellow-400 hover:bg-yellow-400 hover:text-black"
               >
                 Ver serviços
               </button>
             </div>
           </div>
 
-          {/* SETAS */}
-          <button onClick={prevBanner} className="absolute left-6 top-1/2 -translate-y-1/2 text-white text-6xl opacity-30 hover:opacity-90">
-            ❮
-          </button>
+          <button onClick={prevBanner} className="absolute left-6 top-1/2 -translate-y-1/2 text-6xl text-white opacity-30 hover:opacity-90">❮</button>
+          <button onClick={nextBanner} className="absolute right-6 top-1/2 -translate-y-1/2 text-6xl text-white opacity-30 hover:opacity-90">❯</button>
 
-          <button onClick={nextBanner} className="absolute right-6 top-1/2 -translate-y-1/2 text-white text-6xl opacity-30 hover:opacity-90">
-            ❯
-          </button>
-
-          {/* BOLINHAS */}
           <div className="absolute bottom-5 w-full flex justify-center gap-3">
             {banners.map((_, i) => (
-              <button
-                key={i}
-                onClick={() => setBannerIndex(i)}
-                className={`w-3 h-3 rounded-full ${
-                  i === bannerIndex ? "bg-yellow-400" : "bg-gray-500"
-                }`}
-              />
+              <button key={i} onClick={() => setBannerIndex(i)} className={`w-3 h-3 rounded-full ${i === bannerIndex ? "bg-yellow-400" : "bg-gray-500"}`} />
             ))}
           </div>
 
         </div>
       </section>
-
-      {/* BARRA */}
-      <div className="w-full bg-[#0a0a0a] border-y border-yellow-400/20 py-6 mt-16">
-        <div className="text-center group">
-          <h2 className="text-4xl font-bold text-yellow-400 inline-block">
-            Nossos Serviços
-          </h2>
-          <div className="h-[2px] bg-yellow-400 w-0 group-hover:w-full transition-all duration-500 mx-auto mt-2"></div>
-        </div>
-      </div>
 
       {/* SERVIÇOS */}
       <section id="servicos" className="max-w-7xl mx-auto px-6 py-16">
@@ -210,40 +208,19 @@ export default function App() {
           {filteredServices.map((s, i) => {
             const Icon = s.icon;
             return (
-              <div key={i} className="relative overflow-hidden rounded-xl group cursor-pointer">
+              <div key={i} className="relative overflow-hidden rounded-xl group">
                 <img src={s.image} className="w-full h-[240px] object-cover group-hover:scale-110 transition" />
                 <div className="absolute inset-0 bg-black/60 group-hover:bg-black/70"></div>
 
                 <div className="absolute bottom-4 left-4">
                   <Icon className="text-yellow-400 mb-2" />
-                  <h3 className="text-yellow-400 font-semibold">{s.title}</h3>
+                  <h3 className="text-yellow-400">{s.title}</h3>
                 </div>
               </div>
             );
           })}
         </div>
       </section>
-
-      {/* AVALIAÇÕES */}
-      <section id="avaliacoes" className="max-w-7xl mx-auto px-6 pb-16">
-        <h2 className="text-3xl text-yellow-400 mb-8">Avaliações</h2>
-
-        <div className="grid md:grid-cols-3 gap-6">
-          {[1,2,3].map((_, i) => (
-            <div key={i} className="bg-[#0a0a0a] p-6 rounded-xl">
-              <div className="flex text-yellow-400 mb-2">
-                {[...Array(5)].map((_, i) => <Star key={i} size={16} />)}
-              </div>
-              <p className="text-gray-300">Serviço excelente!</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* WHATSAPP FIXO */}
-      <a href="https://wa.me/5511979626107" target="_blank" className="fixed bottom-6 right-6 bg-green-500 px-5 py-3 rounded-full">
-        WhatsApp
-      </a>
 
     </div>
   );
