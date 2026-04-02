@@ -38,7 +38,7 @@ export default function App() {
           {/* LOGO REAL */}
           <div className="flex items-center gap-3">
             <img
-              src="https://i.imgur.com/your-logo.png"
+              src="https://chatgpt.com/backend-api/estuary/content?id=file_000000006c7871f5bb946c800e6f3df2&ts=493095&p=fs&cid=1&sig=6ef97144b9b2394289b6f576b47dc3976709b4bae4bd4b5516b6bc6440f2f08c&v=0"
               alt="logo"
               className="w-12 h-12 object-contain"
             />
