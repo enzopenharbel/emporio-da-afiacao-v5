@@ -155,13 +155,37 @@ export default function App() {
       <section className="max-w-7xl mx-auto px-6 py-16">
         <h2 className="text-3xl text-yellow-400 mb-8">Serviços</h2>
 
-        <div className="grid md:grid-cols-3 gap-6">
-          {["Alicates", "Tesouras", "Facas"].map((item, i) => (
-            <div key={i} className="bg-[#0a0a0a] border border-yellow-400/20 p-6 rounded-xl hover:scale-105 transition">
-              <p>{item}</p>
-            </div>
-          ))}
-        </div>
+        <div className="grid md:grid-cols-4 gap-6">
+
+  <div className="bg-[#0a0a0a] border border-yellow-400/20 p-6 rounded-xl hover:scale-105 transition hover:border-yellow-400">
+    <h3 className="text-yellow-400 text-lg font-semibold mb-2">Afiações</h3>
+    <p className="text-gray-400 text-sm">
+      Serviço principal com corte preciso e acabamento profissional.
+    </p>
+  </div>
+
+  <div className="bg-[#0a0a0a] border border-yellow-400/20 p-6 rounded-xl hover:scale-105 transition hover:border-yellow-400">
+    <h3 className="text-yellow-400 text-lg font-semibold mb-2">Venda de Produtos</h3>
+    <p className="text-gray-400 text-sm">
+      Produtos e acessórios selecionados para manicure.
+    </p>
+  </div>
+
+  <div className="bg-[#0a0a0a] border border-yellow-400/20 p-6 rounded-xl hover:scale-105 transition hover:border-yellow-400">
+    <h3 className="text-yellow-400 text-lg font-semibold mb-2">Gravações</h3>
+    <p className="text-gray-400 text-sm">
+      Personalização profissional de instrumentos.
+    </p>
+  </div>
+
+  <div className="bg-[#0a0a0a] border border-yellow-400/20 p-6 rounded-xl hover:scale-105 transition hover:border-yellow-400">
+    <h3 className="text-yellow-400 text-lg font-semibold mb-2">Troca de Molas</h3>
+    <p className="text-gray-400 text-sm">
+      Manutenção completa para prolongar a vida útil do alicate.
+    </p>
+  </div>
+
+</div>
       </section>
 
       {/* AVALIAÇÕES */}
