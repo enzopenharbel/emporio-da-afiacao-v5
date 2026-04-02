@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Star } from "lucide-react";
+import { Star, Scissors, Wrench } from "lucide-react";
 
 const banners = [
   "https://images.unsplash.com/photo-1585747860715-2ba37e788b70?auto=format&fit=crop&w=1600&q=80",
@@ -35,18 +35,19 @@ export default function App() {
       <header className="fixed w-full z-50 bg-black border-b border-yellow-400/20">
         <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
 
-          {/* LOGO REAL */}
+          {/* LOGO */}
           <div className="flex items-center gap-3">
-  <img
-    src="/logo.png"
-    alt="Logo"
-    className="h-16 md:h-20 w-auto object-contain scale-125 drop-shadow-[0_0_12px_rgba(250,204,21,0.4)]"
-  />
+            <img
+              src="/logo.png"
+              alt="Logo"
+              className="h-16 md:h-20 w-auto object-contain scale-125 drop-shadow-[0_0_12px_rgba(250,204,21,0.4)]"
+            />
 
-  <h1 className="text-yellow-400 font-bold text-xl">
-    Empório da Afiação
-  </h1>
-</div>
+            <h1 className="text-yellow-400 font-bold text-xl">
+              Empório da Afiação
+            </h1>
+          </div>
+
           {/* BUSCA */}
           <div className="hidden md:flex flex-1 justify-center">
             <div className="w-[420px] rounded-xl border-[2.5px] border-yellow-400/50 bg-black overflow-hidden
@@ -87,11 +88,10 @@ export default function App() {
         </div>
       </header>
 
-      {/* BANNER COM SLIDE REAL */}
+      {/* BANNER */}
       <section className="pt-28 w-full overflow-hidden">
         <div className="relative w-full">
 
-          {/* SLIDER */}
           <div
             className="flex transition-transform duration-700 ease-in-out"
             style={{
@@ -107,10 +107,8 @@ export default function App() {
             ))}
           </div>
 
-          {/* OVERLAY */}
           <div className="absolute inset-0 bg-black/60" />
 
-          {/* TEXTO */}
           <div className="absolute inset-0 flex flex-col justify-center items-center text-center">
             <h2 className="text-5xl font-bold text-yellow-400 mb-4">
               Afiação Profissional
@@ -120,7 +118,6 @@ export default function App() {
             </p>
           </div>
 
-          {/* SETAS */}
           <button
             onClick={prevBanner}
             className="absolute left-6 top-1/2 -translate-y-1/2 text-white text-6xl opacity-20 hover:opacity-80 transition"
@@ -135,7 +132,6 @@ export default function App() {
             ❯
           </button>
 
-          {/* BOLINHAS */}
           <div className="absolute bottom-4 w-full flex justify-center gap-2">
             {banners.map((_, i) => (
               <div
@@ -153,39 +149,45 @@ export default function App() {
 
       {/* SERVIÇOS */}
       <section className="max-w-7xl mx-auto px-6 py-16">
-        <h2 className="text-3xl text-yellow-400 mb-8">Serviços</h2>
+        <h2 className="text-3xl text-yellow-400 mb-8 text-center">
+          Nossos Serviços
+        </h2>
 
         <div className="grid md:grid-cols-4 gap-6">
 
-  <div className="bg-[#0a0a0a] border border-yellow-400/20 p-6 rounded-xl hover:scale-105 transition hover:border-yellow-400">
-    <h3 className="text-yellow-400 text-lg font-semibold mb-2">Afiações</h3>
-    <p className="text-gray-400 text-sm">
-      Serviço principal com corte preciso e acabamento profissional.
-    </p>
-  </div>
+          <div className="bg-[#0a0a0a] border-2 border-yellow-400 p-6 rounded-xl hover:scale-105 transition shadow-[0_0_20px_rgba(250,204,21,0.15)]">
+            <Scissors className="text-yellow-400 mb-4" size={28} />
+            <h3 className="text-yellow-400 text-lg font-semibold mb-2">Afiações</h3>
+            <p className="text-gray-400 text-sm">
+              Serviço principal com corte preciso e acabamento profissional.
+            </p>
+          </div>
 
-  <div className="bg-[#0a0a0a] border border-yellow-400/20 p-6 rounded-xl hover:scale-105 transition hover:border-yellow-400">
-    <h3 className="text-yellow-400 text-lg font-semibold mb-2">Venda de Produtos</h3>
-    <p className="text-gray-400 text-sm">
-      Produtos e acessórios selecionados para manicure.
-    </p>
-  </div>
+          <div className="bg-[#0a0a0a] border border-yellow-400/20 p-6 rounded-xl hover:scale-105 transition hover:border-yellow-400">
+            <Wrench className="text-yellow-400 mb-4" size={28} />
+            <h3 className="text-yellow-400 text-lg font-semibold mb-2">Venda de Produtos</h3>
+            <p className="text-gray-400 text-sm">
+              Produtos e acessórios selecionados para manicure.
+            </p>
+          </div>
 
-  <div className="bg-[#0a0a0a] border border-yellow-400/20 p-6 rounded-xl hover:scale-105 transition hover:border-yellow-400">
-    <h3 className="text-yellow-400 text-lg font-semibold mb-2">Gravações</h3>
-    <p className="text-gray-400 text-sm">
-      Personalização profissional de instrumentos.
-    </p>
-  </div>
+          <div className="bg-[#0a0a0a] border border-yellow-400/20 p-6 rounded-xl hover:scale-105 transition hover:border-yellow-400">
+            <Star className="text-yellow-400 mb-4" size={28} />
+            <h3 className="text-yellow-400 text-lg font-semibold mb-2">Gravações</h3>
+            <p className="text-gray-400 text-sm">
+              Personalização profissional de instrumentos.
+            </p>
+          </div>
 
-  <div className="bg-[#0a0a0a] border border-yellow-400/20 p-6 rounded-xl hover:scale-105 transition hover:border-yellow-400">
-    <h3 className="text-yellow-400 text-lg font-semibold mb-2">Troca de Molas</h3>
-    <p className="text-gray-400 text-sm">
-      Manutenção completa para prolongar a vida útil do alicate.
-    </p>
-  </div>
+          <div className="bg-[#0a0a0a] border border-yellow-400/20 p-6 rounded-xl hover:scale-105 transition hover:border-yellow-400">
+            <Wrench className="text-yellow-400 mb-4" size={28} />
+            <h3 className="text-yellow-400 text-lg font-semibold mb-2">Troca de Molas</h3>
+            <p className="text-gray-400 text-sm">
+              Manutenção completa para prolongar a vida útil do alicate.
+            </p>
+          </div>
 
-</div>
+        </div>
       </section>
 
       {/* AVALIAÇÕES */}
