@@ -40,7 +40,7 @@ export default function App() {
   <img
     src="/logo.png"
     alt="Logo"
-    className="w-20 h-20 object-contain drop-shadow-[0_0_10px_rgba(250,204,21,0.5)]"
+    className="h-16 md:h-20 w-auto object-contain scale-125 drop-shadow-[0_0_12px_rgba(250,204,21,0.4)]"
   />
 
   <h1 className="text-yellow-400 font-bold text-xl">
