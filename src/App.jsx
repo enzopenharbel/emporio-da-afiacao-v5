@@ -38,7 +38,7 @@ export default function App() {
           {/* LOGO REAL */}
           <div className="flex items-center gap-3">
             <img
-              src="https://i.imgur.com/3ZQ3Z9V.png"
+              src="https://ibb.co/fGy8y3T0"
               alt="logo"
               className="w-12 h-12 object-contain"
             />
