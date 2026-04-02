@@ -1,21 +1,12 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
-import { Search, Star, Scissors, Wrench } from "lucide-react";
+import React, { useEffect, useRef, useState } from "react";
+import { Search, Star, Scissors, Wrench, CheckCircle } from "lucide-react";
 
 const banners = [
   "https://images.unsplash.com/photo-1585747860715-2ba37e788b70?auto=format&fit=crop&w=1600&q=80",
-  "https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=1600&q=80",
   "https://images.unsplash.com/photo-1604654894610-df63bc536371?auto=format&fit=crop&w=1600&q=80",
 ];
 
-const services = [
-  { title: "Afiações", icon: Scissors, image: "https://images.unsplash.com/photo-1604654894610-df63bc536371" },
-  { title: "Venda de Produtos", icon: Wrench, image: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9" },
-  { title: "Gravações", icon: Star, image: "https://images.unsplash.com/photo-1515377905703-c4788e51af15" },
-  { title: "Troca de Molas", icon: Wrench, image: "https://images.unsplash.com/photo-1585747860715-2ba37e788b70" },
-];
-
 export default function App() {
-  const [search, setSearch] = useState("");
   const [bannerIndex, setBannerIndex] = useState(0);
   const sectionsRef = useRef([]);
 
@@ -31,8 +22,8 @@ export default function App() {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            entry.target.classList.remove("opacity-0", "translate-x-20", "-translate-x-20");
-            entry.target.classList.add("opacity-100", "translate-x-0");
+            entry.target.classList.remove("opacity-0", "translate-y-10");
+            entry.target.classList.add("opacity-100", "translate-y-0");
           }
         });
       },
@@ -42,20 +33,13 @@ export default function App() {
     sectionsRef.current.forEach((el) => el && observer.observe(el));
   }, []);
 
-  const filteredServices = useMemo(() => {
-    return services.filter((s) =>
-      s.title.toLowerCase().includes(search.toLowerCase())
-    );
-  }, [search]);
-
   return (
     <div className="bg-black text-white min-h-screen">
 
       {/* HEADER */}
-      <header className="fixed w-full z-50 bg-black/90 backdrop-blur-md border-b border-yellow-400/20">
-        <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-4 gap-6">
+      <header className="fixed w-full z-50 bg-black/80 backdrop-blur-lg border-b border-yellow-400/10">
+        <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
 
-          {/* LOGO */}
           <div className="flex items-center gap-3">
             <img src="/logo.png" className="h-14" />
             <span className="text-yellow-400 font-bold text-lg">
@@ -63,46 +47,24 @@ export default function App() {
             </span>
           </div>
 
-          {/* BUSCA COM EFEITO */}
+          {/* BUSCA */}
           <div className="hidden md:flex flex-1 justify-center">
             <div className="flex w-full max-w-[420px] group">
-
               <input
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
                 placeholder="Buscar serviços..."
-                className="
-                  flex-1 bg-black border border-yellow-400/30 border-r-0
-                  rounded-l-xl px-4 py-2 text-yellow-200 outline-none
-                  transition
-                  group-hover:border-yellow-400
-                  focus:border-yellow-400
-                  focus:shadow-[0_0_12px_rgba(250,204,21,0.5)]
-                "
+                className="flex-1 bg-black border border-yellow-400/20 border-r-0 rounded-l-xl px-4 py-2 text-yellow-200 outline-none group-hover:border-yellow-400 focus:border-yellow-400 focus:shadow-[0_0_10px_rgba(250,204,21,0.4)]"
               />
-
-              <button className="bg-yellow-400 hover:bg-yellow-300 px-4 rounded-r-xl transition">
-                <Search size={18} className="text-black" />
+              <button className="bg-yellow-400 px-4 rounded-r-xl">
+                <Search className="text-black" size={18} />
               </button>
-
             </div>
           </div>
-
-          {/* MENU */}
-          <nav className="hidden md:flex gap-8 text-sm">
-            {["Início", "Serviços", "Avaliações", "Contato"].map((item, i) => (
-              <button key={i} className="relative group hover:text-yellow-400">
-                {item}
-                <span className="absolute left-0 -bottom-1 w-0 h-[2px] bg-yellow-400 group-hover:w-full transition-all"></span>
-              </button>
-            ))}
-          </nav>
 
         </div>
       </header>
 
-      {/* BANNER */}
-      <section className="pt-28">
+      {/* HERO */}
+      <section className="pt-28 relative">
         <div className="relative">
 
           <div
@@ -110,83 +72,127 @@ export default function App() {
             style={{ transform: `translateX(-${bannerIndex * 100}%)` }}
           >
             {banners.map((img, i) => (
-              <img key={i} src={img} className="w-full h-[520px] object-cover" />
+              <img key={i} src={img} className="w-full h-[550px] object-cover" />
             ))}
           </div>
 
-          <div className="absolute inset-0 bg-black/60" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/40 to-black/90" />
 
-          {/* TEXTO */}
-          <div className="absolute inset-0 flex items-center justify-center">
-            <h2 className="text-5xl text-yellow-400 font-bold">
-              Afiação Profissional
+          <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
+            <h2 className="text-5xl md:text-6xl font-bold text-yellow-400 mb-6">
+              Afiação de Alta Precisão
             </h2>
-          </div>
 
-          {/* SETAS */}
-          <button onClick={() => setBannerIndex((bannerIndex - 1 + banners.length) % banners.length)} className="absolute left-6 top-1/2 text-6xl opacity-30">❮</button>
-          <button onClick={() => setBannerIndex((bannerIndex + 1) % banners.length)} className="absolute right-6 top-1/2 text-6xl opacity-30">❯</button>
+            <p className="text-gray-300 max-w-xl mb-6">
+              Qualidade profissional para alicates, tesouras e instrumentos.
+            </p>
 
-          {/* BOLINHAS */}
-          <div className="absolute bottom-5 w-full flex justify-center gap-3">
-            {banners.map((_, i) => (
-              <button
-                key={i}
-                onClick={() => setBannerIndex(i)}
-                className={`w-3 h-3 rounded-full ${
-                  i === bannerIndex ? "bg-yellow-400" : "bg-gray-500"
-                }`}
-              />
-            ))}
+            <a
+              href="#"
+              className="bg-green-500 px-8 py-3 rounded-full text-black font-semibold hover:bg-green-400 transition"
+            >
+              Falar no WhatsApp
+            </a>
           </div>
 
         </div>
       </section>
 
       {/* SERVIÇOS */}
-      <section ref={(el) => (sectionsRef.current[0] = el)} className="max-w-7xl mx-auto px-6 py-16 opacity-0 translate-x-20 transition-all duration-700">
-        <div className="grid md:grid-cols-4 gap-6">
-          {filteredServices.map((s, i) => {
-            const Icon = s.icon;
-            return (
-              <div key={i} className="relative overflow-hidden rounded-xl group">
-                <img src={s.image} className="h-[240px] w-full object-cover group-hover:scale-110 transition" />
-                <div className="absolute inset-0 bg-black/60" />
-                <div className="absolute bottom-4 left-4">
-                  <Icon className="text-yellow-400 mb-2" />
-                  <h3 className="text-yellow-400">{s.title}</h3>
-                </div>
-              </div>
-            );
-          })}
+      <section
+        ref={(el) => (sectionsRef.current[0] = el)}
+        className="max-w-7xl mx-auto px-6 py-20 opacity-0 translate-y-10 transition-all duration-700"
+      >
+        <h2 className="text-4xl text-yellow-400 mb-10 text-center">
+          Nossos Serviços
+        </h2>
+
+        <div className="grid md:grid-cols-4 gap-8">
+          {["Afiações", "Produtos", "Gravações", "MolAS"].map((s, i) => (
+            <div
+              key={i}
+              className="bg-[#0a0a0a] p-6 rounded-xl border border-yellow-400/10 hover:border-yellow-400/40 transition hover:-translate-y-2"
+            >
+              <Scissors className="text-yellow-400 mb-4" />
+              <h3 className="text-yellow-400">{s}</h3>
+            </div>
+          ))}
         </div>
       </section>
 
       {/* DIFERENCIAIS */}
-      <section ref={(el) => (sectionsRef.current[1] = el)} className="max-w-7xl mx-auto px-6 py-16 opacity-0 -translate-x-20 transition-all duration-700">
-        <h2 className="text-3xl text-yellow-400 mb-8">Por que escolher a gente?</h2>
-        <ul className="space-y-4 text-gray-300">
-          <li>✔ Atendimento rápido</li>
-          <li>✔ Alta precisão</li>
-          <li>✔ Equipamentos profissionais</li>
-        </ul>
+      <section
+        ref={(el) => (sectionsRef.current[1] = el)}
+        className="max-w-7xl mx-auto px-6 py-20 opacity-0 translate-y-10 transition-all duration-700"
+      >
+        <h2 className="text-4xl text-yellow-400 mb-10 text-center">
+          Por que escolher a gente?
+        </h2>
+
+        <div className="grid md:grid-cols-3 gap-8">
+          {["Alta precisão", "Entrega rápida", "Atendimento profissional"].map((d, i) => (
+            <div key={i} className="text-center">
+              <CheckCircle className="text-yellow-400 mx-auto mb-3" />
+              <p className="text-gray-300">{d}</p>
+            </div>
+          ))}
+        </div>
       </section>
 
       {/* COMO FUNCIONA */}
-      <section ref={(el) => (sectionsRef.current[2] = el)} className="max-w-7xl mx-auto px-6 py-16 opacity-0 translate-x-20 transition-all duration-700">
-        <h2 className="text-3xl text-yellow-400 mb-8">Como funciona</h2>
-        <p className="text-gray-300">
-          Entre em contato pelo WhatsApp, envie seu material e receba o serviço com qualidade profissional.
-        </p>
+      <section
+        ref={(el) => (sectionsRef.current[2] = el)}
+        className="max-w-7xl mx-auto px-6 py-20 opacity-0 translate-y-10 transition-all duration-700"
+      >
+        <h2 className="text-4xl text-yellow-400 mb-10 text-center">
+          Como funciona
+        </h2>
+
+        <div className="grid md:grid-cols-3 gap-8 text-center">
+          {["Contato", "Envio", "Entrega"].map((step, i) => (
+            <div key={i}>
+              <div className="text-yellow-400 text-3xl mb-2">{i + 1}</div>
+              <p className="text-gray-300">{step}</p>
+            </div>
+          ))}
+        </div>
       </section>
 
-      {/* CONTATO */}
-      <section ref={(el) => (sectionsRef.current[3] = el)} className="max-w-7xl mx-auto px-6 pb-16 opacity-0 -translate-x-20 transition-all duration-700">
-        <h2 className="text-3xl text-yellow-400 mb-6">Contato</h2>
-        <a href="https://wa.me/5511979626107" className="bg-green-500 px-6 py-3 rounded-full text-black">
-          Falar no WhatsApp
+      {/* AVALIAÇÕES */}
+      <section
+        ref={(el) => (sectionsRef.current[3] = el)}
+        className="max-w-7xl mx-auto px-6 py-20 opacity-0 translate-y-10 transition-all duration-700"
+      >
+        <h2 className="text-4xl text-yellow-400 mb-10 text-center">
+          Avaliações
+        </h2>
+
+        <div className="grid md:grid-cols-3 gap-8">
+          {[1,2,3].map((_, i) => (
+            <div key={i} className="bg-[#0a0a0a] p-6 rounded-xl">
+              <div className="flex text-yellow-400 mb-2">
+                {[...Array(5)].map((_, i) => <Star key={i} size={16} />)}
+              </div>
+              <p className="text-gray-300">Excelente serviço!</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* CTA FINAL */}
+      <section className="text-center py-20 bg-gradient-to-r from-yellow-400/10 to-yellow-400/5">
+        <h2 className="text-3xl text-yellow-400 mb-4">
+          Pronto para afiar seus instrumentos?
+        </h2>
+        <a href="#" className="bg-green-500 px-6 py-3 rounded-full text-black">
+          Fale conosco
         </a>
       </section>
+
+      {/* FOOTER */}
+      <footer className="text-center py-10 border-t border-yellow-400/10 text-gray-500">
+        © 2026 Empório da Afiação
+      </footer>
 
     </div>
   );
