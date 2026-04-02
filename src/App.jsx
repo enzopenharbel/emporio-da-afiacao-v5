@@ -37,16 +37,16 @@ export default function App() {
 
           {/* LOGO REAL */}
           <div className="flex items-center gap-3">
-            <img
-              src="/logo.png"
-  alt="Logo Empório da Afiação"
-  className="w-16 h-16 object-contain"
-            />
-            <h1 className="text-yellow-400 font-bold text-lg">
-              Empório da Afiação
-            </h1>
-          </div>
+  <img
+    src="/logo.png"
+    alt="Logo"
+    className="w-20 h-20 object-contain drop-shadow-[0_0_10px_rgba(250,204,21,0.5)]"
+  />
 
+  <h1 className="text-yellow-400 font-bold text-xl">
+    Empório da Afiação
+  </h1>
+</div>
           {/* BUSCA */}
           <div className="hidden md:flex flex-1 justify-center">
             <div className="w-[420px] rounded-xl border-[2.5px] border-yellow-400/50 bg-black overflow-hidden
