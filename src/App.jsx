@@ -80,28 +80,46 @@ export default function App() {
           </div>
 
           {/* BUSCA CORRIGIDA */}
-          <div className="hidden md:flex flex-1 justify-center">
-            <div className="w-full max-w-[420px] relative">
+<div className="hidden md:flex flex-1 justify-center">
+  <div className="flex w-full max-w-[500px]">
 
-              <input
-                type="text"
-                placeholder="Buscar serviços..."
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-                className="w-full bg-black border border-yellow-400/30 rounded-full pl-4 pr-14 py-2 text-sm text-yellow-200 outline-none
-                focus:border-yellow-400 focus:shadow-[0_0_15px_rgba(250,204,21,0.4)] transition"
-              />
+    {/* INPUT */}
+    <input
+      type="text"
+      placeholder="Buscar serviços..."
+      value={search}
+      onChange={(e) => setSearch(e.target.value)}
+      className="
+        flex-1
+        bg-black
+        border border-yellow-400/40
+        border-r-0
+        rounded-l-xl
+        px-4 py-3
+        text-sm text-yellow-200
+        outline-none
 
-              {/* BOTÃO LUPA */}
-              <button
-                className="absolute right-1 top-1/2 -translate-y-1/2 bg-yellow-400 hover:bg-yellow-300 text-black rounded-full w-10 h-10 flex items-center justify-center transition"
-              >
-                <Search size={18} />
-              </button>
+        focus:border-yellow-400
+        focus:shadow-[0_0_15px_rgba(250,204,21,0.4)]
+      "
+    />
 
-            </div>
-          </div>
+    {/* BOTÃO */}
+    <button
+      className="
+        bg-yellow-400
+        hover:bg-yellow-300
+        px-5
+        flex items-center justify-center
+        rounded-r-xl
+        transition
+      "
+    >
+      <Search size={20} className="text-black" />
+    </button>
 
+  </div>
+</div>
           {/* MENU */}
           <nav className="hidden md:flex gap-8 text-sm">
             {[
