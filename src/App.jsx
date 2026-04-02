@@ -18,16 +18,6 @@ export default function App() {
     return () => clearInterval(interval);
   }, []);
 
-  const nextBanner = () => {
-    setBannerIndex((prev) => (prev + 1) % banners.length);
-  };
-
-  const prevBanner = () => {
-    setBannerIndex((prev) =>
-      prev === 0 ? banners.length - 1 : prev - 1
-    );
-  };
-
   return (
     <div className="bg-black text-white min-h-screen">
 
@@ -35,47 +25,17 @@ export default function App() {
       <header className="fixed w-full z-50 bg-black border-b border-yellow-400/20">
         <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
 
-          {/* LOGO */}
           <div className="flex items-center gap-3">
             <img
               src="/logo.png"
               alt="Logo"
-              className="h-16 md:h-20 w-auto object-contain scale-125 drop-shadow-[0_0_12px_rgba(250,204,21,0.4)]"
+              className="h-16 md:h-20 scale-125 drop-shadow-[0_0_12px_rgba(250,204,21,0.4)]"
             />
-
             <h1 className="text-yellow-400 font-bold text-xl">
               Empório da Afiação
             </h1>
           </div>
 
-          {/* BUSCA */}
-          <div className="hidden md:flex flex-1 justify-center">
-            <div className="w-[420px] rounded-xl border-[2.5px] border-yellow-400/50 bg-black overflow-hidden
-              transition-all duration-300
-              shadow-[0_0_12px_rgba(250,204,21,0.15)]
-              hover:shadow-[0_0_25px_rgba(250,204,21,0.35)]
-              focus-within:border-yellow-400
-              focus-within:shadow-[0_0_30px_rgba(250,204,21,0.6)]">
-
-              <div className="flex">
-                <input
-                  placeholder="Diga o que você procura"
-                  value={search}
-                  onChange={(e) => setSearch(e.target.value)}
-                  className="flex-1 bg-transparent px-4 py-2 text-sm text-yellow-300 outline-none
-                  placeholder:text-gray-500
-                  focus:text-yellow-400
-                  focus:drop-shadow-[0_0_6px_rgba(250,204,21,0.8)]"
-                />
-
-                <button className="bg-yellow-400 px-5 flex items-center justify-center hover:bg-yellow-300 transition">
-                  🔍
-                </button>
-              </div>
-            </div>
-          </div>
-
-          {/* MENU */}
           <nav className="hidden md:flex gap-8 text-sm">
             {["Início", "Serviços", "Produtos", "Avaliações", "Contato"].map((item, i) => (
               <span key={i} className="cursor-pointer relative group">
@@ -93,17 +53,11 @@ export default function App() {
         <div className="relative w-full">
 
           <div
-            className="flex transition-transform duration-700 ease-in-out"
-            style={{
-              transform: `translateX(-${bannerIndex * 100}%)`,
-            }}
+            className="flex transition-transform duration-700"
+            style={{ transform: `translateX(-${bannerIndex * 100}%)` }}
           >
             {banners.map((img, i) => (
-              <img
-                key={i}
-                src={img}
-                className="w-full h-[520px] object-cover flex-shrink-0"
-              />
+              <img key={i} src={img} className="w-full h-[520px] object-cover" />
             ))}
           </div>
 
@@ -118,73 +72,80 @@ export default function App() {
             </p>
           </div>
 
-          <button
-            onClick={prevBanner}
-            className="absolute left-6 top-1/2 -translate-y-1/2 text-white text-6xl opacity-20 hover:opacity-80 transition"
-          >
-            ❮
-          </button>
-
-          <button
-            onClick={nextBanner}
-            className="absolute right-6 top-1/2 -translate-y-1/2 text-white text-6xl opacity-20 hover:opacity-80 transition"
-          >
-            ❯
-          </button>
-
-          <div className="absolute bottom-4 w-full flex justify-center gap-2">
-            {banners.map((_, i) => (
-              <div
-                key={i}
-                onClick={() => setBannerIndex(i)}
-                className={`w-3 h-3 rounded-full cursor-pointer ${
-                  i === bannerIndex ? "bg-yellow-400" : "bg-gray-500"
-                }`}
-              />
-            ))}
-          </div>
-
         </div>
       </section>
 
-      {/* SERVIÇOS */}
+      {/* BARRA SERVIÇOS */}
+      <div className="w-full bg-[#0a0a0a] border-y border-yellow-400/20 py-6 mt-16">
+        <div className="text-center relative group cursor-default">
+          <h2 className="text-4xl font-bold text-yellow-400 inline-block">
+            Nossos Serviços
+          </h2>
+
+          {/* LINHA ANIMADA */}
+          <div className="h-[2px] bg-yellow-400 w-0 group-hover:w-full transition-all duration-500 mx-auto mt-2"></div>
+        </div>
+      </div>
+
+      {/* SERVIÇOS COM IMAGEM */}
       <section className="max-w-7xl mx-auto px-6 py-16">
-        <h2 className="text-3xl text-yellow-400 mb-8 text-center">
-          Nossos Serviços
-        </h2>
 
         <div className="grid md:grid-cols-4 gap-6">
 
-          <div className="bg-[#0a0a0a] border-2 border-yellow-400 p-6 rounded-xl hover:scale-105 transition shadow-[0_0_20px_rgba(250,204,21,0.15)]">
-            <Scissors className="text-yellow-400 mb-4" size={28} />
-            <h3 className="text-yellow-400 text-lg font-semibold mb-2">Afiações</h3>
-            <p className="text-gray-400 text-sm">
-              Serviço principal com corte preciso e acabamento profissional.
-            </p>
+          {/* CARD 1 */}
+          <div className="relative overflow-hidden rounded-xl group cursor-pointer">
+            <img
+              src="https://images.unsplash.com/photo-1604654894610-df63bc536371"
+              className="w-full h-[220px] object-cover transition-transform duration-500 group-hover:scale-110"
+            />
+            <div className="absolute inset-0 bg-black/60 group-hover:bg-black/70 transition"></div>
+
+            <div className="absolute bottom-4 left-4">
+              <Scissors className="text-yellow-400 mb-2" />
+              <h3 className="text-yellow-400 font-semibold">Afiações</h3>
+            </div>
           </div>
 
-          <div className="bg-[#0a0a0a] border border-yellow-400/20 p-6 rounded-xl hover:scale-105 transition hover:border-yellow-400">
-            <Wrench className="text-yellow-400 mb-4" size={28} />
-            <h3 className="text-yellow-400 text-lg font-semibold mb-2">Venda de Produtos</h3>
-            <p className="text-gray-400 text-sm">
-              Produtos e acessórios selecionados para manicure.
-            </p>
+          {/* CARD 2 */}
+          <div className="relative overflow-hidden rounded-xl group cursor-pointer">
+            <img
+              src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9"
+              className="w-full h-[220px] object-cover transition-transform duration-500 group-hover:scale-110"
+            />
+            <div className="absolute inset-0 bg-black/60 group-hover:bg-black/70 transition"></div>
+
+            <div className="absolute bottom-4 left-4">
+              <Wrench className="text-yellow-400 mb-2" />
+              <h3 className="text-yellow-400 font-semibold">Produtos</h3>
+            </div>
           </div>
 
-          <div className="bg-[#0a0a0a] border border-yellow-400/20 p-6 rounded-xl hover:scale-105 transition hover:border-yellow-400">
-            <Star className="text-yellow-400 mb-4" size={28} />
-            <h3 className="text-yellow-400 text-lg font-semibold mb-2">Gravações</h3>
-            <p className="text-gray-400 text-sm">
-              Personalização profissional de instrumentos.
-            </p>
+          {/* CARD 3 */}
+          <div className="relative overflow-hidden rounded-xl group cursor-pointer">
+            <img
+              src="https://images.unsplash.com/photo-1515377905703-c4788e51af15"
+              className="w-full h-[220px] object-cover transition-transform duration-500 group-hover:scale-110"
+            />
+            <div className="absolute inset-0 bg-black/60 group-hover:bg-black/70 transition"></div>
+
+            <div className="absolute bottom-4 left-4">
+              <Star className="text-yellow-400 mb-2" />
+              <h3 className="text-yellow-400 font-semibold">Gravações</h3>
+            </div>
           </div>
 
-          <div className="bg-[#0a0a0a] border border-yellow-400/20 p-6 rounded-xl hover:scale-105 transition hover:border-yellow-400">
-            <Wrench className="text-yellow-400 mb-4" size={28} />
-            <h3 className="text-yellow-400 text-lg font-semibold mb-2">Troca de Molas</h3>
-            <p className="text-gray-400 text-sm">
-              Manutenção completa para prolongar a vida útil do alicate.
-            </p>
+          {/* CARD 4 */}
+          <div className="relative overflow-hidden rounded-xl group cursor-pointer">
+            <img
+              src="https://images.unsplash.com/photo-1585747860715-2ba37e788b70"
+              className="w-full h-[220px] object-cover transition-transform duration-500 group-hover:scale-110"
+            />
+            <div className="absolute inset-0 bg-black/60 group-hover:bg-black/70 transition"></div>
+
+            <div className="absolute bottom-4 left-4">
+              <Wrench className="text-yellow-400 mb-2" />
+              <h3 className="text-yellow-400 font-semibold">Troca de Molas</h3>
+            </div>
           </div>
 
         </div>
