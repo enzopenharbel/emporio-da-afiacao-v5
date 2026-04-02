@@ -35,63 +35,42 @@ export default function App() {
       <header className="fixed w-full z-50 bg-black border-b border-yellow-400/20">
         <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
 
-          {/* LOGO NOVO */}
+          {/* LOGO REAL */}
           <div className="flex items-center gap-3">
-            <div className="w-11 h-11 bg-yellow-400 rounded-xl flex items-center justify-center shadow-lg">
-              {/* Ícone moderno */}
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="w-6 h-6 text-black"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth={2}
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" d="M14 4l6 6-10 10H4v-6L14 4z" />
-              </svg>
-            </div>
+            <img
+              src="https://i.imgur.com/your-logo.png"
+              alt="logo"
+              className="w-12 h-12 object-contain"
+            />
             <h1 className="text-yellow-400 font-bold text-lg">
               Empório da Afiação
             </h1>
           </div>
 
-          {/* BARRA DE PESQUISA CORRIGIDA */}
+          {/* BUSCA */}
           <div className="hidden md:flex flex-1 justify-center">
-            <div className="w-[420px] rounded-xl border-[2.5px] border-yellow-400/60 bg-black transition-all duration-300 overflow-hidden
-              shadow-[0_0_10px_rgba(250,204,21,0.15)]
-              hover:shadow-[0_0_20px_rgba(250,204,21,0.35)]
+            <div className="w-[420px] rounded-xl border-[2.5px] border-yellow-400/50 bg-black overflow-hidden
+              transition-all duration-300
+              shadow-[0_0_12px_rgba(250,204,21,0.15)]
+              hover:shadow-[0_0_25px_rgba(250,204,21,0.35)]
               focus-within:border-yellow-400
-              focus-within:shadow-[0_0_25px_rgba(250,204,21,0.6)]">
+              focus-within:shadow-[0_0_30px_rgba(250,204,21,0.6)]">
 
-              <div className="flex items-stretch">
+              <div className="flex">
                 <input
                   placeholder="Diga o que você procura"
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
-                  className="flex-1 bg-transparent px-4 py-2 text-sm text-white outline-none placeholder:text-gray-400 focus:text-yellow-400"
+                  className="flex-1 bg-transparent px-4 py-2 text-sm text-yellow-300 outline-none
+                  placeholder:text-gray-500
+                  focus:text-yellow-400
+                  focus:drop-shadow-[0_0_6px_rgba(250,204,21,0.8)]"
                 />
 
-                <button
-                  type="button"
-                  className="flex items-center justify-center bg-yellow-400 px-5 text-black transition hover:bg-yellow-300"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-5 w-5"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    strokeWidth={2}
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M21 21l-4.35-4.35M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15z"
-                    />
-                  </svg>
+                <button className="bg-yellow-400 px-5 flex items-center justify-center hover:bg-yellow-300 transition">
+                  🔍
                 </button>
               </div>
-
             </div>
           </div>
 
@@ -104,18 +83,31 @@ export default function App() {
               </span>
             ))}
           </nav>
+
         </div>
       </header>
 
-      {/* BANNER */}
-      <section className="pt-28 px-6">
-        <div className="relative rounded-3xl overflow-hidden">
+      {/* BANNER COM SLIDE REAL */}
+      <section className="pt-28 w-full overflow-hidden">
+        <div className="relative w-full">
 
-          <img
-            src={banners[bannerIndex]}
-            className="w-full h-[500px] object-cover transition-all duration-700"
-          />
+          {/* SLIDER */}
+          <div
+            className="flex transition-transform duration-700 ease-in-out"
+            style={{
+              transform: `translateX(-${bannerIndex * 100}%)`,
+            }}
+          >
+            {banners.map((img, i) => (
+              <img
+                key={i}
+                src={img}
+                className="w-full h-[520px] object-cover flex-shrink-0"
+              />
+            ))}
+          </div>
 
+          {/* OVERLAY */}
           <div className="absolute inset-0 bg-black/60" />
 
           {/* TEXTO */}
@@ -128,17 +120,17 @@ export default function App() {
             </p>
           </div>
 
-          {/* SETAS GRANDES E TRANSPARENTES */}
+          {/* SETAS */}
           <button
             onClick={prevBanner}
-            className="absolute left-6 top-1/2 -translate-y-1/2 text-white text-4xl opacity-40 hover:opacity-100 transition"
+            className="absolute left-6 top-1/2 -translate-y-1/2 text-white text-6xl opacity-20 hover:opacity-80 transition"
           >
             ❮
           </button>
 
           <button
             onClick={nextBanner}
-            className="absolute right-6 top-1/2 -translate-y-1/2 text-white text-4xl opacity-40 hover:opacity-100 transition"
+            className="absolute right-6 top-1/2 -translate-y-1/2 text-white text-6xl opacity-20 hover:opacity-80 transition"
           >
             ❯
           </button>
@@ -165,10 +157,7 @@ export default function App() {
 
         <div className="grid md:grid-cols-3 gap-6">
           {["Alicates", "Tesouras", "Facas"].map((item, i) => (
-            <div
-              key={i}
-              className="bg-[#0a0a0a] border border-yellow-400/20 p-6 rounded-xl hover:scale-105 transition"
-            >
+            <div key={i} className="bg-[#0a0a0a] border border-yellow-400/20 p-6 rounded-xl hover:scale-105 transition">
               <p>{item}</p>
             </div>
           ))}
