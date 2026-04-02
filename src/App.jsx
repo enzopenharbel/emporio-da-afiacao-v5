@@ -40,7 +40,7 @@ export default function App() {
             <img
               src="/logo.png"
   alt="Logo Empório da Afiação"
-  className="w-12 h-12 object-contain"
+  className="w-16 h-16 object-contain"
             />
             <h1 className="text-yellow-400 font-bold text-lg">
               Empório da Afiação
