@@ -85,33 +85,40 @@ export default function App() {
       </header>
 
       {/* HERO */}
-      <section className="pt-28 relative">
-        <div className="relative">
+      <section className="pt-28">
+  <div className="relative h-[550px] overflow-hidden">
 
-          <div
-            className="flex transition-transform duration-700"
-            style={{ transform: `translateX(-${bannerIndex * 100}%)` }}
-          >
-            {banners.map((img, i) => (
-              <img key={i} src={img} className="w-full h-[550px] object-cover" />
-            ))}
-          </div>
+    {/* IMAGEM COM EFEITO CINEMA */}
+    <div className="absolute inset-0 scale-110 animate-[zoom_12s_linear_infinite]">
+      <img
+        src="https://images.unsplash.com/photo-1604654894610-df63bc536371"
+        className="w-full h-full object-cover"
+      />
+    </div>
 
-          <div className="absolute inset-0 bg-gradient-to-b from-black/40 to-black/90" />
+    {/* OVERLAY CINEMÁTICO */}
+    <div className="absolute inset-0 bg-gradient-to-r from-black via-black/70 to-transparent" />
 
-          <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
-            <h2 className="text-5xl md:text-6xl font-bold text-yellow-400 mb-6">
-              Afiação de Alta Precisão
-            </h2>
+    {/* TEXTO */}
+    <div className="absolute inset-0 flex flex-col justify-center px-10 md:px-20">
+      <h2 className="text-5xl md:text-6xl font-bold text-yellow-400 mb-4 animate-fadeInUp">
+        Afiação de Alta Precisão
+      </h2>
 
-            <p className="text-gray-300 max-w-xl mb-6">
-              Qualidade profissional para alicates e instrumentos.
-            </p>
+      <p className="text-gray-300 mb-6 max-w-lg animate-fadeInUp delay-200">
+        Qualidade profissional para alicates e instrumentos.
+      </p>
 
-            <a className="bg-green-500 px-8 py-3 rounded-full text-black font-semibold hover:bg-green-400 transition">
-              Falar no WhatsApp
-            </a>
-          </div>
+      <a
+        href="https://wa.me/5511979626107"
+        className="bg-green-500 hover:bg-green-400 px-6 py-3 rounded-full text-black font-semibold w-fit animate-fadeInUp delay-300"
+      >
+        Falar no WhatsApp
+      </a>
+    </div>
+
+  </div>
+</section>
 
           {/* BOLINHAS */}
           <div className="absolute bottom-5 w-full flex justify-center gap-3">
