@@ -85,8 +85,53 @@ export default function App() {
       </header>
 
       {/* HERO */}
-      <section className="pt-28">
+<section className="pt-28">
   <div className="relative h-[550px] overflow-hidden">
+
+    {/* IMAGEM DINÂMICA */}
+    <div className="absolute inset-0 scale-110 animate-[zoom_12s_linear_infinite]">
+      <img
+        src={banners[bannerIndex]}
+        className="w-full h-full object-cover transition-all duration-700"
+      />
+    </div>
+
+    {/* OVERLAY */}
+    <div className="absolute inset-0 bg-gradient-to-r from-black via-black/70 to-transparent" />
+
+    {/* TEXTO */}
+    <div className="absolute inset-0 flex flex-col justify-center px-10 md:px-20">
+      <h2 className="text-5xl md:text-6xl font-bold text-yellow-400 mb-4">
+        Afiação de Alta Precisão
+      </h2>
+
+      <p className="text-gray-300 mb-6 max-w-lg">
+        Qualidade profissional para alicates e instrumentos.
+      </p>
+
+      <a
+        href="https://wa.me/5511979626107"
+        className="bg-green-500 hover:bg-green-400 px-6 py-3 rounded-full text-black font-semibold w-fit"
+      >
+        Falar no WhatsApp
+      </a>
+    </div>
+
+    {/* BOLINHAS (AGORA DENTRO DO HERO) */}
+    <div className="absolute bottom-5 w-full flex justify-center gap-3">
+      {banners.map((_, i) => (
+        <button
+          key={i}
+          onClick={() => setBannerIndex(i)}
+          className={`w-3 h-3 rounded-full ${
+            i === bannerIndex ? "bg-yellow-400" : "bg-gray-500"
+          }`}
+        />
+      ))}
+    </div>
+
+  </div>
+</section>
 
     {/* IMAGEM COM EFEITO CINEMA */}
     <div className="absolute inset-0 scale-110 animate-[zoom_12s_linear_infinite]">
