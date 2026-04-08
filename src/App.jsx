@@ -220,21 +220,24 @@ export default function App() {
         </div>
       </section>
 
-      {/* MAPA */}
-      <section className="px-6 py-20">
+      {/* MAPA FULL WIDTH */}
+      <section className="py-20">
+
         <h2 className="text-4xl text-yellow-400 text-center mb-10">
           Nossa Localização
         </h2>
 
-        <div className="max-w-6xl mx-auto rounded-xl overflow-hidden border border-yellow-400/20">
+        <div className="w-full border-y border-yellow-400/30">
           <iframe
             src="https://www.google.com/maps?q=Rua+Brigadeiro+Henrique+Fontenelle,+1056,+São+Paulo&output=embed"
             width="100%"
-            height="400"
+            height="450"
             style={{ border: 0 }}
             loading="lazy"
+            className="w-full"
           ></iframe>
         </div>
+
       </section>
 
       {/* FOOTER */}
