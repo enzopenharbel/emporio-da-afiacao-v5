@@ -1,5 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Search, Star, Scissors, CheckCircle } from "lucide-react";
+import {
+  Search,
+  Star,
+  Scissors,
+  CheckCircle,
+  ShoppingCart,
+  ChevronLeft,
+  ChevronRight,
+} from "lucide-react";
 
 const banners = [
   "https://images.unsplash.com/photo-1585747860715-2ba37e788b70?auto=format&fit=crop&w=1600&q=80",
@@ -56,12 +64,20 @@ export default function App() {
             </div>
           </div>
 
-          <nav className="hidden md:flex gap-8 text-sm">
+          <nav className="hidden md:flex gap-8 text-sm items-center">
             {["Início", "Serviços", "Produtos", "Avaliações", "Contato"].map((item, i) => (
               <button key={i} className="hover:text-yellow-400 transition">
                 {item}
               </button>
             ))}
+
+            {/* CARRINHO */}
+            <button className="relative hover:text-yellow-400">
+              <ShoppingCart />
+              <span className="absolute -top-2 -right-2 bg-yellow-400 text-black text-xs px-1 rounded-full">
+                0
+              </span>
+            </button>
           </nav>
 
         </div>
@@ -71,14 +87,24 @@ export default function App() {
       <section className="pt-28">
         <div className="relative h-[550px] overflow-hidden">
 
-          <img
-            src={banners[bannerIndex]}
-            className="absolute inset-0 w-full h-full object-cover transition-all duration-700"
-          />
+          {/* SLIDES */}
+          {banners.map((img, i) => (
+            <img
+              key={i}
+              src={img}
+              className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 ${
+                i === bannerIndex
+                  ? "opacity-100 scale-100"
+                  : "opacity-0 scale-105"
+              }`}
+            />
+          ))}
 
+          {/* OVERLAY */}
           <div className="absolute inset-0 bg-gradient-to-r from-black via-black/70 to-transparent" />
 
-          <div className="absolute inset-0 flex flex-col justify-center px-10 md:px-20">
+          {/* TEXTO */}
+          <div className="absolute inset-0 flex flex-col justify-center px-10 md:px-20 z-10">
             <h2 className="text-5xl md:text-6xl font-bold text-yellow-400 mb-4">
               Afiação de Alta Precisão
             </h2>
@@ -95,8 +121,30 @@ export default function App() {
             </a>
           </div>
 
+          {/* SETA ESQUERDA */}
+          <button
+            onClick={() =>
+              setBannerIndex((prev) =>
+                prev === 0 ? banners.length - 1 : prev - 1
+              )
+            }
+            className="absolute left-5 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/80 p-3 rounded-full z-20"
+          >
+            <ChevronLeft />
+          </button>
+
+          {/* SETA DIREITA */}
+          <button
+            onClick={() =>
+              setBannerIndex((prev) => (prev + 1) % banners.length)
+            }
+            className="absolute right-5 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/80 p-3 rounded-full z-20"
+          >
+            <ChevronRight />
+          </button>
+
           {/* BOLINHAS */}
-          <div className="absolute bottom-5 w-full flex justify-center gap-3">
+          <div className="absolute bottom-5 w-full flex justify-center gap-3 z-20">
             {banners.map((_, i) => (
               <button
                 key={i}
@@ -169,6 +217,23 @@ export default function App() {
               <p className="text-gray-300">Excelente serviço!</p>
             </div>
           ))}
+        </div>
+      </section>
+
+      {/* MAPA */}
+      <section className="px-6 py-20">
+        <h2 className="text-4xl text-yellow-400 text-center mb-10">
+          Nossa Localização
+        </h2>
+
+        <div className="max-w-6xl mx-auto rounded-xl overflow-hidden border border-yellow-400/20">
+          <iframe
+            src="https://www.google.com/maps?q=Rua+Brigadeiro+Henrique+Fontenelle,+1056,+São+Paulo&output=embed"
+            width="100%"
+            height="400"
+            style={{ border: 0 }}
+            loading="lazy"
+          ></iframe>
         </div>
       </section>
 
