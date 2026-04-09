@@ -85,8 +85,9 @@ export default function App() {
 
           <nav className="hidden md:flex gap-8 text-sm items-center">
             {["Início", "Produtos", "Avaliações", "Contato"].map((item, i) => (
-              <button key={i} className="hover:text-yellow-400 transition">
+              <button key={i} className="relative group hover:text-yellow-400 transition">
                 {item}
+                <span className="absolute left-0 -bottom-1 w-0 h-[2px] bg-yellow-400 group-hover:w-full transition-all"></span>
               </button>
             ))}
 
@@ -172,57 +173,43 @@ export default function App() {
       </section>
 
       {/* PRODUTOS */}
-      <section
-        ref={(el) => (sectionsRef.current[0] = el)}
-        className="max-w-7xl mx-auto px-6 py-20 opacity-0 translate-y-10 transition-all duration-700"
-      >
-        <h2 className="text-4xl text-yellow-400 mb-10 text-center">
-          Produtos
-        </h2>
+      <section className="py-20">
 
-        <div className="grid md:grid-cols-4 gap-8">
-          {produtos.map((p, i) => (
-            <div key={i} className="bg-[#0a0a0a] rounded-xl overflow-hidden border border-yellow-400/10 hover:-translate-y-2 transition">
-
-              <img src={p.img} className="w-full h-40 object-cover" />
-
-              <div className="p-4 text-center">
-                <p className="text-yellow-400 font-semibold">{p.nome}</p>
-              </div>
-
-            </div>
-          ))}
+        {/* FAIXA */}
+        <div className="bg-[#0a0a0a] py-6 text-center border-y border-yellow-400/20 mb-10">
+          <h2 className="text-4xl text-yellow-400 inline-block relative group cursor-default">
+            Produtos
+            <span className="absolute left-0 -bottom-2 w-0 h-[2px] bg-yellow-400 group-hover:w-full transition-all"></span>
+          </h2>
         </div>
-      </section>
 
-      {/* AVALIAÇÕES */}
-      <section
-        ref={(el) => (sectionsRef.current[1] = el)}
-        className="max-w-7xl mx-auto px-6 py-20 opacity-0 translate-y-10 transition-all duration-700"
-      >
-        <h2 className="text-4xl text-yellow-400 text-center mb-10">
-          Avaliações
-        </h2>
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid md:grid-cols-4 gap-8">
+            {produtos.map((p, i) => (
+              <div key={i} className="bg-[#0a0a0a] rounded-xl overflow-hidden border border-yellow-400/10 hover:-translate-y-2 transition">
 
-        <div className="grid md:grid-cols-3 gap-8">
-          {[1, 2, 3].map((_, i) => (
-            <div key={i} className="bg-[#0a0a0a] p-6 rounded-xl">
-              <div className="flex text-yellow-400 mb-2">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} size={16} />
-                ))}
+                <img src={p.img} className="w-full h-40 object-cover" />
+
+                <div className="p-4 text-center">
+                  <p className="text-yellow-400 font-semibold">{p.nome}</p>
+                </div>
+
               </div>
-              <p className="text-gray-300">Excelente serviço!</p>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </section>
 
       {/* MAPA */}
       <section className="py-20">
-        <h2 className="text-4xl text-yellow-400 text-center mb-10">
-          Nossa Localização
-        </h2>
+
+        {/* FAIXA */}
+        <div className="bg-[#0a0a0a] py-6 text-center border-y border-yellow-400/20 mb-10">
+          <h2 className="text-4xl text-yellow-400 inline-block relative group cursor-default">
+            Nossa Localização
+            <span className="absolute left-0 -bottom-2 w-0 h-[2px] bg-yellow-400 group-hover:w-full transition-all"></span>
+          </h2>
+        </div>
 
         <div className="w-full border-y border-yellow-400/30">
           <iframe
@@ -233,6 +220,7 @@ export default function App() {
             loading="lazy"
           ></iframe>
         </div>
+
       </section>
 
       {/* FOOTER */}
