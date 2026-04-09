@@ -165,7 +165,15 @@ export default function App() {
       </section>
 
       {/* FOOTER COM "CAÍDA" */}
-      <footer className="bg-[#111] text-gray-400 pt-20 pb-6 relative">
+      <footer className="bg-[#111] text-gray-400 pt-24 pb-6 relative overflow-hidden">
+
+  {/* FUNDO COM CAÍDA INTEGRADA */}
+  <div
+    className="absolute top-0 left-0 w-full h-24 bg-[#111]"
+    style={{
+      clipPath: "polygon(0 100%, 100% 0, 100% 100%, 0% 100%)",
+    }}
+  ></div>
 
         {/* CORTE DIAGONAL */}
         <div className="absolute top-0 left-0 w-full h-16 bg-black clip-path-footer"></div>
