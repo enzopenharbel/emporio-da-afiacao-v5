@@ -37,11 +37,24 @@ export default function App() {
 
       {/* HEADER */}
       <header className="fixed w-full z-50 bg-black/90 backdrop-blur-md border-b border-yellow-400/20">
-        <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
+        <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-4 gap-6">
 
           <div className="flex items-center gap-3">
             <img src="/logo.png" className="h-14" />
             <span className="text-yellow-400 font-bold">Empório da Afiação</span>
+          </div>
+
+          {/* BUSCA RESTAURADA */}
+          <div className="hidden md:flex flex-1 justify-center">
+            <div className="flex w-full max-w-[420px] group">
+              <input
+                placeholder="Buscar produtos..."
+                className="flex-1 bg-black border border-yellow-400/30 border-r-0 rounded-l-xl px-4 py-2 text-yellow-200 outline-none group-hover:border-yellow-400 focus:border-yellow-400 transition"
+              />
+              <button className="bg-yellow-400 px-4 rounded-r-xl hover:bg-yellow-300 transition">
+                <Search size={18} className="text-black" />
+              </button>
+            </div>
           </div>
 
           <nav className="hidden md:flex gap-8 items-center">
@@ -51,7 +64,14 @@ export default function App() {
                 <span className="absolute left-0 -bottom-1 w-0 h-[2px] bg-yellow-400 group-hover:w-full transition-all"></span>
               </button>
             ))}
-            <ShoppingCart />
+
+            {/* CARRINHO COM EFEITO */}
+            <button className="relative group">
+              <ShoppingCart className="group-hover:text-yellow-400 transition" />
+              <span className="absolute -top-2 -right-2 bg-yellow-400 text-black text-xs px-1 rounded-full group-hover:scale-110 transition">
+                0
+              </span>
+            </button>
           </nav>
 
         </div>
@@ -83,7 +103,6 @@ export default function App() {
             </div>
           </div>
 
-          {/* Setas */}
           <button
             onClick={() =>
               setBannerIndex((prev) =>
@@ -125,16 +144,13 @@ export default function App() {
         </div>
       </section>
 
-      {/* MAPA COM DIVISÓRIA MELHORADA */}
+      {/* MAPA */}
       <section className="py-20">
-
         <div className="relative text-center mb-10">
           <h2 className="text-4xl text-yellow-400 inline-block relative group">
             Nossa Localização
             <span className="absolute left-0 -bottom-2 w-0 h-[2px] bg-yellow-400 group-hover:w-full transition-all"></span>
           </h2>
-
-          {/* LINHA DECORATIVA */}
           <div className="mt-6 h-[3px] w-full bg-gradient-to-r from-transparent via-yellow-400 to-transparent opacity-60"></div>
         </div>
 
@@ -146,47 +162,44 @@ export default function App() {
             style={{ border: 0 }}
           ></iframe>
         </div>
-
       </section>
 
-      {/* FOOTER NOVO */}
-      <footer className="bg-[#111] text-gray-400 pt-16 pb-6">
+      {/* FOOTER COM "CAÍDA" */}
+      <footer className="bg-[#111] text-gray-400 pt-20 pb-6 relative">
+
+        {/* CORTE DIAGONAL */}
+        <div className="absolute top-0 left-0 w-full h-16 bg-black clip-path-footer"></div>
 
         <div className="max-w-7xl mx-auto grid md:grid-cols-3 gap-10 px-6">
 
-          {/* LOGO */}
           <div>
             <h3 className="text-yellow-400 text-xl font-bold mb-4">
               Empório da Afiação
             </h3>
             <p>
-              Afiação profissional de alicates, facas e instrumentos de estética.
+              Afiação profissional de alicates, facas e instrumentos.
             </p>
           </div>
 
-          {/* LINKS */}
           <div>
             <h4 className="text-white mb-4">Links</h4>
             <ul className="space-y-2">
               <li>Início</li>
               <li>Produtos</li>
-              <li>Avaliações</li>
               <li>Contato</li>
             </ul>
           </div>
 
-          {/* CONTATO */}
           <div>
             <h4 className="text-white mb-4">Contato</h4>
             <p>São Paulo - SP</p>
             <p>(11) 97962-6107</p>
-            <p className="text-yellow-400">WhatsApp disponível</p>
           </div>
 
         </div>
 
-        <div className="text-center text-gray-600 mt-10 text-sm">
-          © 2026 Empório da Afiação — Todos os direitos reservados
+        <div className="text-center mt-10 text-gray-600 text-sm">
+          © 2026 Empório da Afiação
         </div>
 
       </footer>
