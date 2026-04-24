@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import {
   Search,
   Star,
@@ -9,6 +9,10 @@ import {
   ArrowLeft,
 } from "lucide-react";
 
+// =============================
+// BANNERS DO TOPO
+// Edite aqui os textos e imagens do banner rotativo
+// =============================
 const banners = [
   {
     titulo: "Afiação de Alicates",
@@ -27,6 +31,10 @@ const banners = [
   },
 ];
 
+// =============================
+// CATEGORIAS E PRODUTOS
+// Edite aqui as categorias da página principal e os produtos internos
+// =============================
 const categorias = [
   {
     nome: "Alicates",
@@ -110,10 +118,18 @@ const categorias = [
   },
 ];
 
+// =============================
+// FUNÇÃO AUXILIAR DE ROTA
+// Controla a abertura das páginas de categoria pelo hash da URL
+// =============================
 function slugAtual() {
   return window.location.hash.replace("#categoria/", "");
 }
 
+// =============================
+// COMPONENTE PRINCIPAL DO SITE
+// Controla banner, categorias, páginas internas e navegação
+// =============================
 export default function App() {
   const [bannerIndex, setBannerIndex] = useState(0);
   const [paginaCategoria, setPaginaCategoria] = useState(slugAtual());
@@ -147,6 +163,10 @@ export default function App() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
+  // =============================
+  // PÁGINA INTERNA DA CATEGORIA
+  // Aparece quando o usuário clica em Alicates, Facas, Tesouras etc.
+  // =============================
   if (categoriaAberta) {
     return (
       <div className="bg-black text-white min-h-screen">
@@ -372,12 +392,25 @@ export default function App() {
   );
 }
 
+// =============================
+// CABEÇALHO / HEADER
+// Aqui ficam logo, pesquisa, menu, carrinho e efeito de redução ao rolar
+// =============================
 function Header({ voltarInicio }) {
+  // Altere este número para escolher quando o cabeçalho começa a encolher.
+  // Exemplo: 40 = encolhe depois de rolar 40px.
+  const scrollTrigger = 40;
+
+  // Altere estes valores para controlar o tamanho do cabeçalho.
+  // headerNormal = altura original / headerReduzido = altura depois de rolar.
+  const headerNormal = "min-h-[120px]";
+  const headerReduzido = "min-h-[8px]";
+
   const [scrolled, setScrolled] = useState(false);
   const [searchActive, setSearchActive] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40);
+    const onScroll = () => setScrolled(window.scrollY > scrollTrigger);
     onScroll();
 
     window.addEventListener("scroll", onScroll);
@@ -401,7 +434,7 @@ function Header({ voltarInicio }) {
     >
       <div
         className={`max-w-7xl mx-auto flex items-center justify-between px-6 gap-6 transition-all duration-700 overflow-hidden ${
-          scrolled ? "min-h-[8px]" : "min-h-[120px]"
+          scrolled ? headerReduzido : headerNormal
         }`}
       >
         <button
@@ -483,6 +516,10 @@ function Header({ voltarInicio }) {
   );
 }
 
+// =============================
+// RODAPÉ / FOOTER
+// Aqui ficam informações finais do site
+// =============================
 function Footer() {
   return (
     <footer className="bg-[#111] text-gray-400 pt-24 pb-6 relative overflow-hidden">
