@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import {
   Search,
   Star,
@@ -9,10 +9,6 @@ import {
   ArrowLeft,
 } from "lucide-react";
 
-// =============================
-// BANNERS DO TOPO
-// Edite aqui os textos e imagens do banner rotativo
-// =============================
 const banners = [
   {
     titulo: "Afiação de Alicates",
@@ -31,26 +27,48 @@ const banners = [
   },
 ];
 
-// =============================
-// CATEGORIAS E PRODUTOS
-// Edite aqui as categorias da página principal e os produtos internos
-// =============================
 const categorias = [
   {
     nome: "Alicates",
     slug: "alicates",
     chamada: "Alicates profissionais para manicure, cutícula e uso técnico.",
     img: "https://images.unsplash.com/photo-1604654894610-df63bc536371?auto=format&fit=crop&w=900&q=85",
+    // PRODUTOS DA CATEGORIA ALICATES
     produtos: [
       {
-        nome: "Alicates de cutícula",
-        descricao: "Modelos profissionais para atendimento, manutenção e venda local.",
+        nome: "Alicate Mundial 522",
+        slug: "alicate-mundial-522",
+        descricao: "Alicate para uso doméstico.",
+        detalhes: "Página específica do Alicate Mundial 522. Edite aqui futuramente os detalhes, preço, imagens e botão de compra.",
         img: "https://images.unsplash.com/photo-1604654894610-df63bc536371?auto=format&fit=crop&w=900&q=85",
       },
       {
-        nome: "Serviço de afiação de alicates",
-        descricao: "Afiação com acabamento fino para recuperar o corte do instrumento.",
-        img: "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=900&q=85",
+        nome: "Alicate Mundial 777",
+        slug: "alicate-mundial-777",
+        descricao: "Alicate inox para uso profissional.",
+        detalhes: "Página específica do Alicate Mundial 777. Edite aqui futuramente os detalhes, preço, imagens e botão de compra.",
+        img: "https://images.unsplash.com/photo-1604654894610-df63bc536371?auto=format&fit=crop&w=900&q=85",
+      },
+      {
+        nome: "Alicate Mundial 722",
+        slug: "alicate-mundial-722",
+        descricao: "Alicate inox cabo curto para uso profissional.",
+        detalhes: "Página específica do Alicate Mundial 722. Edite aqui futuramente os detalhes, preço, imagens e botão de compra.",
+        img: "https://images.unsplash.com/photo-1604654894610-df63bc536371?auto=format&fit=crop&w=900&q=85",
+      },
+      {
+        nome: "Alicate Mundial 772",
+        slug: "alicate-mundial-772",
+        descricao: "Alicate inox cabo longo para uso profissional.",
+        detalhes: "Página específica do Alicate Mundial 772. Edite aqui futuramente os detalhes, preço, imagens e botão de compra.",
+        img: "https://images.unsplash.com/photo-1604654894610-df63bc536371?auto=format&fit=crop&w=900&q=85",
+      },
+      {
+        nome: "Alicate Mundial 775",
+        slug: "alicate-mundial-775",
+        descricao: "Alicate cabo curto para uso profissional.",
+        detalhes: "Página específica do Alicate Mundial 775. Edite aqui futuramente os detalhes, preço, imagens e botão de compra.",
+        img: "https://images.unsplash.com/photo-1604654894610-df63bc536371?auto=format&fit=crop&w=900&q=85",
       },
     ],
   },
@@ -62,6 +80,7 @@ const categorias = [
     produtos: [
       {
         nome: "Espátulas de manicure",
+        slug: "espatulas-de-manicure",
         descricao: "Instrumentos para uso profissional e revenda.",
         img: "https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?auto=format&fit=crop&w=900&q=85",
       },
@@ -75,11 +94,13 @@ const categorias = [
     produtos: [
       {
         nome: "Facas profissionais",
+        slug: "facas-profissionais",
         descricao: "Facas para corte preciso em cozinha, açougue e churrasco.",
         img: "https://images.unsplash.com/photo-1593618998160-e34014e67546?auto=format&fit=crop&w=900&q=85",
       },
       {
         nome: "Serviço de afiação de facas",
+        slug: "servico-de-afiacao-de-facas",
         descricao: "Recuperação de fio para facas domésticas e profissionais.",
         img: "https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?auto=format&fit=crop&w=900&q=85",
       },
@@ -93,6 +114,7 @@ const categorias = [
     produtos: [
       {
         nome: "Tesouras profissionais",
+        slug: "tesouras-profissionais",
         descricao: "Tesouras para venda e manutenção com acabamento profissional.",
         img: "https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?auto=format&fit=crop&w=900&q=85",
       },
@@ -106,11 +128,13 @@ const categorias = [
     produtos: [
       {
         nome: "Troca de molas e acessórios",
+        slug: "troca-de-molas-e-acessorios",
         descricao: "Manutenção complementar para prolongar a vida útil dos instrumentos.",
         img: "https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=900&q=85",
       },
       {
         nome: "Gravação",
+        slug: "gravacao",
         descricao: "Identificação de instrumentos para profissionais e salões.",
         img: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=900&q=85",
       },
@@ -118,24 +142,41 @@ const categorias = [
   },
 ];
 
-// =============================
-// FUNÇÃO AUXILIAR DE ROTA
-// Controla a abertura das páginas de categoria pelo hash da URL
-// =============================
-function slugAtual() {
-  return window.location.hash.replace("#categoria/", "");
+// CONTROLE DE ROTAS PELO HASH DA URL
+function slugCategoriaAtual() {
+  const hash = window.location.hash;
+  return hash.startsWith("#categoria/") ? hash.replace("#categoria/", "") : "";
 }
 
-// =============================
-// COMPONENTE PRINCIPAL DO SITE
-// Controla banner, categorias, páginas internas e navegação
-// =============================
+function slugProdutoAtual() {
+  const hash = window.location.hash;
+  return hash.startsWith("#produto/") ? hash.replace("#produto/", "") : "";
+}
+
+// LISTA ÚNICA COM TODOS OS PRODUTOS PARA ABRIR PÁGINA INDIVIDUAL
+const todosProdutos = categorias.flatMap((categoria) =>
+  categoria.produtos.map((produto) => ({
+    ...produto,
+    categoriaNome: categoria.nome,
+    categoriaSlug: categoria.slug,
+  }))
+);
+
 export default function App() {
+  // ESTADOS PRINCIPAIS DO SITE
   const [bannerIndex, setBannerIndex] = useState(0);
-  const [paginaCategoria, setPaginaCategoria] = useState(slugAtual());
+  const [paginaCategoria, setPaginaCategoria] = useState(slugCategoriaAtual());
+  const [paginaProduto, setPaginaProduto] = useState(slugProdutoAtual());
+
+  // IDENTIFICA QUAL CATEGORIA OU PRODUTO ESTÁ ABERTO
   const categoriaAberta = useMemo(
     () => categorias.find((cat) => cat.slug === paginaCategoria),
     [paginaCategoria]
+  );
+
+  const produtoAberto = useMemo(
+    () => todosProdutos.find((produto) => produto.slug === paginaProduto),
+    [paginaProduto]
   );
 
   useEffect(() => {
@@ -145,28 +186,109 @@ export default function App() {
     return () => clearInterval(interval);
   }, []);
 
+  // ATUALIZA A PÁGINA QUANDO A URL MUDA
   useEffect(() => {
-    const onHashChange = () => setPaginaCategoria(slugAtual());
+    const onHashChange = () => {
+      setPaginaCategoria(slugCategoriaAtual());
+      setPaginaProduto(slugProdutoAtual());
+    };
+
     window.addEventListener("hashchange", onHashChange);
     return () => window.removeEventListener("hashchange", onHashChange);
   }, []);
 
+  // ABRE UMA CATEGORIA
   const abrirCategoria = (slug) => {
     window.location.hash = `categoria/${slug}`;
     setPaginaCategoria(slug);
+    setPaginaProduto("");
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  const voltarInicio = () => {
-    window.location.hash = "inicio";
+  // ABRE A PÁGINA INDIVIDUAL DE UM PRODUTO
+  const abrirProduto = (slug) => {
+    window.location.hash = `produto/${slug}`;
+    setPaginaProduto(slug);
     setPaginaCategoria("");
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  // =============================
-  // PÁGINA INTERNA DA CATEGORIA
-  // Aparece quando o usuário clica em Alicates, Facas, Tesouras etc.
-  // =============================
+  // VOLTA PARA A PÁGINA INICIAL
+  const voltarInicio = () => {
+    window.location.hash = "inicio";
+    setPaginaCategoria("");
+    setPaginaProduto("");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  // PÁGINA INDIVIDUAL DO PRODUTO
+  if (produtoAberto) {
+    return (
+      <div className="bg-black text-white min-h-screen">
+        <Header voltarInicio={voltarInicio} />
+
+        <main className="pt-32">
+          <section className="relative min-h-[420px] overflow-hidden border-b border-yellow-400/20">
+            <img
+              src={produtoAberto.img}
+              alt={produtoAberto.nome}
+              className="absolute inset-0 w-full h-full object-cover opacity-35"
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-black via-black/85 to-black/40" />
+
+            <div className="relative max-w-7xl mx-auto px-6 py-20">
+              <button
+                onClick={() => abrirCategoria(produtoAberto.categoriaSlug)}
+                className="mb-8 inline-flex items-center gap-2 text-yellow-400 hover:text-yellow-300 transition"
+              >
+                <ArrowLeft size={18} /> Voltar para {produtoAberto.categoriaNome}
+              </button>
+
+              <p className="text-yellow-400 uppercase tracking-[0.35em] text-sm mb-3">
+                {produtoAberto.categoriaNome}
+              </p>
+
+              <h1 className="text-4xl md:text-6xl font-black text-yellow-400 mb-5">
+                {produtoAberto.nome}
+              </h1>
+
+              <p className="max-w-2xl text-lg text-gray-200 leading-relaxed">
+                {produtoAberto.descricao}
+              </p>
+            </div>
+          </section>
+
+          <section className="py-20 px-6 max-w-7xl mx-auto grid md:grid-cols-2 gap-10 items-start">
+            <div className="rounded-3xl overflow-hidden border border-yellow-400/20 shadow-[0_0_35px_rgba(250,204,21,0.12)]">
+              <img
+                src={produtoAberto.img}
+                alt={produtoAberto.nome}
+                className="w-full h-[430px] object-cover"
+              />
+            </div>
+
+            <div className="bg-[#0b0b0b] border border-yellow-400/15 rounded-3xl p-8 shadow-[0_0_35px_rgba(250,204,21,0.08)]">
+              <h2 className="text-3xl font-bold text-yellow-400 mb-5">
+                Detalhes do produto
+              </h2>
+
+              <p className="text-gray-300 leading-relaxed mb-8">
+                {produtoAberto.detalhes || "Página específica do produto. Edite depois os detalhes, preço, imagens e botão de compra."}
+              </p>
+
+              <button className="bg-yellow-400 text-black font-bold px-7 py-3 rounded-xl hover:bg-yellow-300 hover:shadow-[0_0_28px_rgba(250,204,21,0.55)] transition-all">
+                Solicitar pelo WhatsApp
+              </button>
+            </div>
+          </section>
+        </main>
+
+        <Footer />
+      </div>
+    );
+  }
+
+  // PÁGINA DA CATEGORIA
   if (categoriaAberta) {
     return (
       <div className="bg-black text-white min-h-screen">
@@ -207,9 +329,10 @@ export default function App() {
 
             <div className="grid md:grid-cols-3 gap-8">
               {categoriaAberta.produtos.map((produto, i) => (
-                <article
+                <button
                   key={i}
-                  className="bg-[#0b0b0b] border border-yellow-400/15 rounded-3xl overflow-hidden shadow-[0_0_35px_rgba(250,204,21,0.08)] hover:border-yellow-400/60 transition group"
+                  onClick={() => abrirProduto(produto.slug)}
+                  className="text-left bg-[#0b0b0b] border border-yellow-400/15 rounded-3xl overflow-hidden shadow-[0_0_35px_rgba(250,204,21,0.08)] hover:border-yellow-400/60 hover:shadow-[0_0_35px_rgba(250,204,21,0.22)] transition group"
                 >
                   <div className="h-56 overflow-hidden">
                     <img
@@ -222,11 +345,14 @@ export default function App() {
                     <h3 className="text-xl text-yellow-400 font-bold mb-3">
                       {produto.nome}
                     </h3>
-                    <p className="text-gray-300 leading-relaxed">
+                    <p className="text-gray-300 leading-relaxed mb-4">
                       {produto.descricao}
                     </p>
+                    <p className="text-yellow-400 text-sm font-semibold">
+                      Ver detalhes →
+                    </p>
                   </div>
-                </article>
+                </button>
               ))}
             </div>
           </section>
@@ -392,25 +518,12 @@ export default function App() {
   );
 }
 
-// =============================
-// CABEÇALHO / HEADER
-// Aqui ficam logo, pesquisa, menu, carrinho e efeito de redução ao rolar
-// =============================
 function Header({ voltarInicio }) {
-  // Altere este número para escolher quando o cabeçalho começa a encolher.
-  // Exemplo: 40 = encolhe depois de rolar 40px.
-  const scrollTrigger = 40;
-
-  // Altere estes valores para controlar o tamanho do cabeçalho.
-  // headerNormal = altura original / headerReduzido = altura depois de rolar.
-  const headerNormal = "min-h-[120px]";
-  const headerReduzido = "min-h-[8px]";
-
   const [scrolled, setScrolled] = useState(false);
   const [searchActive, setSearchActive] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > scrollTrigger);
+    const onScroll = () => setScrolled(window.scrollY > 40);
     onScroll();
 
     window.addEventListener("scroll", onScroll);
@@ -434,7 +547,7 @@ function Header({ voltarInicio }) {
     >
       <div
         className={`max-w-7xl mx-auto flex items-center justify-between px-6 gap-6 transition-all duration-700 overflow-hidden ${
-          scrolled ? headerReduzido : headerNormal
+          scrolled ? "min-h-[8px]" : "min-h-[120px]"
         }`}
       >
         <button
@@ -516,10 +629,6 @@ function Header({ voltarInicio }) {
   );
 }
 
-// =============================
-// RODAPÉ / FOOTER
-// Aqui ficam informações finais do site
-// =============================
 function Footer() {
   return (
     <footer className="bg-[#111] text-gray-400 pt-24 pb-6 relative overflow-hidden">
