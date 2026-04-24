@@ -13,17 +13,17 @@ const banners = [
   {
     titulo: "Afiação de Alicates",
     subtitulo: "Precisão, corte limpo e acabamento profissional para manicure e estética.",
-    img: "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=1800&q=85",
+    img: "/images/banners/banner-alicates.jpg",
   },
   {
     titulo: "Facas Sempre Afiadas",
     subtitulo: "Serviço ideal para açougues, cozinhas, churrasqueiros e uso doméstico.",
-    img: "https://images.unsplash.com/photo-1593618998160-e34014e67546?auto=format&fit=crop&w=1800&q=85",
+    img: "/images/banners/banner-facas.avif",
   },
   {
     titulo: "Tesouras e Espátulas",
     subtitulo: "Afiação, manutenção e venda de instrumentos com qualidade e confiança.",
-    img: "https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?auto=format&fit=crop&w=1800&q=85",
+    img: "/images/banners/banner-tesouras.avif",
   },
 ];
 
@@ -152,7 +152,7 @@ export default function App() {
       <div className="bg-black text-white min-h-screen">
         <Header voltarInicio={voltarInicio} />
 
-        <main className="pt-28">
+        <main className="pt-32">
           <section className="relative min-h-[360px] overflow-hidden border-b border-yellow-400/20">
             <img
               src={categoriaAberta.img}
@@ -222,14 +222,14 @@ export default function App() {
       <Header voltarInicio={voltarInicio} />
 
       {/* HERO */}
-      <section id="inicio" className="pt-28">
+      <section id="inicio" className="pt-32">
         <div className="relative h-[560px] md:h-[640px] overflow-hidden">
           {banners.map((banner, i) => (
             <img
               key={i}
               src={banner.img}
               alt={banner.titulo}
-              className={`absolute w-full h-full object-cover transition-all duration-1000 ${
+              className={`absolute w-full h-full object-cover transition-all duration-[2200ms] ease-in-out ${
                 i === bannerIndex ? "opacity-100 scale-100" : "opacity-0 scale-105"
               }`}
             />
@@ -254,16 +254,16 @@ export default function App() {
 
           {/* MENU EM BOLA NA PARTE INFERIOR DO BANNER */}
           <div className="absolute left-1/2 bottom-8 md:bottom-10 -translate-x-1/2 z-20">
-            <div className="flex items-center justify-center gap-4 bg-black/45 backdrop-blur-xl border border-yellow-400/30 rounded-full px-5 py-4 shadow-[0_0_35px_rgba(250,204,21,0.25)]">
+            <div className="flex items-center justify-center gap-3">
               {banners.map((banner, i) => (
                 <button
                   key={i}
                   onClick={() => setBannerIndex(i)}
                   title={banner.titulo}
-                  className={`w-5 h-5 md:w-6 md:h-6 rounded-full border transition-all duration-300 ${
+                  className={`w-2.5 h-2.5 md:w-3 md:h-3 rounded-full border transition-all duration-300 ${
                     i === bannerIndex
-                      ? "bg-yellow-400 border-yellow-300 scale-125 shadow-[0_0_18px_rgba(250,204,21,0.9)]"
-                      : "bg-black/70 border-yellow-400/50 hover:bg-yellow-400/70 hover:scale-110"
+                      ? "bg-yellow-400 border-yellow-300 scale-125 shadow-[0_0_14px_rgba(250,204,21,0.9)]"
+                      : "bg-transparent border-yellow-400/70 hover:bg-yellow-400/70 hover:scale-110"
                   }`}
                 />
               ))}
@@ -382,21 +382,21 @@ function Header({ voltarInicio }) {
 
   return (
     <header className="fixed w-full z-50 bg-black/90 backdrop-blur-md border-b border-yellow-400/20">
-      <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-4 gap-6">
-        <button onClick={voltarInicio} className="flex items-center gap-3">
-          <img src="/logo.png" alt="Empório da Afiação" className="h-14" />
-          <span className="text-yellow-400 font-bold hidden sm:block">
+      <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-2 gap-6">
+        <button onClick={voltarInicio} className="flex items-center gap-4 min-w-[230px]">
+          <img src="/logo.png" alt="Empório da Afiação" className="h-28 md:h-32 lg:h-36 w-auto object-contain drop-shadow-[0_0_20px_rgba(250,204,21,0.65)]" />
+          <span className="text-yellow-400 font-bold hidden lg:block text-lg">
             Empório da Afiação
           </span>
         </button>
 
         <div className="hidden md:flex flex-1 justify-center">
-          <div className="flex w-full max-w-[420px] group">
+          <div className="flex w-full max-w-[440px] group rounded-xl transition-all duration-300 shadow-[0_0_0_rgba(250,204,21,0)] hover:shadow-[0_0_30px_rgba(250,204,21,0.38)] focus-within:shadow-[0_0_38px_rgba(250,204,21,0.65)]">
             <input
               placeholder="Diga o que você procura"
-              className="flex-1 bg-black border border-yellow-400/30 border-r-0 rounded-l-xl px-4 py-2 text-yellow-200 outline-none group-hover:border-yellow-400 focus:border-yellow-400 transition"
+              className="flex-1 bg-black border border-yellow-400/30 border-r-0 rounded-l-xl px-4 py-2 text-yellow-200 outline-none group-hover:border-yellow-400 focus:border-yellow-400 transition-all duration-300"
             />
-            <button className="bg-yellow-400 px-4 rounded-r-xl hover:bg-yellow-300 transition">
+            <button className="bg-yellow-400 px-4 rounded-r-xl hover:bg-yellow-300 transition-all duration-300 group-hover:shadow-[0_0_24px_rgba(250,204,21,0.45)] focus:shadow-[0_0_28px_rgba(250,204,21,0.65)]">
               <Search size={18} className="text-black" />
             </button>
           </div>
