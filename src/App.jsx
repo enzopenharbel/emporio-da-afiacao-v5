@@ -374,10 +374,12 @@ export default function App() {
 
 function Header({ voltarInicio }) {
   const [scrolled, setScrolled] = useState(false);
+  const [searchActive, setSearchActive] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 35);
+    const onScroll = () => setScrolled(window.scrollY > 40);
     onScroll();
+
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
@@ -391,80 +393,86 @@ function Header({ voltarInicio }) {
 
   return (
     <header
-      className={`fixed w-full z-50 bg-black/90 backdrop-blur-md border-b border-yellow-400/20 transition-all duration-700 ease-out ${
+      className={`fixed w-full z-50 bg-black/95 backdrop-blur-md border-b border-yellow-400/20 transition-all duration-700 ${
         scrolled
-          ? "shadow-[0_8px_35px_rgba(0,0,0,0.45)]"
-          : "shadow-[0_0_0_rgba(0,0,0,0)]"
+          ? "py-0 shadow-[0_0_18px_rgba(250,204,21,0.18)]"
+          : "py-2 shadow-[0_0_0_rgba(250,204,21,0)]"
       }`}
     >
       <div
-        className={`max-w-7xl mx-auto flex items-center justify-between px-6 gap-6 transition-all duration-700 ease-out ${
-          scrolled ? "py-1 min-h-[78px]" : "py-2 min-h-[128px]"
+        className={`max-w-7xl mx-auto flex items-center justify-between px-6 gap-6 transition-all duration-700 overflow-hidden ${
+          scrolled ? "min-h-[8px]" : "min-h-[120px]"
         }`}
       >
         <button
           onClick={voltarInicio}
-          className={`flex items-center shrink-0 transition-all duration-700 ease-out ${
-            scrolled ? "min-w-[145px]" : "min-w-[210px]"
+          className={`flex items-center shrink-0 transition-all duration-700 ${
+            scrolled ? "w-[34px] opacity-0 pointer-events-none" : "w-[190px] md:w-[230px]"
           }`}
         >
           <img
             src="/logo.png"
             alt="Empório da Afiação"
-            className={`w-auto object-contain transition-all duration-700 ease-out drop-shadow-[0_0_22px_rgba(250,204,21,0.72)] ${
-              scrolled ? "h-20 md:h-24 lg:h-28" : "h-28 md:h-34 lg:h-40"
+            className={`w-auto object-contain transition-all duration-700 ${
+              scrolled
+                ? "h-[5px] opacity-0"
+                : "h-28 md:h-32 lg:h-36 opacity-100 drop-shadow-[0_0_24px_rgba(250,204,21,0.8)]"
             }`}
           />
         </button>
 
-        <div className="hidden md:flex flex-1 justify-center">
+        <div
+          className={`hidden md:flex flex-1 justify-center transition-all duration-700 ${
+            scrolled ? "opacity-0 scale-75 pointer-events-none" : "opacity-100 scale-100"
+          }`}
+        >
           <div
-            className={`flex group rounded-xl transition-all duration-500 ease-out shadow-[0_0_0_rgba(250,204,21,0)] hover:shadow-[0_0_32px_rgba(250,204,21,0.42)] focus-within:shadow-[0_0_42px_rgba(250,204,21,0.72)] ${
-              scrolled
-                ? "w-[300px] hover:w-[390px] focus-within:w-[390px]"
-                : "w-[360px] hover:w-[470px] focus-within:w-[470px]"
-            }`}
+            className={`relative flex rounded-xl group transition-all duration-500 ${
+              searchActive ? "w-[520px]" : "w-[390px] hover:w-[460px]"
+            } hover:shadow-[0_0_34px_rgba(250,204,21,0.55)] focus-within:shadow-[0_0_48px_rgba(250,204,21,0.9)]`}
           >
+            <div className="absolute -inset-[1px] rounded-xl bg-gradient-to-r from-yellow-400/10 via-yellow-300/35 to-yellow-400/10 opacity-0 blur-md transition-all duration-500 group-hover:opacity-100 group-focus-within:opacity-100 pointer-events-none"></div>
+
             <input
               placeholder="Diga o que você procura"
-              className={`flex-1 bg-black border-2 border-yellow-400/45 border-r-0 rounded-l-xl text-yellow-200 outline-none transition-all duration-500 ease-out group-hover:border-yellow-400 focus:border-yellow-400 placeholder:text-yellow-100/45 ${
-                scrolled ? "px-3 py-2 text-sm" : "px-4 py-2.5"
-              }`}
+              onFocus={() => setSearchActive(true)}
+              onBlur={() => setSearchActive(false)}
+              className="relative z-10 flex-1 bg-black border-[3px] border-yellow-400/55 border-r-0 rounded-l-xl px-4 py-2 text-yellow-200 placeholder:text-gray-400 outline-none transition-all duration-500 hover:border-yellow-400 focus:border-yellow-400 focus:tracking-wide"
             />
-            <button
-              className={`bg-yellow-400 border-2 border-yellow-400 border-l-0 rounded-r-xl hover:bg-yellow-300 transition-all duration-500 ease-out group-hover:shadow-[0_0_24px_rgba(250,204,21,0.45)] focus:shadow-[0_0_28px_rgba(250,204,21,0.65)] ${
-                scrolled ? "px-3" : "px-4"
-              }`}
-            >
-              <Search size={scrolled ? 17 : 18} className="text-black" />
+
+            <button className="relative z-10 bg-yellow-400 border-[3px] border-yellow-400 border-l-0 px-4 rounded-r-xl hover:bg-yellow-300 transition-all duration-300 hover:shadow-[0_0_24px_rgba(250,204,21,0.7)]">
+              <Search size={18} className="text-black" />
             </button>
           </div>
         </div>
 
         <nav
-          className={`hidden md:flex items-center transition-all duration-700 ease-out ${
-            scrolled ? "gap-6 text-sm" : "gap-8 text-base"
+          className={`hidden md:flex gap-8 items-center transition-all duration-700 ${
+            scrolled ? "opacity-0 scale-75 pointer-events-none" : "opacity-100 scale-100"
           }`}
         >
-          <button onClick={() => irPara("inicio")} className="relative group hover:text-yellow-400 transition-colors">
+          <button onClick={() => irPara("inicio")} className="relative group hover:text-yellow-400">
             Início
             <span className="absolute left-0 -bottom-1 w-0 h-[2px] bg-yellow-400 group-hover:w-full transition-all"></span>
           </button>
-          <button onClick={() => irPara("produtos")} className="relative group hover:text-yellow-400 transition-colors">
+
+          <button onClick={() => irPara("produtos")} className="relative group hover:text-yellow-400">
             Produtos
             <span className="absolute left-0 -bottom-1 w-0 h-[2px] bg-yellow-400 group-hover:w-full transition-all"></span>
           </button>
-          <button onClick={() => irPara("avaliacoes")} className="relative group hover:text-yellow-400 transition-colors">
+
+          <button onClick={() => irPara("avaliacoes")} className="relative group hover:text-yellow-400">
             Avaliações
             <span className="absolute left-0 -bottom-1 w-0 h-[2px] bg-yellow-400 group-hover:w-full transition-all"></span>
           </button>
-          <button onClick={() => irPara("contato")} className="relative group hover:text-yellow-400 transition-colors">
+
+          <button onClick={() => irPara("contato")} className="relative group hover:text-yellow-400">
             Contato
             <span className="absolute left-0 -bottom-1 w-0 h-[2px] bg-yellow-400 group-hover:w-full transition-all"></span>
           </button>
 
           <button className="relative group">
-            <ShoppingCart className="group-hover:text-yellow-400 transition" size={scrolled ? 20 : 24} />
+            <ShoppingCart className="group-hover:text-yellow-400 transition" />
             <span className="absolute -top-2 -right-2 bg-yellow-400 text-black text-xs px-1 rounded-full group-hover:scale-110 transition">
               0
             </span>
@@ -474,6 +482,7 @@ function Header({ voltarInicio }) {
     </header>
   );
 }
+
 function Footer() {
   return (
     <footer className="bg-[#111] text-gray-400 pt-24 pb-6 relative overflow-hidden">
