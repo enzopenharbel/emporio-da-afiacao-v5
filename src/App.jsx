@@ -600,7 +600,7 @@ function ProductCard({ produto, abrirProduto }) {
     >
       <div className="h-56 overflow-hidden">
         <img
-          src={produto.img}
+          src={imagensProdutos[produto.nome] || produto.img}
           alt={produto.nome}
           className="h-full w-full object-cover group-hover:scale-110 transition duration-700"
         />
