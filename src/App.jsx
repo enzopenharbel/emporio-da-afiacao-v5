@@ -252,8 +252,8 @@ export default function App() {
             </div>
           </div>
 
-          {/* MENU EM BOLA NO CENTRO DO BANNER */}
-          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 translate-y-24 md:translate-y-28 z-20">
+          {/* MENU EM BOLA NA PARTE INFERIOR DO BANNER */}
+          <div className="absolute left-1/2 bottom-8 md:bottom-10 -translate-x-1/2 z-20">
             <div className="flex items-center justify-center gap-4 bg-black/45 backdrop-blur-xl border border-yellow-400/30 rounded-full px-5 py-4 shadow-[0_0_35px_rgba(250,204,21,0.25)]">
               {banners.map((banner, i) => (
                 <button
