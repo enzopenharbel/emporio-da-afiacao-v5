@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import {
   Search,
   Star,
@@ -39,11 +39,6 @@ const categorias = [
         descricao: "Modelos profissionais para atendimento, manutenção e venda local.",
         img: "https://images.unsplash.com/photo-1604654894610-df63bc536371?auto=format&fit=crop&w=900&q=85",
       },
-      {
-        nome: "Serviço de afiação de alicates",
-        descricao: "Afiação com acabamento fino para recuperar o corte do instrumento.",
-        img: "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=900&q=85",
-      },
     ],
   },
   {
@@ -69,11 +64,6 @@ const categorias = [
         nome: "Facas profissionais",
         descricao: "Facas para corte preciso em cozinha, açougue e churrasco.",
         img: "https://images.unsplash.com/photo-1593618998160-e34014e67546?auto=format&fit=crop&w=900&q=85",
-      },
-      {
-        nome: "Serviço de afiação de facas",
-        descricao: "Recuperação de fio para facas domésticas e profissionais.",
-        img: "https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?auto=format&fit=crop&w=900&q=85",
       },
     ],
   },
@@ -101,11 +91,6 @@ const categorias = [
         descricao: "Manutenção complementar para prolongar a vida útil dos instrumentos.",
         img: "https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=900&q=85",
       },
-      {
-        nome: "Gravação",
-        descricao: "Identificação de instrumentos para profissionais e salões.",
-        img: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=900&q=85",
-      },
     ],
   },
 ];
@@ -117,6 +102,7 @@ function slugAtual() {
 export default function App() {
   const [bannerIndex, setBannerIndex] = useState(0);
   const [paginaCategoria, setPaginaCategoria] = useState(slugAtual());
+
   const categoriaAberta = useMemo(
     () => categorias.find((cat) => cat.slug === paginaCategoria),
     [paginaCategoria]
@@ -125,7 +111,8 @@ export default function App() {
   useEffect(() => {
     const interval = setInterval(() => {
       setBannerIndex((prev) => (prev + 1) % banners.length);
-    }, 4500);
+    }, 5200);
+
     return () => clearInterval(interval);
   }, []);
 
@@ -152,28 +139,33 @@ export default function App() {
       <div className="bg-black text-white min-h-screen">
         <Header voltarInicio={voltarInicio} />
 
-        <main className="pt-28">
+        <main className="pt-36">
           <section className="relative min-h-[360px] overflow-hidden border-b border-yellow-400/20">
             <img
               src={categoriaAberta.img}
               alt={categoriaAberta.nome}
               className="absolute inset-0 w-full h-full object-cover opacity-45"
             />
+
             <div className="absolute inset-0 bg-gradient-to-r from-black via-black/80 to-black/30" />
+
             <div className="relative max-w-7xl mx-auto px-6 py-20">
               <button
                 onClick={voltarInicio}
                 className="mb-8 inline-flex items-center gap-2 text-yellow-400 hover:text-yellow-300 transition"
               >
-                <ArrowLeft size={18} /> Voltar para categorias
+                <ArrowLeft size={18} />
+                Voltar para categorias
               </button>
 
               <p className="text-yellow-400 uppercase tracking-[0.35em] text-sm mb-3">
                 Categoria
               </p>
+
               <h1 className="text-5xl md:text-6xl font-black text-yellow-400 mb-5">
                 {categoriaAberta.nome}
               </h1>
+
               <p className="max-w-2xl text-lg text-gray-200 leading-relaxed">
                 {categoriaAberta.chamada}
               </p>
@@ -198,10 +190,12 @@ export default function App() {
                       className="h-full w-full object-cover group-hover:scale-110 transition duration-700"
                     />
                   </div>
+
                   <div className="p-6">
                     <h3 className="text-xl text-yellow-400 font-bold mb-3">
                       {produto.nome}
                     </h3>
+
                     <p className="text-gray-300 leading-relaxed">
                       {produto.descricao}
                     </p>
@@ -221,16 +215,17 @@ export default function App() {
     <div className="bg-black text-white min-h-screen">
       <Header voltarInicio={voltarInicio} />
 
-      {/* HERO */}
-      <section id="inicio" className="pt-28">
+      <section id="inicio" className="pt-36 md:pt-40">
         <div className="relative h-[560px] md:h-[640px] overflow-hidden">
           {banners.map((banner, i) => (
             <img
               key={i}
               src={banner.img}
               alt={banner.titulo}
-              className={`absolute w-full h-full object-cover transition-all duration-1000 ${
-                i === bannerIndex ? "opacity-100 scale-100" : "opacity-0 scale-105"
+              className={`absolute w-full h-full object-cover transition-all duration-[3200ms] ease-in-out ${
+                i === bannerIndex
+                  ? "opacity-100 scale-100"
+                  : "opacity-0 scale-110"
               }`}
             />
           ))}
@@ -243,31 +238,30 @@ export default function App() {
               <p className="text-yellow-400 uppercase tracking-[0.35em] text-xs md:text-sm mb-4">
                 Empório da Afiação
               </p>
+
               <h2 className="text-4xl md:text-7xl text-yellow-400 font-black mb-5 leading-tight drop-shadow-2xl">
                 {banners[bannerIndex].titulo}
               </h2>
+
               <p className="text-lg md:text-2xl text-gray-200 max-w-2xl leading-relaxed">
                 {banners[bannerIndex].subtitulo}
               </p>
             </div>
           </div>
 
-          {/* MENU EM BOLA NA PARTE INFERIOR DO BANNER */}
-          <div className="absolute left-1/2 bottom-8 md:bottom-10 -translate-x-1/2 z-20">
-            <div className="flex items-center justify-center gap-4 bg-black/45 backdrop-blur-xl border border-yellow-400/30 rounded-full px-5 py-4 shadow-[0_0_35px_rgba(250,204,21,0.25)]">
-              {banners.map((banner, i) => (
-                <button
-                  key={i}
-                  onClick={() => setBannerIndex(i)}
-                  title={banner.titulo}
-                  className={`w-5 h-5 md:w-6 md:h-6 rounded-full border transition-all duration-300 ${
-                    i === bannerIndex
-                      ? "bg-yellow-400 border-yellow-300 scale-125 shadow-[0_0_18px_rgba(250,204,21,0.9)]"
-                      : "bg-black/70 border-yellow-400/50 hover:bg-yellow-400/70 hover:scale-110"
-                  }`}
-                />
-              ))}
-            </div>
+          <div className="absolute left-1/2 bottom-7 -translate-x-1/2 z-20 flex items-center justify-center gap-3">
+            {banners.map((banner, i) => (
+              <button
+                key={i}
+                onClick={() => setBannerIndex(i)}
+                title={banner.titulo}
+                className={`rounded-full transition-all duration-500 ${
+                  i === bannerIndex
+                    ? "w-3 h-3 bg-yellow-400 shadow-[0_0_18px_rgba(250,204,21,1)] scale-125"
+                    : "w-2.5 h-2.5 bg-yellow-400/35 hover:bg-yellow-400 hover:scale-125 hover:shadow-[0_0_14px_rgba(250,204,21,0.9)]"
+                }`}
+              />
+            ))}
           </div>
 
           <button
@@ -292,12 +286,11 @@ export default function App() {
         </div>
       </section>
 
-      {/* CATEGORIAS */}
       <section id="produtos" className="py-20">
         <div className="bg-[#0a0a0a] py-7 text-center border-y border-yellow-400/20 mb-12">
           <h2 className="text-4xl text-yellow-400 relative inline-block group font-bold">
             Categorias de Produtos
-            <span className="absolute left-0 -bottom-2 w-0 h-[2px] bg-yellow-400 group-hover:w-full transition-all"></span>
+            <span className="absolute left-0 -bottom-2 w-0 h-[2px] bg-yellow-400 group-hover:w-full transition-all" />
           </h2>
         </div>
 
@@ -315,10 +308,12 @@ export default function App() {
                   className="h-full w-full object-cover group-hover:scale-125 transition duration-700"
                 />
               </div>
+
               <div className="p-5">
                 <p className="text-center text-yellow-400 font-bold text-xl mb-2">
                   {cat.nome}
                 </p>
+
                 <p className="text-center text-sm text-gray-400 leading-relaxed">
                   Ver produtos
                 </p>
@@ -328,15 +323,20 @@ export default function App() {
         </div>
       </section>
 
-      {/* AVALIAÇÕES */}
-      <section id="avaliacoes" className="py-20 bg-[#060606] border-y border-yellow-400/10">
+      <section
+        id="avaliacoes"
+        className="py-20 bg-[#060606] border-y border-yellow-400/10"
+      >
         <div className="max-w-7xl mx-auto px-6 text-center">
           <h2 className="text-4xl font-bold text-yellow-400 mb-4">
             Atendimento local com qualidade
           </h2>
+
           <p className="text-gray-300 max-w-2xl mx-auto mb-8">
-            Afiação, manutenção e venda de instrumentos para profissionais, salões e clientes da região.
+            Afiação, manutenção e venda de instrumentos para profissionais,
+            salões e clientes da região.
           </p>
+
           <div className="flex justify-center gap-2 text-yellow-400">
             {[1, 2, 3, 4, 5].map((item) => (
               <Star key={item} fill="currentColor" />
@@ -345,14 +345,14 @@ export default function App() {
         </div>
       </section>
 
-      {/* MAPA */}
       <section id="contato" className="py-20">
         <div className="relative text-center mb-10">
           <h2 className="text-4xl text-yellow-400 inline-block relative group font-bold">
             Nossa Localização
-            <span className="absolute left-0 -bottom-2 w-0 h-[2px] bg-yellow-400 group-hover:w-full transition-all"></span>
+            <span className="absolute left-0 -bottom-2 w-0 h-[2px] bg-yellow-400 group-hover:w-full transition-all" />
           </h2>
-          <div className="mt-6 h-[3px] w-full bg-gradient-to-r from-transparent via-yellow-400 to-transparent opacity-60"></div>
+
+          <div className="mt-6 h-[3px] w-full bg-gradient-to-r from-transparent via-yellow-400 to-transparent opacity-60" />
         </div>
 
         <div className="w-full border-t border-yellow-400/30 shadow-[0_0_30px_rgba(250,204,21,0.2)]">
@@ -363,7 +363,7 @@ export default function App() {
             height="450"
             style={{ border: 0 }}
             loading="lazy"
-          ></iframe>
+          />
         </div>
       </section>
 
@@ -375,53 +375,75 @@ export default function App() {
 function Header({ voltarInicio }) {
   const irPara = (id) => {
     voltarInicio();
+
     setTimeout(() => {
       document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
     }, 80);
   };
 
   return (
-    <header className="fixed w-full z-50 bg-black/90 backdrop-blur-md border-b border-yellow-400/20">
-      <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-4 gap-6">
-        <button onClick={voltarInicio} className="flex items-center gap-3">
-          <img src="/logo.png" alt="Empório da Afiação" className="h-14" />
-          <span className="text-yellow-400 font-bold hidden sm:block">
-            Empório da Afiação
-          </span>
+    <header className="fixed w-full z-50 bg-black/95 backdrop-blur-md border-b border-yellow-400/20">
+      <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-2 gap-6 min-h-[120px]">
+        <button
+          onClick={voltarInicio}
+          className="flex items-center justify-start w-[210px] md:w-[250px] shrink-0"
+        >
+          <img
+            src="/logo.png"
+            alt="Empório da Afiação"
+            className="h-28 md:h-36 lg:h-44 w-auto object-contain drop-shadow-[0_0_28px_rgba(250,204,21,0.75)]"
+          />
         </button>
 
         <div className="hidden md:flex flex-1 justify-center">
-          <div className="flex w-full max-w-[420px] group">
+          <div className="flex w-full max-w-[520px] rounded-xl transition-all duration-300 hover:shadow-[0_0_32px_rgba(250,204,21,0.55)] focus-within:shadow-[0_0_42px_rgba(250,204,21,0.85)]">
             <input
               placeholder="Diga o que você procura"
-              className="flex-1 bg-black border border-yellow-400/30 border-r-0 rounded-l-xl px-4 py-2 text-yellow-200 outline-none group-hover:border-yellow-400 focus:border-yellow-400 transition"
+              className="flex-1 bg-black border-[3px] border-yellow-400/55 border-r-0 rounded-l-xl px-4 py-3 text-yellow-200 outline-none transition-all duration-300 hover:border-yellow-400 focus:border-yellow-400"
             />
-            <button className="bg-yellow-400 px-4 rounded-r-xl hover:bg-yellow-300 transition">
-              <Search size={18} className="text-black" />
+
+            <button className="bg-yellow-400 border-[3px] border-yellow-400 border-l-0 px-5 rounded-r-xl hover:bg-yellow-300 transition-all duration-300">
+              <Search size={20} className="text-black" />
             </button>
           </div>
         </div>
 
         <nav className="hidden md:flex gap-8 items-center">
-          <button onClick={() => irPara("inicio")} className="relative group hover:text-yellow-400">
+          <button
+            onClick={() => irPara("inicio")}
+            className="relative group hover:text-yellow-400"
+          >
             Início
-            <span className="absolute left-0 -bottom-1 w-0 h-[2px] bg-yellow-400 group-hover:w-full transition-all"></span>
+            <span className="absolute left-0 -bottom-1 w-0 h-[2px] bg-yellow-400 group-hover:w-full transition-all" />
           </button>
-          <button onClick={() => irPara("produtos")} className="relative group hover:text-yellow-400">
+
+          <button
+            onClick={() => irPara("produtos")}
+            className="relative group hover:text-yellow-400"
+          >
             Produtos
-            <span className="absolute left-0 -bottom-1 w-0 h-[2px] bg-yellow-400 group-hover:w-full transition-all"></span>
+            <span className="absolute left-0 -bottom-1 w-0 h-[2px] bg-yellow-400 group-hover:w-full transition-all" />
           </button>
-          <button onClick={() => irPara("avaliacoes")} className="relative group hover:text-yellow-400">
+
+          <button
+            onClick={() => irPara("avaliacoes")}
+            className="relative group hover:text-yellow-400"
+          >
             Avaliações
-            <span className="absolute left-0 -bottom-1 w-0 h-[2px] bg-yellow-400 group-hover:w-full transition-all"></span>
+            <span className="absolute left-0 -bottom-1 w-0 h-[2px] bg-yellow-400 group-hover:w-full transition-all" />
           </button>
-          <button onClick={() => irPara("contato")} className="relative group hover:text-yellow-400">
+
+          <button
+            onClick={() => irPara("contato")}
+            className="relative group hover:text-yellow-400"
+          >
             Contato
-            <span className="absolute left-0 -bottom-1 w-0 h-[2px] bg-yellow-400 group-hover:w-full transition-all"></span>
+            <span className="absolute left-0 -bottom-1 w-0 h-[2px] bg-yellow-400 group-hover:w-full transition-all" />
           </button>
 
           <button className="relative group">
             <ShoppingCart className="group-hover:text-yellow-400 transition" />
+
             <span className="absolute -top-2 -right-2 bg-yellow-400 text-black text-xs px-1 rounded-full group-hover:scale-110 transition">
               0
             </span>
@@ -440,18 +462,23 @@ function Footer() {
         style={{
           clipPath: "polygon(0 100%, 100% 0, 100% 100%, 0% 100%)",
         }}
-      ></div>
+      />
 
       <div className="max-w-7xl mx-auto grid md:grid-cols-3 gap-10 px-6 relative">
         <div>
           <h3 className="text-yellow-400 text-xl font-bold mb-4 flex items-center gap-2">
-            <Scissors size={20} /> Empório da Afiação
+            <Scissors size={20} />
+            Empório da Afiação
           </h3>
-          <p>Afiação profissional de alicates, facas, tesouras e instrumentos.</p>
+
+          <p>
+            Afiação profissional de alicates, facas, tesouras e instrumentos.
+          </p>
         </div>
 
         <div>
           <h4 className="text-white mb-4">Links</h4>
+
           <ul className="space-y-2">
             <li>Início</li>
             <li>Produtos</li>
@@ -461,6 +488,7 @@ function Footer() {
 
         <div>
           <h4 className="text-white mb-4">Contato</h4>
+
           <p>São Paulo - SP</p>
           <p>(11) 97962-6107</p>
         </div>
