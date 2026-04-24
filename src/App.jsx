@@ -13,17 +13,17 @@ const banners = [
   {
     titulo: "Afiação de Alicates",
     subtitulo: "Precisão, corte limpo e acabamento profissional para manicure e estética.",
-    img: "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=1800&q=85",
+    img: "/images/banners/banner-alicates.jpg",
   },
   {
     titulo: "Facas Sempre Afiadas",
     subtitulo: "Serviço ideal para açougues, cozinhas, churrasqueiros e uso doméstico.",
-    img: "https://images.unsplash.com/photo-1593618998160-e34014e67546?auto=format&fit=crop&w=1800&q=85",
+    img: "/images/banners/banner-facas.avif",
   },
   {
     titulo: "Tesouras e Espátulas",
     subtitulo: "Afiação, manutenção e venda de instrumentos com qualidade e confiança.",
-    img: "https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?auto=format&fit=crop&w=1800&q=85",
+    img: "/images/banners/banner-tesouras.avif",
   },
 ];
 
