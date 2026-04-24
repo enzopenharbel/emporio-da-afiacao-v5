@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import {
   Search,
   Star,
@@ -9,6 +9,9 @@ import {
   ArrowLeft,
 } from "lucide-react";
 
+// =============================
+// BANNERS DO TOPO
+// =============================
 const banners = [
   {
     titulo: "Afiação de Alicates",
@@ -27,82 +30,84 @@ const banners = [
   },
 ];
 
+// =============================
+// IMAGENS PADRÃO POR CATEGORIA
+// Troque depois pelas suas imagens reais.
+// =============================
+const imagensPadrao = {
+  alicates:
+    "https://images.unsplash.com/photo-1604654894610-df63bc536371?auto=format&fit=crop&w=900&q=85",
+  tesouras:
+    "https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?auto=format&fit=crop&w=900&q=85",
+  facas:
+    "https://images.unsplash.com/photo-1593618998160-e34014e67546?auto=format&fit=crop&w=900&q=85",
+  espatulas:
+    "https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?auto=format&fit=crop&w=900&q=85",
+  acessorios:
+    "https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=900&q=85",
+  servicos:
+    "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=900&q=85",
+};
+
+// =============================
+// FUNÇÃO PARA CRIAR SLUGS
+// =============================
+function criarSlug(texto) {
+  return texto
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)/g, "");
+}
+
+// =============================
+// FUNÇÃO PARA CRIAR PRODUTOS
+// =============================
+function criarProduto(nome, descricao, categoriaSlug, subcategoria = "") {
+  return {
+    nome,
+    slug: criarSlug(nome),
+    descricao,
+    categoriaSlug,
+    subcategoria,
+    img: imagensPadrao[categoriaSlug],
+  };
+}
+
+// =============================
+// CATEGORIAS, SUBCATEGORIAS E PRODUTOS
+// Para adicionar mais produtos depois, edite esta área.
+// =============================
 const categorias = [
   {
     nome: "Alicates",
     slug: "alicates",
-    chamada: "Alicates profissionais para manicure, cutícula e uso técnico.",
-    img: "https://images.unsplash.com/photo-1604654894610-df63bc536371?auto=format&fit=crop&w=900&q=85",
-    // PRODUTOS DA CATEGORIA ALICATES
-    produtos: [
+    chamada: "Alicates profissionais para cutícula, unha e uso técnico.",
+    img: imagensPadrao.alicates,
+    subcategorias: [
       {
-        nome: "Alicate Mundial 522",
-        slug: "alicate-mundial-522",
-        descricao: "Alicate para uso doméstico.",
-        detalhes: "Página específica do Alicate Mundial 522. Edite aqui futuramente os detalhes, preço, imagens e botão de compra.",
-        img: "https://images.unsplash.com/photo-1604654894610-df63bc536371?auto=format&fit=crop&w=900&q=85",
+        nome: "Alicates de Cutícula",
+        produtos: [
+          criarProduto("Alicate Mundial 522", "Alicate para uso doméstico.", "alicates", "Alicates de Cutícula"),
+          criarProduto("Alicate Mundial 777", "Alicate inox para uso profissional.", "alicates", "Alicates de Cutícula"),
+          criarProduto("Alicate Mundial 722", "Alicate inox cabo curto para uso profissional.", "alicates", "Alicates de Cutícula"),
+          criarProduto("Alicate Mundial 772", "Alicate inox cabo longo para uso profissional.", "alicates", "Alicates de Cutícula"),
+          criarProduto("Alicate Mundial 775", "Alicate cabo curto para uso profissional.", "alicates", "Alicates de Cutícula"),
+          criarProduto("Alicate Mundial 735", "Alicate de cutícula para uso profissional.", "alicates", "Alicates de Cutícula"),
+          criarProduto("Alicate Mundial 787", "Alicate de cutícula para uso profissional.", "alicates", "Alicates de Cutícula"),
+          criarProduto("Alicate Mundial 577", "Alicate de cutícula para uso profissional.", "alicates", "Alicates de Cutícula"),
+          criarProduto("Alicate Mundial Precision", "Alicate de precisão para acabamento profissional.", "alicates", "Alicates de Cutícula"),
+          criarProduto("Alicate CAIXA BONITA", "Alicate de cutícula. Detalhes para editar depois.", "alicates", "Alicates de Cutícula"),
+        ],
       },
       {
-        nome: "Alicate Mundial 777",
-        slug: "alicate-mundial-777",
-        descricao: "Alicate inox para uso profissional.",
-        detalhes: "Página específica do Alicate Mundial 777. Edite aqui futuramente os detalhes, preço, imagens e botão de compra.",
-        img: "https://images.unsplash.com/photo-1604654894610-df63bc536371?auto=format&fit=crop&w=900&q=85",
-      },
-      {
-        nome: "Alicate Mundial 722",
-        slug: "alicate-mundial-722",
-        descricao: "Alicate inox cabo curto para uso profissional.",
-        detalhes: "Página específica do Alicate Mundial 722. Edite aqui futuramente os detalhes, preço, imagens e botão de compra.",
-        img: "https://images.unsplash.com/photo-1604654894610-df63bc536371?auto=format&fit=crop&w=900&q=85",
-      },
-      {
-        nome: "Alicate Mundial 772",
-        slug: "alicate-mundial-772",
-        descricao: "Alicate inox cabo longo para uso profissional.",
-        detalhes: "Página específica do Alicate Mundial 772. Edite aqui futuramente os detalhes, preço, imagens e botão de compra.",
-        img: "https://images.unsplash.com/photo-1604654894610-df63bc536371?auto=format&fit=crop&w=900&q=85",
-      },
-      {
-        nome: "Alicate Mundial 775",
-        slug: "alicate-mundial-775",
-        descricao: "Alicate cabo curto para uso profissional.",
-        detalhes: "Página específica do Alicate Mundial 775. Edite aqui futuramente os detalhes, preço, imagens e botão de compra.",
-        img: "https://images.unsplash.com/photo-1604654894610-df63bc536371?auto=format&fit=crop&w=900&q=85",
-      },
-    ],
-  },
-  {
-    nome: "Espátulas",
-    slug: "espatulas",
-    chamada: "Espátulas para manicure, limpeza e acabamento profissional.",
-    img: "https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?auto=format&fit=crop&w=900&q=85",
-    produtos: [
-      {
-        nome: "Espátulas de manicure",
-        slug: "espatulas-de-manicure",
-        descricao: "Instrumentos para uso profissional e revenda.",
-        img: "https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?auto=format&fit=crop&w=900&q=85",
-      },
-    ],
-  },
-  {
-    nome: "Facas",
-    slug: "facas",
-    chamada: "Facas para cozinha, açougue, churrasco e uso diário.",
-    img: "https://images.unsplash.com/photo-1593618998160-e34014e67546?auto=format&fit=crop&w=900&q=85",
-    produtos: [
-      {
-        nome: "Facas profissionais",
-        slug: "facas-profissionais",
-        descricao: "Facas para corte preciso em cozinha, açougue e churrasco.",
-        img: "https://images.unsplash.com/photo-1593618998160-e34014e67546?auto=format&fit=crop&w=900&q=85",
-      },
-      {
-        nome: "Serviço de afiação de facas",
-        slug: "servico-de-afiacao-de-facas",
-        descricao: "Recuperação de fio para facas domésticas e profissionais.",
-        img: "https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?auto=format&fit=crop&w=900&q=85",
+        nome: "Alicates de Unha",
+        produtos: [
+          criarProduto("Alicate Mundial 520", "Alicate de unha para uso doméstico ou profissional.", "alicates", "Alicates de Unha"),
+          criarProduto("Alicate Mundial INOX 786", "Alicate de unha inox para uso profissional.", "alicates", "Alicates de Unha"),
+          criarProduto("Alicate Mundial INOX 776", "Alicate de unha inox para uso profissional.", "alicates", "Alicates de Unha"),
+        ],
       },
     ],
   },
@@ -110,142 +115,179 @@ const categorias = [
     nome: "Tesouras",
     slug: "tesouras",
     chamada: "Tesouras para corte, acabamento, costura e uso profissional.",
-    img: "https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?auto=format&fit=crop&w=900&q=85",
+    img: imagensPadrao.tesouras,
     produtos: [
-      {
-        nome: "Tesouras profissionais",
-        slug: "tesouras-profissionais",
-        descricao: "Tesouras para venda e manutenção com acabamento profissional.",
-        img: "https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?auto=format&fit=crop&w=900&q=85",
-      },
+      criarProduto("Tesoura Mundial", "Tesoura Mundial para uso profissional ou doméstico.", "tesouras"),
+      criarProduto("Tesoura Corneta", "Tesoura Corneta para uso profissional ou doméstico.", "tesouras"),
     ],
   },
   {
-    nome: "Outros",
-    slug: "outros",
-    chamada: "Acessórios, molas, gravações e itens de apoio para estética.",
-    img: "https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=900&q=85",
+    nome: "Facas",
+    slug: "facas",
+    chamada: "Facas para cozinha, açougue, churrasco e uso diário.",
+    img: imagensPadrao.facas,
     produtos: [
-      {
-        nome: "Troca de molas e acessórios",
-        slug: "troca-de-molas-e-acessorios",
-        descricao: "Manutenção complementar para prolongar a vida útil dos instrumentos.",
-        img: "https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=900&q=85",
-      },
-      {
-        nome: "Gravação",
-        slug: "gravacao",
-        descricao: "Identificação de instrumentos para profissionais e salões.",
-        img: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=900&q=85",
-      },
+      criarProduto("Cutelo", "Cutelo para cortes fortes e uso em cozinha ou açougue.", "facas"),
+      criarProduto("Faca Corneta", "Faca Corneta para uso profissional ou doméstico.", "facas"),
+      criarProduto("Facas de carne", "Facas para corte de carnes, churrasco e cozinha.", "facas"),
+    ],
+  },
+  {
+    nome: "Espátulas",
+    slug: "espatulas",
+    chamada: "Espátulas para manicure, limpeza e acabamento profissional.",
+    img: imagensPadrao.espatulas,
+    produtos: [
+      criarProduto("Espátula palito c/ silicone", "Espátula palito com silicone para manicure.", "espatulas"),
+      criarProduto("Espátula palito de ferro Mundial", "Espátula palito de ferro Mundial para uso profissional.", "espatulas"),
+    ],
+  },
+  {
+    nome: "Acessórios",
+    slug: "acessorios",
+    chamada: "Acessórios, molas e itens de apoio para instrumentos de estética.",
+    img: imagensPadrao.acessorios,
+    produtos: [
+      criarProduto("Mola comum", "Mola comum para manutenção de alicates.", "acessorios"),
+      criarProduto("Mola de silicone", "Mola de silicone para manutenção de alicates.", "acessorios"),
+    ],
+  },
+  {
+    nome: "Serviços",
+    slug: "servicos",
+    chamada: "Serviços de afiação, manutenção e personalização de instrumentos.",
+    img: imagensPadrao.servicos,
+    produtos: [
+      criarProduto("Afiação", "Serviço de afiação profissional para alicates, facas, tesouras e instrumentos.", "servicos"),
+      criarProduto("Troca de molas", "Serviço de troca de molas para alicates.", "servicos"),
+      criarProduto("Gravação", "Serviço de gravação para identificação de instrumentos.", "servicos"),
     ],
   },
 ];
 
-// CONTROLE DE ROTAS PELO HASH DA URL
-function slugCategoriaAtual() {
-  const hash = window.location.hash;
-  return hash.startsWith("#categoria/") ? hash.replace("#categoria/", "") : "";
-}
+// =============================
+// LISTA ÚNICA DE PRODUTOS
+// =============================
+const todosProdutos = categorias.flatMap((categoria) => {
+  if (categoria.subcategorias) {
+    return categoria.subcategorias.flatMap((sub) =>
+      sub.produtos.map((produto) => ({
+        ...produto,
+        categoriaNome: categoria.nome,
+        categoriaSlug: categoria.slug,
+        subcategoria: sub.nome,
+      }))
+    );
+  }
 
-function slugProdutoAtual() {
-  const hash = window.location.hash;
-  return hash.startsWith("#produto/") ? hash.replace("#produto/", "") : "";
-}
-
-// LISTA ÚNICA COM TODOS OS PRODUTOS PARA ABRIR PÁGINA INDIVIDUAL
-const todosProdutos = categorias.flatMap((categoria) =>
-  categoria.produtos.map((produto) => ({
+  return categoria.produtos.map((produto) => ({
     ...produto,
     categoriaNome: categoria.nome,
     categoriaSlug: categoria.slug,
-  }))
-);
+  }));
+});
+
+// =============================
+// IDENTIFICA A PÁGINA ATUAL PELO HASH
+// =============================
+function rotaAtual() {
+  const hash = window.location.hash.replace("#", "");
+  const [tipo, slug] = hash.split("/");
+  return { tipo, slug };
+}
 
 export default function App() {
-  // ESTADOS PRINCIPAIS DO SITE
+  // =============================
+  // ESTADOS PRINCIPAIS
+  // =============================
   const [bannerIndex, setBannerIndex] = useState(0);
-  const [paginaCategoria, setPaginaCategoria] = useState(slugCategoriaAtual());
-  const [paginaProduto, setPaginaProduto] = useState(slugProdutoAtual());
+  const [rota, setRota] = useState(rotaAtual());
 
-  // IDENTIFICA QUAL CATEGORIA OU PRODUTO ESTÁ ABERTO
   const categoriaAberta = useMemo(
-    () => categorias.find((cat) => cat.slug === paginaCategoria),
-    [paginaCategoria]
+    () => categorias.find((cat) => cat.slug === rota.slug),
+    [rota]
   );
 
   const produtoAberto = useMemo(
-    () => todosProdutos.find((produto) => produto.slug === paginaProduto),
-    [paginaProduto]
+    () => todosProdutos.find((produto) => produto.slug === rota.slug),
+    [rota]
   );
 
+  // =============================
+  // BANNER ROTATIVO
+  // =============================
   useEffect(() => {
     const interval = setInterval(() => {
       setBannerIndex((prev) => (prev + 1) % banners.length);
     }, 4500);
+
     return () => clearInterval(interval);
   }, []);
 
-  // ATUALIZA A PÁGINA QUANDO A URL MUDA
+  // =============================
+  // CONTROLE DE ROTAS PELO HASH
+  // =============================
   useEffect(() => {
-    const onHashChange = () => {
-      setPaginaCategoria(slugCategoriaAtual());
-      setPaginaProduto(slugProdutoAtual());
-    };
-
+    const onHashChange = () => setRota(rotaAtual());
     window.addEventListener("hashchange", onHashChange);
     return () => window.removeEventListener("hashchange", onHashChange);
   }, []);
 
-  // ABRE UMA CATEGORIA
+  // =============================
+  // FUNÇÕES DE NAVEGAÇÃO
+  // =============================
   const abrirCategoria = (slug) => {
     window.location.hash = `categoria/${slug}`;
-    setPaginaCategoria(slug);
-    setPaginaProduto("");
+    setRota({ tipo: "categoria", slug });
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  // ABRE A PÁGINA INDIVIDUAL DE UM PRODUTO
   const abrirProduto = (slug) => {
     window.location.hash = `produto/${slug}`;
-    setPaginaProduto(slug);
-    setPaginaCategoria("");
+    setRota({ tipo: "produto", slug });
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  // VOLTA PARA A PÁGINA INICIAL
   const voltarInicio = () => {
     window.location.hash = "inicio";
-    setPaginaCategoria("");
-    setPaginaProduto("");
+    setRota({ tipo: "inicio", slug: undefined });
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
+  const voltarCategoria = (slug) => {
+    window.location.hash = `categoria/${slug}`;
+    setRota({ tipo: "categoria", slug });
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  // =============================
   // PÁGINA INDIVIDUAL DO PRODUTO
-  if (produtoAberto) {
+  // =============================
+  if (rota.tipo === "produto" && produtoAberto) {
     return (
       <div className="bg-black text-white min-h-screen">
         <Header voltarInicio={voltarInicio} />
 
         <main className="pt-32">
-          <section className="relative min-h-[420px] overflow-hidden border-b border-yellow-400/20">
+          <section className="relative min-h-[430px] overflow-hidden border-b border-yellow-400/20">
             <img
               src={produtoAberto.img}
               alt={produtoAberto.nome}
               className="absolute inset-0 w-full h-full object-cover opacity-35"
             />
-            <div className="absolute inset-0 bg-gradient-to-r from-black via-black/85 to-black/40" />
+
+            <div className="absolute inset-0 bg-gradient-to-r from-black via-black/85 to-black/35" />
 
             <div className="relative max-w-7xl mx-auto px-6 py-20">
               <button
-                onClick={() => abrirCategoria(produtoAberto.categoriaSlug)}
+                onClick={() => voltarCategoria(produtoAberto.categoriaSlug)}
                 className="mb-8 inline-flex items-center gap-2 text-yellow-400 hover:text-yellow-300 transition"
               >
                 <ArrowLeft size={18} /> Voltar para {produtoAberto.categoriaNome}
               </button>
 
               <p className="text-yellow-400 uppercase tracking-[0.35em] text-sm mb-3">
-                {produtoAberto.categoriaNome}
+                {produtoAberto.subcategoria || produtoAberto.categoriaNome}
               </p>
 
               <h1 className="text-4xl md:text-6xl font-black text-yellow-400 mb-5">
@@ -258,8 +300,8 @@ export default function App() {
             </div>
           </section>
 
-          <section className="py-20 px-6 max-w-7xl mx-auto grid md:grid-cols-2 gap-10 items-start">
-            <div className="rounded-3xl overflow-hidden border border-yellow-400/20 shadow-[0_0_35px_rgba(250,204,21,0.12)]">
+          <section className="py-20 px-6 max-w-7xl mx-auto grid lg:grid-cols-2 gap-10 items-start">
+            <div className="rounded-3xl overflow-hidden border border-yellow-400/20 shadow-[0_0_40px_rgba(250,204,21,0.12)]">
               <img
                 src={produtoAberto.img}
                 alt={produtoAberto.nome}
@@ -269,16 +311,24 @@ export default function App() {
 
             <div className="bg-[#0b0b0b] border border-yellow-400/15 rounded-3xl p-8 shadow-[0_0_35px_rgba(250,204,21,0.08)]">
               <h2 className="text-3xl font-bold text-yellow-400 mb-5">
-                Detalhes do produto
+                Detalhes do item
               </h2>
 
-              <p className="text-gray-300 leading-relaxed mb-8">
-                {produtoAberto.detalhes || "Página específica do produto. Edite depois os detalhes, preço, imagens e botão de compra."}
+              <p className="text-gray-300 leading-relaxed mb-6">
+                Esta página já está criada para você editar depois com preço, descrição completa, fotos reais, botão de compra ou botão de WhatsApp.
               </p>
 
-              <button className="bg-yellow-400 text-black font-bold px-7 py-3 rounded-xl hover:bg-yellow-300 hover:shadow-[0_0_28px_rgba(250,204,21,0.55)] transition-all">
-                Solicitar pelo WhatsApp
-              </button>
+              <div className="space-y-3 text-gray-300">
+                <p>
+                  <span className="text-yellow-400 font-semibold">Categoria:</span> {produtoAberto.categoriaNome}
+                </p>
+
+                {produtoAberto.subcategoria && (
+                  <p>
+                    <span className="text-yellow-400 font-semibold">Subcategoria:</span> {produtoAberto.subcategoria}
+                  </p>
+                )}
+              </div>
             </div>
           </section>
         </main>
@@ -288,8 +338,10 @@ export default function App() {
     );
   }
 
+  // =============================
   // PÁGINA DA CATEGORIA
-  if (categoriaAberta) {
+  // =============================
+  if (rota.tipo === "categoria" && categoriaAberta) {
     return (
       <div className="bg-black text-white min-h-screen">
         <Header voltarInicio={voltarInicio} />
@@ -301,7 +353,9 @@ export default function App() {
               alt={categoriaAberta.nome}
               className="absolute inset-0 w-full h-full object-cover opacity-45"
             />
+
             <div className="absolute inset-0 bg-gradient-to-r from-black via-black/80 to-black/30" />
+
             <div className="relative max-w-7xl mx-auto px-6 py-20">
               <button
                 onClick={voltarInicio}
@@ -313,9 +367,11 @@ export default function App() {
               <p className="text-yellow-400 uppercase tracking-[0.35em] text-sm mb-3">
                 Categoria
               </p>
+
               <h1 className="text-5xl md:text-6xl font-black text-yellow-400 mb-5">
                 {categoriaAberta.nome}
               </h1>
+
               <p className="max-w-2xl text-lg text-gray-200 leading-relaxed">
                 {categoriaAberta.chamada}
               </p>
@@ -327,34 +383,37 @@ export default function App() {
               Produtos e serviços em {categoriaAberta.nome}
             </h2>
 
-            <div className="grid md:grid-cols-3 gap-8">
-              {categoriaAberta.produtos.map((produto, i) => (
-                <button
-                  key={i}
-                  onClick={() => abrirProduto(produto.slug)}
-                  className="text-left bg-[#0b0b0b] border border-yellow-400/15 rounded-3xl overflow-hidden shadow-[0_0_35px_rgba(250,204,21,0.08)] hover:border-yellow-400/60 hover:shadow-[0_0_35px_rgba(250,204,21,0.22)] transition group"
-                >
-                  <div className="h-56 overflow-hidden">
-                    <img
-                      src={produto.img}
-                      alt={produto.nome}
-                      className="h-full w-full object-cover group-hover:scale-110 transition duration-700"
-                    />
-                  </div>
-                  <div className="p-6">
-                    <h3 className="text-xl text-yellow-400 font-bold mb-3">
-                      {produto.nome}
+            {categoriaAberta.subcategorias ? (
+              <div className="space-y-14">
+                {categoriaAberta.subcategorias.map((subcategoria) => (
+                  <div key={subcategoria.nome}>
+                    <h3 className="text-2xl font-bold text-yellow-300 mb-6 border-l-4 border-yellow-400 pl-4">
+                      {subcategoria.nome}
                     </h3>
-                    <p className="text-gray-300 leading-relaxed mb-4">
-                      {produto.descricao}
-                    </p>
-                    <p className="text-yellow-400 text-sm font-semibold">
-                      Ver detalhes →
-                    </p>
+
+                    <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                      {subcategoria.produtos.map((produto) => (
+                        <ProductCard
+                          key={produto.slug}
+                          produto={produto}
+                          abrirProduto={abrirProduto}
+                        />
+                      ))}
+                    </div>
                   </div>
-                </button>
-              ))}
-            </div>
+                ))}
+              </div>
+            ) : (
+              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                {categoriaAberta.produtos.map((produto) => (
+                  <ProductCard
+                    key={produto.slug}
+                    produto={produto}
+                    abrirProduto={abrirProduto}
+                  />
+                ))}
+              </div>
+            )}
           </section>
         </main>
 
@@ -363,11 +422,14 @@ export default function App() {
     );
   }
 
+  // =============================
+  // PÁGINA INICIAL
+  // =============================
   return (
     <div className="bg-black text-white min-h-screen">
       <Header voltarInicio={voltarInicio} />
 
-      {/* HERO */}
+      {/* HERO / BANNER ROTATIVO */}
       <section id="inicio" className="pt-32">
         <div className="relative h-[560px] md:h-[640px] overflow-hidden">
           {banners.map((banner, i) => (
@@ -389,16 +451,18 @@ export default function App() {
               <p className="text-yellow-400 uppercase tracking-[0.35em] text-xs md:text-sm mb-4">
                 Empório da Afiação
               </p>
+
               <h2 className="text-4xl md:text-7xl text-yellow-400 font-black mb-5 leading-tight drop-shadow-2xl">
                 {banners[bannerIndex].titulo}
               </h2>
+
               <p className="text-lg md:text-2xl text-gray-200 max-w-2xl leading-relaxed">
                 {banners[bannerIndex].subtitulo}
               </p>
             </div>
           </div>
 
-          {/* MENU EM BOLA NA PARTE INFERIOR DO BANNER */}
+          {/* BOLINHAS DO BANNER */}
           <div className="absolute left-1/2 bottom-8 md:bottom-10 -translate-x-1/2 z-20">
             <div className="flex items-center justify-center gap-3">
               {banners.map((banner, i) => (
@@ -416,6 +480,7 @@ export default function App() {
             </div>
           </div>
 
+          {/* SETA ESQUERDA */}
           <button
             onClick={() =>
               setBannerIndex((prev) =>
@@ -427,6 +492,7 @@ export default function App() {
             <ChevronLeft />
           </button>
 
+          {/* SETA DIREITA */}
           <button
             onClick={() =>
               setBannerIndex((prev) => (prev + 1) % banners.length)
@@ -447,7 +513,7 @@ export default function App() {
           </h2>
         </div>
 
-        <div className="max-w-7xl mx-auto grid sm:grid-cols-2 lg:grid-cols-5 gap-7 px-6">
+        <div className="max-w-7xl mx-auto grid sm:grid-cols-2 lg:grid-cols-6 gap-7 px-6">
           {categorias.map((cat) => (
             <button
               key={cat.slug}
@@ -461,10 +527,12 @@ export default function App() {
                   className="h-full w-full object-cover group-hover:scale-125 transition duration-700"
                 />
               </div>
+
               <div className="p-5">
                 <p className="text-center text-yellow-400 font-bold text-xl mb-2">
                   {cat.nome}
                 </p>
+
                 <p className="text-center text-sm text-gray-400 leading-relaxed">
                   Ver produtos
                 </p>
@@ -480,9 +548,11 @@ export default function App() {
           <h2 className="text-4xl font-bold text-yellow-400 mb-4">
             Atendimento local com qualidade
           </h2>
+
           <p className="text-gray-300 max-w-2xl mx-auto mb-8">
             Afiação, manutenção e venda de instrumentos para profissionais, salões e clientes da região.
           </p>
+
           <div className="flex justify-center gap-2 text-yellow-400">
             {[1, 2, 3, 4, 5].map((item) => (
               <Star key={item} fill="currentColor" />
@@ -498,6 +568,7 @@ export default function App() {
             Nossa Localização
             <span className="absolute left-0 -bottom-2 w-0 h-[2px] bg-yellow-400 group-hover:w-full transition-all"></span>
           </h2>
+
           <div className="mt-6 h-[3px] w-full bg-gradient-to-r from-transparent via-yellow-400 to-transparent opacity-60"></div>
         </div>
 
@@ -518,6 +589,48 @@ export default function App() {
   );
 }
 
+// =============================
+// CARD DE PRODUTO
+// =============================
+function ProductCard({ produto, abrirProduto }) {
+  return (
+    <article
+      onClick={() => abrirProduto(produto.slug)}
+      className="cursor-pointer bg-[#0b0b0b] border border-yellow-400/15 rounded-3xl overflow-hidden shadow-[0_0_35px_rgba(250,204,21,0.08)] hover:border-yellow-400/60 hover:shadow-[0_0_38px_rgba(250,204,21,0.2)] transition group"
+    >
+      <div className="h-56 overflow-hidden">
+        <img
+          src={produto.img}
+          alt={produto.nome}
+          className="h-full w-full object-cover group-hover:scale-110 transition duration-700"
+        />
+      </div>
+
+      <div className="p-6">
+        <h3 className="text-xl text-yellow-400 font-bold mb-3">
+          {produto.nome}
+        </h3>
+
+        <p className="text-gray-300 leading-relaxed">
+          {produto.descricao}
+        </p>
+
+        <p className="mt-5 text-sm text-yellow-400 font-semibold">
+          Ver detalhes →
+        </p>
+      </div>
+    </article>
+  );
+}
+
+// =============================
+// CABEÇALHO / HEADER
+// Onde editar redução do header:
+// - altura normal: min-h-[120px]
+// - altura ao rolar: min-h-[8px]
+// - tamanho do logo normal: h-28 md:h-32 lg:h-36
+// - tamanho do logo ao rolar: h-[5px]
+// =============================
 function Header({ voltarInicio }) {
   const [scrolled, setScrolled] = useState(false);
   const [searchActive, setSearchActive] = useState(false);
@@ -550,6 +663,7 @@ function Header({ voltarInicio }) {
           scrolled ? "min-h-[8px]" : "min-h-[120px]"
         }`}
       >
+        {/* LOGOTIPO */}
         <button
           onClick={voltarInicio}
           className={`flex items-center shrink-0 transition-all duration-700 ${
@@ -567,6 +681,7 @@ function Header({ voltarInicio }) {
           />
         </button>
 
+        {/* PESQUISA ANIMADA */}
         <div
           className={`hidden md:flex flex-1 justify-center transition-all duration-700 ${
             scrolled ? "opacity-0 scale-75 pointer-events-none" : "opacity-100 scale-100"
@@ -592,6 +707,7 @@ function Header({ voltarInicio }) {
           </div>
         </div>
 
+        {/* MENU */}
         <nav
           className={`hidden md:flex gap-8 items-center transition-all duration-700 ${
             scrolled ? "opacity-0 scale-75 pointer-events-none" : "opacity-100 scale-100"
@@ -629,6 +745,9 @@ function Header({ voltarInicio }) {
   );
 }
 
+// =============================
+// RODAPÉ / FOOTER
+// =============================
 function Footer() {
   return (
     <footer className="bg-[#111] text-gray-400 pt-24 pb-6 relative overflow-hidden">
@@ -644,11 +763,13 @@ function Footer() {
           <h3 className="text-yellow-400 text-xl font-bold mb-4 flex items-center gap-2">
             <Scissors size={20} /> Empório da Afiação
           </h3>
+
           <p>Afiação profissional de alicates, facas, tesouras e instrumentos.</p>
         </div>
 
         <div>
           <h4 className="text-white mb-4">Links</h4>
+
           <ul className="space-y-2">
             <li>Início</li>
             <li>Produtos</li>
@@ -658,6 +779,7 @@ function Footer() {
 
         <div>
           <h4 className="text-white mb-4">Contato</h4>
+
           <p>São Paulo - SP</p>
           <p>(11) 97962-6107</p>
         </div>
