@@ -7,7 +7,6 @@ import {
   ChevronLeft,
   ChevronRight,
   ArrowLeft,
-  Clipboard,
 } from "lucide-react";
 
 // =============================
@@ -264,7 +263,6 @@ export default function App() {
   // =============================
   const [bannerIndex, setBannerIndex] = useState(0);
   const [rota, setRota] = useState(rotaAtual());
-  const [buscaProduto, setBuscaProduto] = useState("");
 
   const categoriaAberta = useMemo(
     () => categorias.find((cat) => cat.slug === rota.slug),
@@ -275,49 +273,6 @@ export default function App() {
     () => todosProdutos.find((produto) => produto.slug === rota.slug),
     [rota]
   );
-
-  // =============================
-  // BUSCA / FILTRO REAL DE PRODUTOS
-  // =============================
-  const categoriasFiltradas = useMemo(() => {
-    const termo = buscaProduto.trim().toLowerCase();
-
-    if (!termo) return categorias;
-
-    return categorias
-      .map((categoria) => {
-        if (categoria.subcategorias) {
-          const subcategoriasFiltradas = categoria.subcategorias
-            .map((subcategoria) => ({
-              ...subcategoria,
-              produtos: subcategoria.produtos.filter((produto) =>
-                `${produto.nome} ${produto.descricao} ${produto.subcategoria || ""} ${categoria.nome}`
-                  .toLowerCase()
-                  .includes(termo)
-              ),
-            }))
-            .filter((subcategoria) => subcategoria.produtos.length > 0);
-
-          return {
-            ...categoria,
-            subcategorias: subcategoriasFiltradas,
-          };
-        }
-
-        return {
-          ...categoria,
-          produtos: categoria.produtos.filter((produto) =>
-            `${produto.nome} ${produto.descricao} ${categoria.nome}`
-              .toLowerCase()
-              .includes(termo)
-          ),
-        };
-      })
-      .filter((categoria) => {
-        if (categoria.subcategorias) return categoria.subcategorias.length > 0;
-        return categoria.produtos.length > 0;
-      });
-  }, [buscaProduto]);
 
   // =============================
   // BANNER ROTATIVO
@@ -653,117 +608,41 @@ export default function App() {
         </div>
       </section>
 
-      {/* PRODUTOS / BUSCA REAL */}
+      {/* CATEGORIAS */}
       <section id="produtos" className="py-20">
         <div className="bg-[#0a0a0a] py-7 text-center border-y border-yellow-400/20 mb-12">
           <h2 className="text-4xl text-yellow-400 relative inline-block group font-bold">
-            Produtos
+            Categorias de Produtos
             <span className="absolute left-0 -bottom-2 w-0 h-[2px] bg-yellow-400 group-hover:w-full transition-all"></span>
           </h2>
-
-          <p className="text-gray-400 mt-4">
-            Pesquise por produto, categoria ou serviço.
-          </p>
         </div>
 
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="max-w-2xl mx-auto mb-12">
-            <div className="relative group rounded-2xl transition-all duration-500 hover:shadow-[0_0_34px_rgba(250,204,21,0.45)] focus-within:shadow-[0_0_46px_rgba(250,204,21,0.75)]">
-              <div className="absolute -inset-[1px] rounded-2xl bg-gradient-to-r from-yellow-400/15 via-yellow-300/35 to-yellow-400/15 opacity-0 blur-md transition-all duration-500 group-hover:opacity-100 group-focus-within:opacity-100 pointer-events-none"></div>
-
-              <div className="relative z-10 flex">
-                <input
-                  value={buscaProduto}
-                  onChange={(e) => setBuscaProduto(e.target.value)}
-                  placeholder="Buscar por Alicate Mundial 522, facas, molas..."
-                  className="flex-1 bg-black border-[3px] border-yellow-400/55 border-r-0 rounded-l-2xl px-5 py-4 text-yellow-200 placeholder:text-gray-500 outline-none transition-all duration-300 focus:border-yellow-400"
+        <div className="max-w-7xl mx-auto grid sm:grid-cols-2 lg:grid-cols-6 gap-7 px-6">
+          {categorias.map((cat) => (
+            <button
+              key={cat.slug}
+              onClick={() => abrirCategoria(cat.slug)}
+              className="text-left bg-[#0a0a0a] rounded-3xl overflow-hidden border border-yellow-400/15 hover:border-yellow-400/70 shadow-[0_0_25px_rgba(250,204,21,0.05)] hover:shadow-[0_0_35px_rgba(250,204,21,0.22)] transition group"
+            >
+              <div className="h-52 overflow-hidden">
+                <img
+                  src={cat.img}
+                  alt={cat.nome}
+                  className="h-full w-full object-cover group-hover:scale-125 transition duration-700"
                 />
-
-                <button
-                  type="button"
-                  className="bg-yellow-400 border-[3px] border-yellow-400 border-l-0 px-5 rounded-r-2xl"
-                >
-                  <Search size={22} className="text-black" />
-                </button>
               </div>
-            </div>
 
-            {buscaProduto && (
-              <button
-                onClick={() => setBuscaProduto("")}
-                className="mt-4 text-sm text-yellow-400 hover:text-yellow-300 transition"
-              >
-                Limpar busca
-              </button>
-            )}
-          </div>
+              <div className="p-5">
+                <p className="text-center text-yellow-400 font-bold text-xl mb-2">
+                  {cat.nome}
+                </p>
 
-          {categoriasFiltradas.length === 0 ? (
-            <div className="text-center bg-[#0a0a0a] border border-yellow-400/15 rounded-3xl p-10">
-              <p className="text-yellow-400 text-xl font-bold mb-2">
-                Nenhum produto encontrado
-              </p>
-              <p className="text-gray-400">
-                Tente buscar por outro nome, categoria ou serviço.
-              </p>
-            </div>
-          ) : (
-            <div className="space-y-16">
-              {categoriasFiltradas.map((categoria) => (
-                <div key={categoria.slug}>
-                  <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-7">
-                    <div>
-                      <p className="text-yellow-400 uppercase tracking-[0.28em] text-xs mb-2">
-                        Categoria
-                      </p>
-                      <h3 className="text-3xl font-black text-yellow-400">
-                        {categoria.nome}
-                      </h3>
-                    </div>
-
-                    <button
-                      onClick={() => abrirCategoria(categoria.slug)}
-                      className="text-sm text-yellow-400 font-bold hover:text-yellow-300 transition"
-                    >
-                      Ver categoria completa →
-                    </button>
-                  </div>
-
-                  {categoria.subcategorias ? (
-                    <div className="space-y-10">
-                      {categoria.subcategorias.map((subcategoria) => (
-                        <div key={subcategoria.nome}>
-                          <h4 className="text-xl font-bold text-yellow-300 mb-5 border-l-4 border-yellow-400 pl-4">
-                            {subcategoria.nome}
-                          </h4>
-
-                          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                            {subcategoria.produtos.map((produto) => (
-                              <ProductCard
-                                key={produto.slug}
-                                produto={produto}
-                                abrirProduto={abrirProduto}
-                              />
-                            ))}
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  ) : (
-                    <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                      {categoria.produtos.map((produto) => (
-                        <ProductCard
-                          key={produto.slug}
-                          produto={produto}
-                          abrirProduto={abrirProduto}
-                        />
-                      ))}
-                    </div>
-                  )}
-                </div>
-              ))}
-            </div>
-          )}
+                <p className="text-center text-sm text-gray-400 leading-relaxed">
+                  Ver produtos
+                </p>
+              </div>
+            </button>
+          ))}
         </div>
       </section>
 
@@ -863,14 +742,6 @@ export default function App() {
             Nossa Localização
             <span className="absolute left-0 -bottom-2 w-0 h-[2px] bg-yellow-400 group-hover:w-full transition-all"></span>
           </h2>
-
-          <p className="text-gray-400 mt-5">
-            Rua Brigadeiro Henrique Fontenelle, 1056 — Parque São Domingos, São Paulo/SP
-          </p>
-
-          <div className="mt-6 flex justify-center">
-            <BotaoCopiarEndereco />
-          </div>
 
           <div className="mt-6 h-[3px] w-full bg-gradient-to-r from-transparent via-yellow-400 to-transparent opacity-60"></div>
         </div>
@@ -993,12 +864,8 @@ function ProdutoImagemZoom({ imagens = [], nome }) {
         </div>
       </div>
 
-      {imagens.length > 0 && (
-        <div>
-          <p className="text-sm text-yellow-400 font-bold mb-3">
-            Miniaturas do produto
-          </p>
-          <div className="flex gap-3 overflow-x-auto pb-2">
+      {imagens.length > 1 && (
+        <div className="flex gap-3 overflow-x-auto pb-2">
           {imagens.map((img, index) => (
             <button
               key={index}
@@ -1016,7 +883,6 @@ function ProdutoImagemZoom({ imagens = [], nome }) {
               />
             </button>
           ))}
-          </div>
         </div>
       )}
     </div>
@@ -1145,42 +1011,6 @@ function Header({ voltarInicio }) {
   );
 }
 
-
-
-// =============================
-// BOTÃO COPIAR ENDEREÇO
-// =============================
-function BotaoCopiarEndereco() {
-  const endereco = "Rua Brigadeiro Henrique Fontenelle, 1056, Parque São Domingos, São Paulo - SP";
-  const [copiado, setCopiado] = useState(false);
-
-  const copiarEndereco = async () => {
-    try {
-      await navigator.clipboard.writeText(endereco);
-      setCopiado(true);
-      setTimeout(() => setCopiado(false), 1800);
-    } catch (error) {
-      const campo = document.createElement("textarea");
-      campo.value = endereco;
-      document.body.appendChild(campo);
-      campo.select();
-      document.execCommand("copy");
-      document.body.removeChild(campo);
-      setCopiado(true);
-      setTimeout(() => setCopiado(false), 1800);
-    }
-  };
-
-  return (
-    <button
-      onClick={copiarEndereco}
-      className="inline-flex items-center justify-center gap-2 rounded-xl border border-yellow-400/50 px-5 py-3 text-yellow-400 font-bold hover:bg-yellow-400 hover:text-black hover:shadow-[0_0_24px_rgba(250,204,21,0.45)] transition"
-    >
-      <Clipboard size={18} />
-      {copiado ? "Endereço copiado!" : "Copiar endereço"}
-    </button>
-  );
-}
 
 // =============================
 // BOTÃO FLUTUANTE DO WHATSAPP
