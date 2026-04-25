@@ -407,7 +407,9 @@ export default function App() {
           </section>
         </main>
 
-        <Footer />
+        <WhatsAppFloat />
+        <WhatsAppFloat />
+      <Footer />
       </div>
     );
   }
@@ -491,7 +493,9 @@ export default function App() {
           </section>
         </main>
 
-        <Footer />
+        <WhatsAppFloat />
+        <WhatsAppFloat />
+      <Footer />
       </div>
     );
   }
@@ -604,6 +608,14 @@ export default function App() {
         </div>
       </section>
 
+      <SecaoDestaque abrirProduto={abrirProduto} />
+
+      <SecaoComoFunciona />
+
+      <SecaoParaQuemE />
+
+      <SecaoDiferenciais />
+
       {/* CATEGORIAS */}
       <section id="produtos" className="py-20">
         <div className="bg-[#0a0a0a] py-7 text-center border-y border-yellow-400/20 mb-12">
@@ -642,20 +654,82 @@ export default function App() {
         </div>
       </section>
 
-      {/* AVALIAÇÕES */}
+      {/* AVALIAÇÕES / PROVA SOCIAL */}
       <section id="avaliacoes" className="py-20 bg-[#060606] border-y border-yellow-400/10">
-        <div className="max-w-7xl mx-auto px-6 text-center">
-          <h2 className="text-4xl font-bold text-yellow-400 mb-4">
-            Atendimento local com qualidade
-          </h2>
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-12">
+            <p className="text-yellow-400 uppercase tracking-[0.35em] text-xs mb-3">
+              Confiança local
+            </p>
 
-          <p className="text-gray-300 max-w-2xl mx-auto mb-8">
-            Afiação, manutenção e venda de instrumentos para profissionais, salões e clientes da região.
-          </p>
+            <h2 className="text-4xl font-black text-yellow-400 mb-4">
+              O que os clientes procuram aqui
+            </h2>
 
-          <div className="flex justify-center gap-2 text-yellow-400">
-            {[1, 2, 3, 4, 5].map((item) => (
-              <Star key={item} fill="currentColor" />
+            <p className="text-gray-300 max-w-2xl mx-auto">
+              Afiação, manutenção e venda de instrumentos para profissionais, salões e clientes da região.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-6 mb-12">
+            {[
+              { numero: "+500", texto: "instrumentos atendidos" },
+              { numero: "4.4★", texto: "avaliação média no Google" },
+              { numero: "3", texto: "serviços principais: afiação, mola e gravação" },
+            ].map((item, i) => (
+              <div
+                key={i}
+                className="bg-black/50 border border-yellow-400/15 rounded-3xl p-7 text-center hover:border-yellow-400/60 hover:shadow-[0_0_28px_rgba(250,204,21,0.16)] transition"
+              >
+                <p className="text-4xl font-black text-yellow-400 mb-2">
+                  {item.numero}
+                </p>
+                <p className="text-gray-400">
+                  {item.texto}
+                </p>
+              </div>
+            ))}
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-6">
+            {[
+              {
+                nome: "Juliana",
+                perfil: "Manicure",
+                texto: "Meu alicate voltou com corte limpo e muito melhor para trabalhar.",
+              },
+              {
+                nome: "Carlos",
+                perfil: "Uso em cozinha",
+                texto: "As facas ficaram prontas para uso novamente. Atendimento direto e rápido.",
+              },
+              {
+                nome: "Marina",
+                perfil: "Salão de beleza",
+                texto: "Gosto porque consigo resolver afiação, mola e acessórios em um só lugar.",
+              },
+            ].map((avaliacao, i) => (
+              <div
+                key={i}
+                className="bg-[#0a0a0a] border border-yellow-400/15 rounded-3xl p-7 hover:border-yellow-400/60 hover:-translate-y-1 hover:shadow-[0_0_26px_rgba(250,204,21,0.14)] transition"
+              >
+                <div className="flex gap-1 text-yellow-400 mb-4">
+                  {[1, 2, 3, 4, 5].map((item) => (
+                    <Star key={item} size={18} fill="currentColor" />
+                  ))}
+                </div>
+
+                <p className="text-gray-300 leading-relaxed mb-5">
+                  “{avaliacao.texto}”
+                </p>
+
+                <p className="text-yellow-400 font-bold">
+                  {avaliacao.nome}
+                </p>
+                <p className="text-gray-500 text-sm">
+                  {avaliacao.perfil}
+                </p>
+              </div>
             ))}
           </div>
         </div>
@@ -684,6 +758,7 @@ export default function App() {
         </div>
       </section>
 
+      <WhatsAppFloat />
       <Footer />
     </div>
   );
@@ -936,48 +1011,299 @@ function Header({ voltarInicio }) {
   );
 }
 
+
+// =============================
+// BOTÃO FLUTUANTE DO WHATSAPP
+// =============================
+function WhatsAppFloat() {
+  return (
+    <a
+      href={criarLinkWhatsApp("Olá! Vim pelo site e quero mais informações.")}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="fixed bottom-6 right-6 z-[60] flex items-center gap-2 rounded-full bg-green-500 px-5 py-3 font-black text-white shadow-[0_0_28px_rgba(34,197,94,0.65)] hover:scale-110 hover:bg-green-400 transition"
+    >
+      WhatsApp
+    </a>
+  );
+}
+
+// =============================
+// SEÇÃO DESTAQUE / MAIS VENDIDO
+// =============================
+function SecaoDestaque({ abrirProduto }) {
+  return (
+    <section className="py-20 px-6 bg-[#070707] border-y border-yellow-400/10">
+      <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <span className="inline-flex bg-yellow-400 text-black px-4 py-2 rounded-full text-xs font-black uppercase tracking-[0.18em] shadow-[0_0_24px_rgba(250,204,21,0.55)]">
+            Mais vendido
+          </span>
+
+          <h2 className="text-4xl md:text-6xl text-yellow-400 font-black mt-5 mb-5 leading-tight">
+            Alicate Mundial 522
+          </h2>
+
+          <p className="text-gray-300 text-lg leading-relaxed max-w-xl mb-8">
+            Um dos modelos mais procurados para uso doméstico. Ideal para quem busca praticidade, bom corte e confiança no dia a dia.
+          </p>
+
+          <div className="flex flex-wrap gap-4">
+            <button
+              onClick={() => abrirProduto("alicate-mundial-522")}
+              className="bg-yellow-400 text-black px-7 py-3 rounded-xl font-black hover:bg-yellow-300 hover:scale-105 hover:shadow-[0_0_26px_rgba(250,204,21,0.55)] transition"
+            >
+              Ver produto
+            </button>
+
+            <a
+              href={criarLinkWhatsApp("Olá! Quero saber mais sobre o Alicate Mundial 522.")}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="border border-yellow-400/60 text-yellow-400 px-7 py-3 rounded-xl font-black hover:bg-yellow-400 hover:text-black hover:scale-105 transition"
+            >
+              Chamar no WhatsApp
+            </a>
+          </div>
+        </div>
+
+        <div className="relative">
+          <div className="absolute -inset-4 rounded-[2rem] bg-yellow-400/10 blur-2xl"></div>
+          <div className="relative bg-white rounded-[2rem] p-8 border border-yellow-400/20 shadow-[0_0_45px_rgba(250,204,21,0.15)] overflow-hidden group">
+            <img
+              src="/images/produtos/alicate-mundial-522.jpg"
+              alt="Alicate Mundial 522"
+              className="w-full h-[420px] object-contain transition duration-700 group-hover:scale-110"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// =============================
+// SEÇÃO COMO FUNCIONA
+// =============================
+function SecaoComoFunciona() {
+  const passos = [
+    "Você traz o instrumento",
+    "Fazemos a avaliação",
+    "Afiação profissional",
+    "Entrega rápida",
+  ];
+
+  return (
+    <section className="py-20 px-6 bg-black">
+      <div className="max-w-7xl mx-auto text-center">
+        <p className="text-yellow-400 uppercase tracking-[0.35em] text-xs mb-3">
+          Processo simples
+        </p>
+
+        <h2 className="text-4xl text-yellow-400 font-black mb-12">
+          Como funciona
+        </h2>
+
+        <div className="grid md:grid-cols-4 gap-6">
+          {passos.map((item, i) => (
+            <div
+              key={i}
+              className="bg-[#0a0a0a] p-7 rounded-3xl border border-yellow-400/15 hover:border-yellow-400/60 hover:shadow-[0_0_30px_rgba(250,204,21,0.16)] transition group"
+            >
+              <div className="mx-auto mb-5 flex h-12 w-12 items-center justify-center rounded-full bg-yellow-400 text-black font-black group-hover:scale-110 transition">
+                {i + 1}
+              </div>
+
+              <p className="text-gray-300 font-semibold">
+                {item}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// =============================
+// SEÇÃO PARA QUEM É
+// =============================
+function SecaoParaQuemE() {
+  const publicos = [
+    "Manicures",
+    "Salões de beleza",
+    "Açougues",
+    "Uso doméstico",
+  ];
+
+  return (
+    <section className="py-20 px-6 bg-[#060606] border-y border-yellow-400/10">
+      <div className="max-w-7xl mx-auto text-center">
+        <p className="text-yellow-400 uppercase tracking-[0.35em] text-xs mb-3">
+          Atendimento local
+        </p>
+
+        <h2 className="text-4xl text-yellow-400 font-black mb-12">
+          Para quem é
+        </h2>
+
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {publicos.map((item, i) => (
+            <div
+              key={i}
+              className="bg-[#0a0a0a] p-8 rounded-3xl border border-yellow-400/15 hover:border-yellow-400/60 hover:-translate-y-2 hover:shadow-[0_0_30px_rgba(250,204,21,0.18)] transition"
+            >
+              <p className="text-yellow-400 text-xl font-bold mb-2">
+                {item}
+              </p>
+
+              <p className="text-gray-400 text-sm">
+                Soluções para corte, manutenção e reposição de instrumentos.
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// =============================
+// SEÇÃO DE DIFERENCIAIS
+// =============================
+function SecaoDiferenciais() {
+  const diferenciais = [
+    "Corte preciso",
+    "Atendimento rápido",
+    "Instrumentos revisados",
+    "Venda e manutenção no mesmo lugar",
+  ];
+
+  return (
+    <section className="py-20 px-6 bg-black">
+      <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <p className="text-yellow-400 uppercase tracking-[0.35em] text-xs mb-3">
+            Por que escolher
+          </p>
+
+          <h2 className="text-4xl md:text-5xl text-yellow-400 font-black mb-6">
+            Qualidade para quem precisa de corte de verdade
+          </h2>
+
+          <p className="text-gray-300 text-lg leading-relaxed">
+            O Empório da Afiação reúne serviços de afiação, manutenção, acessórios e produtos para profissionais e clientes que precisam de instrumentos prontos para uso.
+          </p>
+        </div>
+
+        <div className="grid sm:grid-cols-2 gap-5">
+          {diferenciais.map((item, i) => (
+            <div
+              key={i}
+              className="bg-[#0a0a0a] p-6 rounded-3xl border border-yellow-400/15 hover:border-yellow-400/60 hover:shadow-[0_0_26px_rgba(250,204,21,0.14)] transition"
+            >
+              <p className="text-yellow-400 font-black mb-2">
+                ✓ {item}
+              </p>
+              <p className="text-gray-400 text-sm">
+                Pensado para facilitar o dia a dia de quem depende de bons instrumentos.
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+
 // =============================
 // RODAPÉ / FOOTER
 // =============================
 function Footer() {
   return (
-    <footer className="bg-[#111] text-gray-400 pt-24 pb-6 relative overflow-hidden">
-      <div
-        className="absolute top-0 left-0 w-full h-24 bg-[#111]"
+    <footer className="relative overflow-hidden bg-[#080808] text-gray-400 pt-28 pb-8 border-t border-yellow-400/20">
+      <div className="absolute top-0 left-0 w-full h-28 bg-[#111]"
         style={{
           clipPath: "polygon(0 100%, 100% 0, 100% 100%, 0% 100%)",
         }}
       ></div>
 
-      <div className="max-w-7xl mx-auto grid md:grid-cols-3 gap-10 px-6 relative">
-        <div>
-          <h3 className="text-yellow-400 text-xl font-bold mb-4 flex items-center gap-2">
-            <Scissors size={20} /> Empório da Afiação
-          </h3>
-
-          <p>Afiação profissional de alicates, facas, tesouras e instrumentos.</p>
-        </div>
-
-        <div>
-          <h4 className="text-white mb-4">Links</h4>
-
-          <ul className="space-y-2">
-            <li>Início</li>
-            <li>Produtos</li>
-            <li>Contato</li>
-          </ul>
-        </div>
-
-        <div>
-          <h4 className="text-white mb-4">Contato</h4>
-
-          <p>São Paulo - SP</p>
-          <p>(11) 97962-6107</p>
-        </div>
+      <div className="absolute -left-24 top-24 text-[9rem] md:text-[13rem] font-black text-yellow-400/5 select-none pointer-events-none">
+        EMPÓRIO
       </div>
 
-      <div className="text-center mt-10 text-gray-600 text-sm relative">
-        © 2026 Empório da Afiação
+      <div className="relative max-w-7xl mx-auto px-6">
+        <div className="mb-14 rounded-[2rem] border border-yellow-400/20 bg-black/60 p-8 md:p-10 shadow-[0_0_40px_rgba(250,204,21,0.08)] grid lg:grid-cols-[1.4fr_auto] gap-8 items-center">
+          <div>
+            <p className="text-yellow-400 uppercase tracking-[0.35em] text-xs mb-3">
+              Atendimento direto
+            </p>
+
+            <h3 className="text-3xl md:text-4xl font-black text-yellow-400 mb-3">
+              Seus instrumentos perderam o corte?
+            </h3>
+
+            <p className="text-gray-300 max-w-2xl">
+              Fale com o Empório da Afiação e solicite informações sobre afiação, troca de molas, gravação ou produtos disponíveis.
+            </p>
+          </div>
+
+          <a
+            href={criarLinkWhatsApp("Olá! Vim pelo site e quero falar com o Empório da Afiação.")}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex justify-center rounded-xl bg-yellow-400 px-7 py-4 font-black text-black hover:bg-yellow-300 hover:scale-105 hover:shadow-[0_0_26px_rgba(250,204,21,0.55)] transition"
+          >
+            Falar no WhatsApp
+          </a>
+        </div>
+
+        <div className="grid md:grid-cols-4 gap-10 relative">
+          <div className="md:col-span-1">
+            <h3 className="text-yellow-400 text-2xl font-black mb-4 flex items-center gap-2">
+              <Scissors size={22} /> Empório da Afiação
+            </h3>
+
+            <p className="leading-relaxed">
+              Afiação profissional de alicates, facas, tesouras e instrumentos. Venda de produtos, acessórios e serviços para estética e uso geral.
+            </p>
+          </div>
+
+          <div>
+            <h4 className="text-white mb-4 font-bold">Categorias</h4>
+            <ul className="space-y-2">
+              <li>Alicates</li>
+              <li>Tesouras</li>
+              <li>Facas</li>
+              <li>Espátulas</li>
+              <li>Acessórios</li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="text-white mb-4 font-bold">Serviços</h4>
+            <ul className="space-y-2">
+              <li>Afiação</li>
+              <li>Troca de molas</li>
+              <li>Gravação</li>
+              <li>Manutenção</li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="text-white mb-4 font-bold">Contato</h4>
+            <ul className="space-y-2">
+              <li>São Paulo - SP</li>
+              <li>(11) 97962-6107</li>
+              <li>Rua Brigadeiro Henrique Fontenelle, 1056</li>
+            </ul>
+          </div>
+        </div>
+
+        <div className="mt-12 pt-6 border-t border-yellow-400/10 text-center text-gray-600 text-sm">
+          © 2026 Empório da Afiação — Todos os direitos reservados
+        </div>
       </div>
     </footer>
   );
