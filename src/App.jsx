@@ -612,11 +612,13 @@ function ProductCard({ produto, abrirProduto }) {
       className="cursor-pointer bg-[#0b0b0b] border border-yellow-400/15 rounded-3xl overflow-hidden shadow-[0_0_35px_rgba(250,204,21,0.08)] hover:border-yellow-400/60 hover:shadow-[0_0_38px_rgba(250,204,21,0.2)] transition group"
     >
       <div className="h-56 overflow-hidden">
-        <img
-          src={produto.img}
-          alt={produto.nome}
-          className="h-full w-full object-cover group-hover:scale-110 transition duration-700"
-        />
+        <div className="h-56 w-full bg-white flex items-center justify-center overflow-hidden rounded-t-2xl">
+  <img
+    src={produto.img}
+    alt={produto.nome}
+    className="max-h-full max-w-full object-contain transition-transform duration-500 group-hover:scale-105"
+  />
+</div>
       </div>
 
       <div className="p-6">
