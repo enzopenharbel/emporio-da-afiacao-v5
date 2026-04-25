@@ -79,9 +79,6 @@ const imagensProdutos = {
   "Alicate Mundial 722": "/images/produtos/alicate-mundial-722.jpg",
   "Alicate Mundial 772": "/images/produtos/alicate-mundial-772.jpg",
   "Alicate Mundial 777": "/images/produtos/alicate-mundial-777.jpg",
-  "Alicate Mundial 735": "/images/produtos/alicate-mundial-735.jpg",
-  "Alicate Mundial 775": "/images/produtos/alicate-mundial-775.jpg",
-  "Alicate Mundial 787": "/images/produtos/alicate-mundial-787.jpg",
 };
 
 // =============================
@@ -937,14 +934,14 @@ function Header({ voltarInicio, termoBusca, setTermoBusca, abrirProduto, resulta
 
   return (
     <header
-      className={`fixed w-full z-50 bg-black/95 backdrop-blur-md border-b border-yellow-400/20 transition-all duration-700 ${
+      className={`fixed w-full z-[9999] bg-black/95 backdrop-blur-md border-b border-yellow-400/20 transition-all duration-700 ${
         scrolled
           ? "py-0 shadow-[0_0_18px_rgba(250,204,21,0.18)]"
           : "py-2 shadow-[0_0_0_rgba(250,204,21,0)]"
       }`}
     >
       <div
-        className={`max-w-7xl mx-auto flex items-center justify-between px-6 gap-6 transition-all duration-700 overflow-hidden ${
+        className={`max-w-7xl mx-auto flex items-center justify-between px-6 gap-6 transition-all duration-700 overflow-visible ${
           scrolled ? "min-h-[8px]" : "min-h-[120px]"
         }`}
       >
@@ -968,7 +965,7 @@ function Header({ voltarInicio, termoBusca, setTermoBusca, abrirProduto, resulta
 
         {/* PESQUISA ANIMADA */}
         <div
-          className={`hidden md:flex flex-1 justify-center transition-all duration-700 ${
+          className={`hidden md:flex flex-1 justify-center transition-all duration-700 overflow-visible ${
             scrolled ? "opacity-0 scale-75 pointer-events-none" : "opacity-100 scale-100"
           }`}
         >
@@ -998,7 +995,10 @@ function Header({ voltarInicio, termoBusca, setTermoBusca, abrirProduto, resulta
             </button>
 
             {termoBusca && searchActive && (
-              <div className="absolute left-0 right-0 top-[115%] z-50 max-h-[360px] overflow-y-auto rounded-2xl border border-yellow-400/25 bg-black/95 shadow-[0_0_35px_rgba(250,204,21,0.22)] backdrop-blur-md">
+              <>
+                <div className="fixed inset-0 top-[120px] z-[9998] bg-black/45 backdrop-blur-[2px] pointer-events-none"></div>
+
+                <div className="absolute left-0 right-0 top-[calc(100%+12px)] z-[10000] max-h-[420px] overflow-y-auto rounded-2xl border border-yellow-400/35 bg-black/98 shadow-[0_20px_70px_rgba(0,0,0,0.85),0_0_35px_rgba(250,204,21,0.28)] backdrop-blur-xl">
                 {resultadosBusca.length > 0 ? (
                   resultadosBusca.slice(0, 8).map((produto) => (
                     <button
@@ -1039,7 +1039,8 @@ function Header({ voltarInicio, termoBusca, setTermoBusca, abrirProduto, resulta
                     </p>
                   </div>
                 )}
-              </div>
+                </div>
+              </>
             )}
           </div>
         </div>
