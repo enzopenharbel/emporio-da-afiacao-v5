@@ -608,14 +608,6 @@ export default function App() {
         </div>
       </section>
 
-      <SecaoDestaque abrirProduto={abrirProduto} />
-
-      <SecaoComoFunciona />
-
-      <SecaoParaQuemE />
-
-      <SecaoDiferenciais />
-
       {/* CATEGORIAS */}
       <section id="produtos" className="py-20">
         <div className="bg-[#0a0a0a] py-7 text-center border-y border-yellow-400/20 mb-12">
@@ -653,6 +645,14 @@ export default function App() {
           ))}
         </div>
       </section>
+
+      <SecaoDestaque abrirProduto={abrirProduto} />
+
+      <SecaoComoFunciona />
+
+      <SecaoParaQuemE />
+
+      <SecaoDiferenciais />
 
       {/* AVALIAÇÕES / PROVA SOCIAL */}
       <section id="avaliacoes" className="py-20 bg-[#060606] border-y border-yellow-400/10">
