@@ -263,6 +263,7 @@ export default function App() {
   // =============================
   const [bannerIndex, setBannerIndex] = useState(0);
   const [rota, setRota] = useState(rotaAtual());
+  const [termoBusca, setTermoBusca] = useState("");
 
   const categoriaAberta = useMemo(
     () => categorias.find((cat) => cat.slug === rota.slug),
@@ -273,6 +274,21 @@ export default function App() {
     () => todosProdutos.find((produto) => produto.slug === rota.slug),
     [rota]
   );
+
+  // =============================
+  // BUSCA REAL DE PRODUTOS
+  // =============================
+  const resultadosBusca = useMemo(() => {
+    const termo = termoBusca.trim().toLowerCase();
+
+    if (!termo) return [];
+
+    return todosProdutos.filter((produto) =>
+      `${produto.nome} ${produto.descricao} ${produto.categoriaNome} ${produto.subcategoria || ""}`
+        .toLowerCase()
+        .includes(termo)
+    );
+  }, [termoBusca]);
 
   // =============================
   // BANNER ROTATIVO
@@ -327,7 +343,7 @@ export default function App() {
   if (rota.tipo === "produto" && produtoAberto) {
     return (
       <div className="bg-black text-white min-h-screen">
-        <Header voltarInicio={voltarInicio} />
+        <Header voltarInicio={voltarInicio} termoBusca={termoBusca} setTermoBusca={setTermoBusca} abrirProduto={abrirProduto} resultadosBusca={resultadosBusca} />
 
         <main className="pt-32">
           <section className="relative min-h-[430px] overflow-hidden border-b border-yellow-400/20">
@@ -420,7 +436,7 @@ export default function App() {
   if (rota.tipo === "categoria" && categoriaAberta) {
     return (
       <div className="bg-black text-white min-h-screen">
-        <Header voltarInicio={voltarInicio} />
+        <Header voltarInicio={voltarInicio} termoBusca={termoBusca} setTermoBusca={setTermoBusca} abrirProduto={abrirProduto} resultadosBusca={resultadosBusca} />
 
         <main className="pt-32">
           <section className="relative min-h-[360px] overflow-hidden border-b border-yellow-400/20">
@@ -505,7 +521,7 @@ export default function App() {
   // =============================
   return (
     <div className="bg-black text-white min-h-screen">
-      <Header voltarInicio={voltarInicio} />
+      <Header voltarInicio={voltarInicio} termoBusca={termoBusca} setTermoBusca={setTermoBusca} abrirProduto={abrirProduto} resultadosBusca={resultadosBusca} />
 
       {/* HERO / BANNER ROTATIVO */}
       <section id="inicio" className="pt-32">
@@ -897,7 +913,7 @@ function ProdutoImagemZoom({ imagens = [], nome }) {
 // - tamanho do logo normal: h-28 md:h-32 lg:h-36
 // - tamanho do logo ao rolar: h-[5px]
 // =============================
-function Header({ voltarInicio }) {
+function Header({ voltarInicio, termoBusca, setTermoBusca, abrirProduto, resultadosBusca }) {
   const [scrolled, setScrolled] = useState(false);
   const [searchActive, setSearchActive] = useState(false);
 
@@ -961,15 +977,67 @@ function Header({ voltarInicio }) {
             <div className="absolute -inset-[1px] rounded-xl bg-gradient-to-r from-yellow-400/10 via-yellow-300/35 to-yellow-400/10 opacity-0 blur-md transition-all duration-500 group-hover:opacity-100 group-focus-within:opacity-100 pointer-events-none"></div>
 
             <input
+              value={termoBusca}
+              onChange={(e) => setTermoBusca(e.target.value)}
               placeholder="Diga o que você procura"
               onFocus={() => setSearchActive(true)}
-              onBlur={() => setSearchActive(false)}
+              onBlur={() => {
+                setTimeout(() => setSearchActive(false), 180);
+              }}
               className="relative z-10 flex-1 bg-black border-[3px] border-yellow-400/55 border-r-0 rounded-l-xl px-4 py-2 text-yellow-200 placeholder:text-gray-400 outline-none transition-all duration-500 hover:border-yellow-400 focus:border-yellow-400 focus:tracking-wide"
             />
 
-            <button className="relative z-10 bg-yellow-400 border-[3px] border-yellow-400 border-l-0 px-4 rounded-r-xl hover:bg-yellow-300 transition-all duration-300 hover:shadow-[0_0_24px_rgba(250,204,21,0.7)]">
+            <button
+              type="button"
+              className="relative z-10 bg-yellow-400 border-[3px] border-yellow-400 border-l-0 px-4 rounded-r-xl hover:bg-yellow-300 transition-all duration-300 hover:shadow-[0_0_24px_rgba(250,204,21,0.7)]"
+            >
               <Search size={18} className="text-black" />
             </button>
+
+            {termoBusca && searchActive && (
+              <div className="absolute left-0 right-0 top-[115%] z-50 max-h-[360px] overflow-y-auto rounded-2xl border border-yellow-400/25 bg-black/95 shadow-[0_0_35px_rgba(250,204,21,0.22)] backdrop-blur-md">
+                {resultadosBusca.length > 0 ? (
+                  resultadosBusca.slice(0, 8).map((produto) => (
+                    <button
+                      key={produto.slug}
+                      onMouseDown={(e) => {
+                        e.preventDefault();
+                        abrirProduto(produto.slug);
+                        setTermoBusca("");
+                      }}
+                      className="flex w-full items-center gap-4 border-b border-yellow-400/10 p-4 text-left hover:bg-yellow-400/10 transition"
+                    >
+                      <div className="h-14 w-14 shrink-0 rounded-xl bg-white p-1 overflow-hidden">
+                        <img
+                          src={produto.img}
+                          alt={produto.nome}
+                          className="h-full w-full object-contain"
+                        />
+                      </div>
+
+                      <div>
+                        <p className="font-bold text-yellow-400">
+                          {produto.nome}
+                        </p>
+                        <p className="text-xs text-gray-400">
+                          {produto.categoriaNome}
+                          {produto.subcategoria ? ` • ${produto.subcategoria}` : ""}
+                        </p>
+                      </div>
+                    </button>
+                  ))
+                ) : (
+                  <div className="p-5 text-center">
+                    <p className="text-yellow-400 font-bold">
+                      Nenhum produto encontrado
+                    </p>
+                    <p className="text-sm text-gray-400 mt-1">
+                      Tente buscar por outro nome.
+                    </p>
+                  </div>
+                )}
+              </div>
+            )}
           </div>
         </div>
 
