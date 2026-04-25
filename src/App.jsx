@@ -10,6 +10,18 @@ import {
 } from "lucide-react";
 
 // =============================
+// CONFIGURAÇÃO DO WHATSAPP
+// =============================
+// Edite o número abaixo se quiser trocar o WhatsApp do site.
+// Formato: DDI + DDD + número, somente números.
+const whatsappNumero = "5511979626107";
+
+function criarLinkWhatsApp(mensagem) {
+  return `https://wa.me/${whatsappNumero}?text=${encodeURIComponent(mensagem)}`;
+}
+
+
+// =============================
 // BANNERS DO TOPO
 // =============================
 const banners = [
@@ -17,16 +29,24 @@ const banners = [
     titulo: "Afiação de Alicates",
     subtitulo: "Precisão, corte limpo e acabamento profissional para manicure e estética.",
     img: "/images/banners/banner-alicates.jpg",
+    badge: "Serviço em destaque",
+    whatsappMensagem: "Olá! Quero solicitar um orçamento para afiação de alicates.",
   },
   {
-    titulo: "Facas Sempre Afiadas",
-    subtitulo: "Serviço ideal para açougues, cozinhas, churrasqueiros e uso doméstico.",
-    img: "/images/banners/banner-facas.avif",
+    titulo: "Alicate Mundial 522",
+    subtitulo: "Um dos modelos mais procurados para uso doméstico.",
+    img: "/images/banners/banner-alicates.jpg",
+    badge: "Mais vendido",
+    produtoSlug: "alicate-mundial-522",
+    whatsappMensagem: "Olá! Quero saber mais sobre o Alicate Mundial 522.",
   },
   {
-    titulo: "Tesouras e Espátulas",
-    subtitulo: "Afiação, manutenção e venda de instrumentos com qualidade e confiança.",
+    titulo: "Troca de Molas e Gravação",
+    subtitulo: "Manutenção e identificação de instrumentos para profissionais e salões.",
     img: "/images/banners/banner-tesouras.avif",
+    badge: "Serviços",
+    produtoSlug: "troca-de-molas",
+    whatsappMensagem: "Olá! Quero saber mais sobre troca de molas e gravação.",
   },
 ];
 
@@ -78,6 +98,16 @@ const imagensGaleriaProdutos = {
 };
 
 // =============================
+// PRODUTOS COM BADGE / DESTAQUE
+// =============================
+// Adicione aqui os produtos que devem aparecer com etiqueta.
+// Exemplo: "Nome do Produto": "Mais vendido"
+const badgesProdutos = {
+  "Alicate Mundial 522": "Mais vendido",
+  "Alicate Mundial 777": "Mais vendido",
+};
+
+// =============================
 // FUNÇÃO PARA CRIAR SLUGS
 // =============================
 function criarSlug(texto) {
@@ -102,6 +132,7 @@ function criarProduto(nome, descricao, categoriaSlug, subcategoria = "") {
     // Imagem personalizada se existir; caso contrário, usa a imagem padrão da categoria
     img: imagensProdutos[nome] || imagensPadrao[categoriaSlug],
     imagens: imagensGaleriaProdutos[nome] || [imagensProdutos[nome] || imagensPadrao[categoriaSlug]],
+    badge: badgesProdutos[nome] || "",
   };
 }
 
@@ -320,6 +351,12 @@ export default function App() {
                 {produtoAberto.subcategoria || produtoAberto.categoriaNome}
               </p>
 
+              {produtoAberto.badge && (
+                <span className="inline-flex items-center mb-4 px-4 py-2 rounded-full bg-yellow-400 text-black text-xs font-black uppercase tracking-[0.18em] shadow-[0_0_24px_rgba(250,204,21,0.6)]">
+                  {produtoAberto.badge}
+                </span>
+              )}
+
               <h1 className="text-4xl md:text-6xl font-black text-yellow-400 mb-5">
                 {produtoAberto.nome}
               </h1>
@@ -343,8 +380,17 @@ export default function App() {
               </h2>
 
               <p className="text-gray-300 leading-relaxed mb-6">
-                Esta página já está criada para você editar depois com preço, descrição completa, fotos reais, botão de compra ou botão de WhatsApp.
+                Esta página já está criada para você editar depois com descrição completa, fotos reais e mais detalhes do produto.
               </p>
+
+              <a
+                href={criarLinkWhatsApp(`Olá! Quero saber mais sobre o produto: ${produtoAberto.nome}.`)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mb-7 inline-flex w-full justify-center items-center rounded-xl bg-yellow-400 px-6 py-3 font-black text-black hover:bg-yellow-300 hover:scale-[1.02] hover:shadow-[0_0_26px_rgba(250,204,21,0.55)] transition"
+              >
+                Chamar no WhatsApp
+              </a>
 
               <div className="space-y-3 text-gray-300">
                 <p>
@@ -484,9 +530,35 @@ export default function App() {
                 {banners[bannerIndex].titulo}
               </h2>
 
+              {banners[bannerIndex].badge && (
+                <span className="inline-flex items-center mt-2 mb-4 px-4 py-2 rounded-full bg-yellow-400 text-black text-sm font-black uppercase tracking-[0.18em] shadow-[0_0_24px_rgba(250,204,21,0.55)]">
+                  {banners[bannerIndex].badge}
+                </span>
+              )}
+
               <p className="text-lg md:text-2xl text-gray-200 max-w-2xl leading-relaxed">
                 {banners[bannerIndex].subtitulo}
               </p>
+
+              <div className="flex flex-wrap gap-4 mt-8">
+                {banners[bannerIndex].produtoSlug && (
+                  <button
+                    onClick={() => abrirProduto(banners[bannerIndex].produtoSlug)}
+                    className="px-6 py-3 rounded-xl bg-yellow-400 text-black font-bold hover:bg-yellow-300 hover:scale-105 transition"
+                  >
+                    Ver destaque
+                  </button>
+                )}
+
+                <a
+                  href={criarLinkWhatsApp(banners[bannerIndex].whatsappMensagem || "Olá! Vim pelo site e quero mais informações.")}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-6 py-3 rounded-xl border border-yellow-400/60 text-yellow-400 font-bold hover:bg-yellow-400 hover:text-black hover:scale-105 transition"
+                >
+                  Chamar no WhatsApp
+                </a>
+              </div>
             </div>
           </div>
 
@@ -621,11 +693,19 @@ export default function App() {
 // CARD DE PRODUTO
 // =============================
 function ProductCard({ produto, abrirProduto }) {
+  const mensagem = `Olá! Quero saber mais sobre o produto: ${produto.nome}.`;
+
   return (
     <article
       onClick={() => abrirProduto(produto.slug)}
-      className="cursor-pointer bg-[#0b0b0b] border border-yellow-400/15 rounded-3xl overflow-hidden shadow-[0_0_35px_rgba(250,204,21,0.08)] hover:border-yellow-400/60 hover:shadow-[0_0_38px_rgba(250,204,21,0.2)] transition group"
+      className="relative cursor-pointer bg-[#0b0b0b] border border-yellow-400/15 rounded-3xl overflow-hidden shadow-[0_0_35px_rgba(250,204,21,0.08)] hover:border-yellow-400/60 hover:shadow-[0_0_38px_rgba(250,204,21,0.2)] transition group"
     >
+      {produto.badge && (
+        <div className="absolute top-4 left-4 z-20 bg-yellow-400 text-black text-xs font-black uppercase tracking-[0.16em] px-3 py-2 rounded-full shadow-[0_0_18px_rgba(250,204,21,0.75)]">
+          {produto.badge}
+        </div>
+      )}
+
       {/* IMAGEM DO CARD DO PRODUTO */}
       <div className="h-64 w-full bg-white flex items-center justify-center overflow-hidden rounded-t-3xl">
         <img
@@ -644,9 +724,27 @@ function ProductCard({ produto, abrirProduto }) {
           {produto.descricao}
         </p>
 
-        <p className="mt-5 text-sm text-yellow-400 font-semibold">
-          Ver detalhes →
-        </p>
+        <div className="mt-6 flex flex-col gap-3">
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              abrirProduto(produto.slug);
+            }}
+            className="text-left text-sm text-yellow-400 font-semibold hover:text-yellow-300 transition"
+          >
+            Ver detalhes →
+          </button>
+
+          <a
+            href={criarLinkWhatsApp(mensagem)}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={(e) => e.stopPropagation()}
+            className="inline-flex justify-center items-center rounded-xl border border-yellow-400/50 px-4 py-2 text-sm font-bold text-yellow-400 hover:bg-yellow-400 hover:text-black hover:shadow-[0_0_22px_rgba(250,204,21,0.45)] transition"
+          >
+            Chamar no WhatsApp
+          </a>
+        </div>
       </div>
     </article>
   );
