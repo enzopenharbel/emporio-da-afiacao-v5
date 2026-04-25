@@ -91,10 +91,14 @@ const imagensProdutos = {
 //   "/images/produtos/produto-3.jpg",
 // ],
 const imagensGaleriaProdutos = {
-  "Alicate Mundial 522": ["/images/produtos/alicate-mundial-522.jpg"],
-  "Alicate Mundial 722": ["/images/produtos/alicate-mundial-722.jpg"],
-  "Alicate Mundial 772": ["/images/produtos/alicate-mundial-772.jpg"],
-  "Alicate Mundial 777": ["/images/produtos/alicate-mundial-777.jpg"],
+  "Alicate Mundial 522": "/images/produtos/alicate-mundial-522.jpg",
+  "Alicate Mundial 722": "/images/produtos/alicate-mundial-722.jpg",
+  "Alicate Mundial 772": "/images/produtos/alicate-mundial-772.jpg",
+  "Alicate Mundial 777": "/images/produtos/alicate-mundial-777.jpg",
+  "Alicate Mundial 735": "/images/produtos/alicate-mundial-735.jpg",
+  "Alicate Mundial 775": "/images/produtos/alicate-mundial-775.jpg",
+  "Alicate Mundial 787": "/images/produtos/alicate-mundial-787.jpg",
+  "Alicate Mundial 577": "/images/produtos/alicate-mundial-577.jpg",
 };
 
 // =============================
