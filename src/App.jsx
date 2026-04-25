@@ -50,6 +50,18 @@ const imagensPadrao = {
 };
 
 // =============================
+// IMAGENS PERSONALIZADAS DOS PRODUTOS
+// =============================
+// Para trocar a imagem de um produto, mantenha o nome do produto igual ao cadastro
+// e altere apenas o caminho da imagem abaixo.
+const imagensProdutos = {
+  "Alicate Mundial 522": "/images/produtos/alicate-mundial-522.jpg",
+  "Alicate Mundial 722": "/images/produtos/alicate-mundial-722.jpg",
+  "Alicate Mundial 772": "/images/produtos/alicate-mundial-772.jpg",
+  "Alicate Mundial 777": "/images/produtos/alicate-mundial-777.jpg",
+};
+
+// =============================
 // FUNÇÃO PARA CRIAR SLUGS
 // =============================
 function criarSlug(texto) {
@@ -71,7 +83,8 @@ function criarProduto(nome, descricao, categoriaSlug, subcategoria = "") {
     descricao,
     categoriaSlug,
     subcategoria,
-    img: imagensPadrao[categoriaSlug],
+    // Imagem personalizada se existir; caso contrário, usa a imagem padrão da categoria
+    img: imagensProdutos[nome] || imagensPadrao[categoriaSlug],
   };
 }
 
