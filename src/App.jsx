@@ -62,6 +62,22 @@ const imagensProdutos = {
 };
 
 // =============================
+// GALERIA DE IMAGENS POR PRODUTO
+// =============================
+// Para adicionar mais imagens no futuro:
+// "Nome do Produto": [
+//   "/images/produtos/produto-1.jpg",
+//   "/images/produtos/produto-2.jpg",
+//   "/images/produtos/produto-3.jpg",
+// ],
+const imagensGaleriaProdutos = {
+  "Alicate Mundial 522": ["/images/produtos/alicate-mundial-522.jpg"],
+  "Alicate Mundial 722": ["/images/produtos/alicate-mundial-722.jpg"],
+  "Alicate Mundial 772": ["/images/produtos/alicate-mundial-772.jpg"],
+  "Alicate Mundial 777": ["/images/produtos/alicate-mundial-777.jpg"],
+};
+
+// =============================
 // FUNÇÃO PARA CRIAR SLUGS
 // =============================
 function criarSlug(texto) {
@@ -85,6 +101,7 @@ function criarProduto(nome, descricao, categoriaSlug, subcategoria = "") {
     subcategoria,
     // Imagem personalizada se existir; caso contrário, usa a imagem padrão da categoria
     img: imagensProdutos[nome] || imagensPadrao[categoriaSlug],
+    imagens: imagensGaleriaProdutos[nome] || [imagensProdutos[nome] || imagensPadrao[categoriaSlug]],
   };
 }
 
@@ -314,13 +331,11 @@ export default function App() {
           </section>
 
           <section className="py-20 px-6 max-w-7xl mx-auto grid lg:grid-cols-2 gap-10 items-start">
-            <div className="rounded-3xl overflow-hidden border border-yellow-400/20 shadow-[0_0_40px_rgba(250,204,21,0.12)]">
-              <img
-                src={produtoAberto.img}
-                alt={produtoAberto.nome}
-                className="w-full h-[430px] object-cover"
-              />
-            </div>
+            {/* IMAGEM PRINCIPAL DO PRODUTO COM ZOOM */}
+            <ProdutoImagemZoom
+              imagens={produtoAberto.imagens || [produtoAberto.img]}
+              nome={produtoAberto.nome}
+            />
 
             <div className="bg-[#0b0b0b] border border-yellow-400/15 rounded-3xl p-8 shadow-[0_0_35px_rgba(250,204,21,0.08)]">
               <h2 className="text-3xl font-bold text-yellow-400 mb-5">
@@ -611,14 +626,13 @@ function ProductCard({ produto, abrirProduto }) {
       onClick={() => abrirProduto(produto.slug)}
       className="cursor-pointer bg-[#0b0b0b] border border-yellow-400/15 rounded-3xl overflow-hidden shadow-[0_0_35px_rgba(250,204,21,0.08)] hover:border-yellow-400/60 hover:shadow-[0_0_38px_rgba(250,204,21,0.2)] transition group"
     >
-      <div className="h-56 overflow-hidden">
-        <div className="h-56 w-full bg-white flex items-center justify-center overflow-hidden rounded-t-2xl">
-  <img
-    src={produto.img}
-    alt={produto.nome}
-    className="max-h-full max-w-full object-contain transition-transform duration-500 group-hover:scale-105"
-  />
-</div>
+      {/* IMAGEM DO CARD DO PRODUTO */}
+      <div className="h-64 w-full bg-white flex items-center justify-center overflow-hidden rounded-t-3xl">
+        <img
+          src={produto.img}
+          alt={produto.nome}
+          className="max-h-full max-w-full object-contain p-4 transition-transform duration-700 group-hover:scale-110"
+        />
       </div>
 
       <div className="p-6">
@@ -635,6 +649,70 @@ function ProductCard({ produto, abrirProduto }) {
         </p>
       </div>
     </article>
+  );
+}
+
+// =============================
+// COMPONENTE DE IMAGEM COM ZOOM CONTROLADO PELO MOUSE
+// =============================
+function ProdutoImagemZoom({ imagens = [], nome }) {
+  const [imagemAtiva, setImagemAtiva] = useState(imagens[0]);
+  const [zoomAtivo, setZoomAtivo] = useState(false);
+  const [posicao, setPosicao] = useState({ x: 50, y: 50 });
+
+  const moverMouse = (e) => {
+    const area = e.currentTarget.getBoundingClientRect();
+    const x = ((e.clientX - area.left) / area.width) * 100;
+    const y = ((e.clientY - area.top) / area.height) * 100;
+    setPosicao({ x, y });
+  };
+
+  return (
+    <div className="space-y-5">
+      <div
+        onMouseMove={moverMouse}
+        onMouseEnter={() => setZoomAtivo(true)}
+        onMouseLeave={() => setZoomAtivo(false)}
+        className="relative h-[520px] bg-white rounded-3xl border border-yellow-400/20 overflow-hidden shadow-[0_0_35px_rgba(250,204,21,0.12)] cursor-zoom-in"
+      >
+        <img
+          src={imagemAtiva}
+          alt={nome}
+          className={`w-full h-full object-contain p-6 transition-transform duration-300 ${
+            zoomAtivo ? "scale-[2.05]" : "scale-100"
+          }`}
+          style={{
+            transformOrigin: `${posicao.x}% ${posicao.y}%`,
+          }}
+        />
+
+        <div className="absolute left-4 bottom-4 bg-black/75 text-yellow-400 text-xs px-3 py-2 rounded-full border border-yellow-400/30">
+          Passe o mouse para ampliar
+        </div>
+      </div>
+
+      {imagens.length > 1 && (
+        <div className="flex gap-3 overflow-x-auto pb-2">
+          {imagens.map((img, index) => (
+            <button
+              key={index}
+              onClick={() => setImagemAtiva(img)}
+              className={`w-24 h-24 shrink-0 rounded-2xl bg-white border overflow-hidden transition ${
+                imagemAtiva === img
+                  ? "border-yellow-400 shadow-[0_0_20px_rgba(250,204,21,0.45)]"
+                  : "border-yellow-400/20 hover:border-yellow-400/70"
+              }`}
+            >
+              <img
+                src={img}
+                alt={`${nome} ${index + 1}`}
+                className="w-full h-full object-contain p-2"
+              />
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
   );
 }
 
