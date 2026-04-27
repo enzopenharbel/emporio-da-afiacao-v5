@@ -344,10 +344,10 @@ export default function App() {
   // =============================
   if (rota.tipo === "produto" && produtoAberto) {
     return (
-      <div className="bg-black text-white min-h-screen">
+      <div className="bg-black text-white min-h-screen pb-20 md:pb-0">
         <Header voltarInicio={voltarInicio} termoBusca={termoBusca} setTermoBusca={setTermoBusca} abrirProduto={abrirProduto} resultadosBusca={resultadosBusca} />
 
-        <main className="pt-24 md:pt-32">
+        <main className="pt-28 md:pt-32">
           <section className="relative min-h-[430px] overflow-hidden border-b border-yellow-400/20">
             <img
               src={produtoAberto.img}
@@ -426,6 +426,7 @@ export default function App() {
         </main>
 
         <WhatsAppFloat />
+        <MobileBottomNav voltarInicio={voltarInicio} />
         <Footer />
       </div>
     );
@@ -436,10 +437,10 @@ export default function App() {
   // =============================
   if (rota.tipo === "categoria" && categoriaAberta) {
     return (
-      <div className="bg-black text-white min-h-screen">
+      <div className="bg-black text-white min-h-screen pb-20 md:pb-0">
         <Header voltarInicio={voltarInicio} termoBusca={termoBusca} setTermoBusca={setTermoBusca} abrirProduto={abrirProduto} resultadosBusca={resultadosBusca} />
 
-        <main className="pt-24 md:pt-32">
+        <main className="pt-28 md:pt-32">
           <section className="relative min-h-[360px] overflow-hidden border-b border-yellow-400/20">
             <img
               src={categoriaAberta.img}
@@ -511,6 +512,7 @@ export default function App() {
         </main>
 
         <WhatsAppFloat />
+        <MobileBottomNav voltarInicio={voltarInicio} />
         <Footer />
       </div>
     );
@@ -520,12 +522,12 @@ export default function App() {
   // PÁGINA INICIAL
   // =============================
   return (
-    <div className="bg-black text-white min-h-screen">
+    <div className="bg-black text-white min-h-screen pb-20 md:pb-0">
       <Header voltarInicio={voltarInicio} termoBusca={termoBusca} setTermoBusca={setTermoBusca} abrirProduto={abrirProduto} resultadosBusca={resultadosBusca} />
 
       {/* HERO / BANNER ROTATIVO */}
-      <section id="inicio" className="pt-24 md:pt-32">
-        <div className="relative h-[520px] sm:h-[580px] md:h-[640px] overflow-hidden">
+      <section id="inicio" className="pt-28 md:pt-32">
+        <div className="relative h-[430px] sm:h-[520px] md:h-[640px] overflow-hidden">
           {banners.map((banner, i) => (
             <img
               key={i}
@@ -540,13 +542,13 @@ export default function App() {
           <div className="absolute inset-0 bg-gradient-to-r from-black via-black/60 to-black/20" />
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(250,204,21,0.12),transparent_35%)]" />
 
-          <div className="absolute inset-0 flex items-center px-5 sm:px-6 md:px-10">
+          <div className="absolute inset-0 flex items-end md:items-center px-4 sm:px-6 md:px-10 pb-20 md:pb-0">
             <div className="max-w-3xl">
               <p className="text-yellow-400 uppercase tracking-[0.35em] text-xs md:text-sm mb-4">
                 Empório da Afiação
               </p>
 
-              <h2 className="text-3xl sm:text-4xl md:text-7xl text-yellow-400 font-black mb-5 leading-tight drop-shadow-2xl">
+              <h2 className="text-3xl sm:text-4xl md:text-7xl text-yellow-400 font-black mb-4 md:mb-5 leading-tight drop-shadow-2xl">
                 {banners[bannerIndex].titulo}
               </h2>
 
@@ -556,15 +558,15 @@ export default function App() {
                 </span>
               )}
 
-              <p className="text-base sm:text-lg md:text-2xl text-gray-200 max-w-2xl leading-relaxed">
+              <p className="text-sm sm:text-base md:text-2xl text-gray-200 max-w-2xl leading-relaxed">
                 {banners[bannerIndex].subtitulo}
               </p>
 
-              <div className="flex flex-wrap gap-4 mt-8">
+              <div className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4 mt-6 md:mt-8">
                 {banners[bannerIndex].produtoSlug && (
                   <button
                     onClick={() => abrirProduto(banners[bannerIndex].produtoSlug)}
-                    className="px-6 py-3 rounded-xl bg-yellow-400 text-black font-bold hover:bg-yellow-300 hover:scale-105 transition"
+                    className="w-full sm:w-auto text-center px-5 sm:px-6 py-3 rounded-xl bg-yellow-400 text-black font-bold hover:bg-yellow-300 hover:scale-105 transition"
                   >
                     Ver destaque
                   </button>
@@ -574,7 +576,7 @@ export default function App() {
                   href={criarLinkWhatsApp(banners[bannerIndex].whatsappMensagem || "Olá! Vim pelo site e quero mais informações.")}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-6 py-3 rounded-xl border border-yellow-400/60 text-yellow-400 font-bold hover:bg-yellow-400 hover:text-black hover:scale-105 transition"
+                  className="w-full sm:w-auto text-center px-5 sm:px-6 py-3 rounded-xl border border-yellow-400/60 text-yellow-400 font-bold hover:bg-yellow-400 hover:text-black hover:scale-105 transition"
                 >
                   Chamar no WhatsApp
                 </a>
@@ -633,14 +635,14 @@ export default function App() {
           </h2>
         </div>
 
-        <div className="max-w-7xl mx-auto grid sm:grid-cols-2 lg:grid-cols-6 gap-7 px-6">
+        <div className="max-w-7xl mx-auto grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-6 gap-4 sm:gap-7 px-4 sm:px-6">
           {categorias.map((cat) => (
             <button
               key={cat.slug}
               onClick={() => abrirCategoria(cat.slug)}
               className="text-left bg-[#0a0a0a] rounded-3xl overflow-hidden border border-yellow-400/15 hover:border-yellow-400/70 shadow-[0_0_25px_rgba(250,204,21,0.05)] hover:shadow-[0_0_35px_rgba(250,204,21,0.22)] transition group"
             >
-              <div className="h-52 overflow-hidden">
+              <div className="h-36 sm:h-52 overflow-hidden">
                 <img
                   src={cat.img}
                   alt={cat.nome}
@@ -648,12 +650,12 @@ export default function App() {
                 />
               </div>
 
-              <div className="p-5">
-                <p className="text-center text-yellow-400 font-bold text-xl mb-2">
+              <div className="p-4 sm:p-5">
+                <p className="text-center text-yellow-400 font-bold text-base sm:text-xl mb-2">
                   {cat.nome}
                 </p>
 
-                <p className="text-center text-sm text-gray-400 leading-relaxed">
+                <p className="text-center text-xs sm:text-sm text-gray-400 leading-relaxed">
                   Ver produtos
                 </p>
               </div>
@@ -775,6 +777,7 @@ export default function App() {
       </section>
 
       <WhatsAppFloat />
+      <MobileBottomNav voltarInicio={voltarInicio} />
       <Footer />
     </div>
   );
@@ -792,13 +795,13 @@ function ProductCard({ produto, abrirProduto }) {
       className="relative cursor-pointer bg-[#0b0b0b] border border-yellow-400/15 rounded-3xl overflow-hidden shadow-[0_0_35px_rgba(250,204,21,0.08)] hover:border-yellow-400/60 hover:shadow-[0_0_38px_rgba(250,204,21,0.2)] transition group"
     >
       {produto.badge && (
-        <div className="absolute top-4 left-4 z-20 bg-yellow-400 text-black text-xs font-black uppercase tracking-[0.16em] px-3 py-2 rounded-full shadow-[0_0_18px_rgba(250,204,21,0.75)]">
+        <div className="absolute top-3 left-3 z-20 bg-yellow-400 text-black text-[10px] sm:text-xs font-black uppercase tracking-[0.12em] px-3 py-1.5 rounded-full shadow-[0_0_18px_rgba(250,204,21,0.75)]">
           {produto.badge}
         </div>
       )}
 
       {/* IMAGEM DO CARD DO PRODUTO */}
-      <div className="h-60 sm:h-64 w-full bg-white flex items-center justify-center overflow-hidden rounded-t-3xl">
+      <div className="h-52 sm:h-64 w-full bg-white flex items-center justify-center overflow-hidden rounded-t-3xl">
         <img
           src={produto.img}
           alt={produto.nome}
@@ -806,24 +809,24 @@ function ProductCard({ produto, abrirProduto }) {
         />
       </div>
 
-      <div className="p-6">
-        <h3 className="text-xl text-yellow-400 font-bold mb-3">
+      <div className="p-4 sm:p-6">
+        <h3 className="text-base sm:text-xl text-yellow-400 font-black mb-2 sm:mb-3 leading-tight">
           {produto.nome}
         </h3>
 
-        <p className="text-gray-300 leading-relaxed">
+        <p className="text-xs sm:text-base text-gray-300 leading-relaxed line-clamp-2">
           {produto.descricao}
         </p>
 
-        <div className="mt-6 flex flex-col gap-3">
+        <div className="mt-5 flex flex-col gap-2 sm:gap-3">
           <button
             onClick={(e) => {
               e.stopPropagation();
               abrirProduto(produto.slug);
             }}
-            className="text-left text-sm text-yellow-400 font-semibold hover:text-yellow-300 transition"
+            className="rounded-xl bg-yellow-400 px-4 py-2.5 text-center text-sm font-black text-black hover:bg-yellow-300 transition"
           >
-            Ver detalhes →
+            Ver detalhes
           </button>
 
           <a
@@ -831,9 +834,9 @@ function ProductCard({ produto, abrirProduto }) {
             target="_blank"
             rel="noopener noreferrer"
             onClick={(e) => e.stopPropagation()}
-            className="inline-flex justify-center items-center rounded-xl border border-yellow-400/50 px-4 py-2 text-sm font-bold text-yellow-400 hover:bg-yellow-400 hover:text-black hover:shadow-[0_0_22px_rgba(250,204,21,0.45)] transition"
+            className="inline-flex justify-center items-center rounded-xl border border-yellow-400/50 px-4 py-2 text-xs sm:text-sm font-bold text-yellow-400 hover:bg-yellow-400 hover:text-black hover:shadow-[0_0_22px_rgba(250,204,21,0.45)] transition"
           >
-            Chamar no WhatsApp
+            WhatsApp
           </a>
         </div>
       </div>
@@ -862,7 +865,7 @@ function ProdutoImagemZoom({ imagens = [], nome }) {
         onMouseMove={moverMouse}
         onMouseEnter={() => setZoomAtivo(true)}
         onMouseLeave={() => setZoomAtivo(false)}
-        className="relative h-[360px] sm:h-[430px] md:h-[520px] bg-white rounded-3xl border border-yellow-400/20 overflow-hidden shadow-[0_0_35px_rgba(250,204,21,0.12)] cursor-zoom-in"
+        className="relative h-[350px] sm:h-[430px] md:h-[520px] bg-white rounded-3xl border border-yellow-400/20 overflow-hidden shadow-[0_0_35px_rgba(250,204,21,0.12)] cursor-zoom-in"
       >
         <img
           src={imagemAtiva}
@@ -947,7 +950,7 @@ function Header({ voltarInicio, termoBusca, setTermoBusca, abrirProduto, resulta
 
     return (
       <div
-        className={`absolute left-0 right-0 top-[calc(100%+10px)] z-[10000] max-h-[360px] overflow-y-auto rounded-2xl border border-yellow-400/35 bg-black shadow-[0_20px_70px_rgba(0,0,0,0.85),0_0_35px_rgba(250,204,21,0.28)] backdrop-blur-xl ${
+        className={`absolute left-0 right-0 top-[calc(100%+10px)] z-[10000] max-h-[380px] overflow-y-auto rounded-2xl border border-yellow-400/35 bg-black shadow-[0_20px_70px_rgba(0,0,0,0.9),0_0_35px_rgba(250,204,21,0.28)] backdrop-blur-xl ${
           mobile ? "mx-0" : ""
         }`}
       >
@@ -994,6 +997,13 @@ function Header({ voltarInicio, termoBusca, setTermoBusca, abrirProduto, resulta
       </div>
     );
   };
+
+  const atalhosMobile = [
+    { nome: "Alicates", id: "produtos" },
+    { nome: "Serviços", id: "produtos" },
+    { nome: "Avaliações", id: "avaliacoes" },
+    { nome: "Contato", id: "contato" },
+  ];
 
   return (
     <header
@@ -1099,62 +1109,84 @@ function Header({ voltarInicio, termoBusca, setTermoBusca, abrirProduto, resulta
         </nav>
       </div>
 
-      {/* HEADER MOBILE */}
-      <div className="md:hidden px-4 py-2">
-        <div className="flex items-center justify-between gap-3">
-          <button onClick={voltarInicio} className="shrink-0">
-            <img
-              src="/logo.png"
-              alt="Empório da Afiação"
-              className={`w-auto object-contain transition-all duration-500 drop-shadow-[0_0_18px_rgba(250,204,21,0.75)] ${
-                scrolled ? "h-14" : "h-20"
-              }`}
-            />
-          </button>
-
-          <div className="flex items-center gap-3">
-            <a
-              href={criarLinkWhatsApp("Olá! Vim pelo site e quero mais informações.")}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="rounded-xl border border-yellow-400/40 px-3 py-2 text-xs font-bold text-yellow-400 hover:bg-yellow-400 hover:text-black transition"
-            >
-              WhatsApp
-            </a>
-
-            <button
-              onClick={() => setMobileMenuOpen((prev) => !prev)}
-              className="rounded-xl border border-yellow-400/40 p-2 text-yellow-400 hover:bg-yellow-400 hover:text-black transition"
-              aria-label="Abrir menu"
-            >
-              {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+      {/* HEADER MOBILE MARKETPLACE */}
+      <div className="md:hidden">
+        <div className="px-3 pt-2 pb-2 bg-gradient-to-b from-black via-black to-[#090909]">
+          <div className="flex items-center justify-between gap-3">
+            <button onClick={voltarInicio} className="shrink-0">
+              <img
+                src="/logo.png"
+                alt="Empório da Afiação"
+                className={`w-auto object-contain transition-all duration-500 drop-shadow-[0_0_18px_rgba(250,204,21,0.75)] ${
+                  scrolled ? "h-12" : "h-16"
+                }`}
+              />
             </button>
-          </div>
-        </div>
 
-        {/* BUSCA MOBILE */}
-        <div className="relative mt-2">
-          <div className="flex rounded-xl shadow-[0_0_18px_rgba(250,204,21,0.12)] focus-within:shadow-[0_0_28px_rgba(250,204,21,0.55)] transition">
-            <input
-              value={termoBusca}
-              onChange={(e) => setTermoBusca(e.target.value)}
-              onFocus={() => setSearchActive(true)}
-              onBlur={() => {
-                setTimeout(() => setSearchActive(false), 220);
-              }}
-              placeholder="Buscar produtos..."
-              className="min-w-0 flex-1 bg-black border-2 border-yellow-400/55 border-r-0 rounded-l-xl px-3 py-2 text-sm text-yellow-200 placeholder:text-gray-500 outline-none"
-            />
+            <div className="flex flex-1 items-center justify-end gap-2">
+              <a
+                href={criarLinkWhatsApp("Olá! Vim pelo site e quero mais informações.")}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="rounded-full bg-green-500 px-3 py-2 text-[11px] font-black text-white shadow-[0_0_18px_rgba(34,197,94,0.45)]"
+              >
+                WhatsApp
+              </a>
 
-            <button
-              type="button"
-              className="bg-yellow-400 border-2 border-yellow-400 border-l-0 px-3 rounded-r-xl"
-            >
-              <Search size={18} className="text-black" />
-            </button>
+              <button className="relative rounded-full border border-yellow-400/30 p-2 text-yellow-400">
+                <ShoppingCart size={20} />
+                <span className="absolute -top-1 -right-1 bg-yellow-400 text-black text-[10px] px-1 rounded-full">
+                  0
+                </span>
+              </button>
+
+              <button
+                onClick={() => setMobileMenuOpen((prev) => !prev)}
+                className="rounded-full border border-yellow-400/40 p-2 text-yellow-400 hover:bg-yellow-400 hover:text-black transition"
+                aria-label="Abrir menu"
+              >
+                {mobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
+              </button>
+            </div>
           </div>
 
-          {termoBusca && searchActive && <SearchResults mobile />}
+          {/* BUSCA MOBILE DESTACADA */}
+          <div className="relative mt-2">
+            <div className="flex rounded-full bg-white shadow-[0_0_24px_rgba(250,204,21,0.18)] focus-within:shadow-[0_0_32px_rgba(250,204,21,0.55)] transition">
+              <input
+                value={termoBusca}
+                onChange={(e) => setTermoBusca(e.target.value)}
+                onFocus={() => setSearchActive(true)}
+                onBlur={() => {
+                  setTimeout(() => setSearchActive(false), 220);
+                }}
+                placeholder="Buscar alicates, facas, molas..."
+                className="min-w-0 flex-1 rounded-l-full bg-white px-4 py-3 text-sm text-black placeholder:text-gray-500 outline-none"
+              />
+
+              <button
+                type="button"
+                className="rounded-r-full bg-yellow-400 px-4"
+              >
+                <Search size={20} className="text-black" />
+              </button>
+            </div>
+
+            {termoBusca && searchActive && <SearchResults mobile />}
+          </div>
+
+          {/* ATALHOS MOBILE HORIZONTAIS */}
+          <div className="mt-3 flex gap-2 overflow-x-auto pb-1 [-ms-overflow-style:none] [scrollbar-width:none]">
+            {atalhosMobile.map((atalho) => (
+              <button
+                key={atalho.nome}
+                onClick={() => irPara(atalho.id)}
+                className="shrink-0 rounded-full border border-yellow-400/25 bg-[#111] px-4 py-2 text-xs font-bold text-yellow-400"
+              >
+                {atalho.nome}
+              </button>
+            ))}
+          </div>
         </div>
       </div>
 
@@ -1205,6 +1237,44 @@ function Header({ voltarInicio, termoBusca, setTermoBusca, abrirProduto, resulta
   );
 }
 
+
+// =============================
+// BARRA INFERIOR MOBILE ESTILO MARKETPLACE
+// =============================
+function MobileBottomNav({ voltarInicio }) {
+  const irPara = (id) => {
+    voltarInicio();
+
+    setTimeout(() => {
+      document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+    }, 80);
+  };
+
+  return (
+    <nav className="md:hidden fixed bottom-0 left-0 right-0 z-[70] border-t border-yellow-400/20 bg-black/95 backdrop-blur-xl px-3 py-2 shadow-[0_-12px_40px_rgba(0,0,0,0.75)]">
+      <div className="grid grid-cols-4 gap-2 text-[11px] font-bold">
+        <button onClick={() => irPara("inicio")} className="rounded-xl py-2 text-yellow-400">
+          Início
+        </button>
+        <button onClick={() => irPara("produtos")} className="rounded-xl py-2 text-yellow-400">
+          Produtos
+        </button>
+        <button onClick={() => irPara("avaliacoes")} className="rounded-xl py-2 text-yellow-400">
+          Avaliações
+        </button>
+        <a
+          href={criarLinkWhatsApp("Olá! Vim pelo site e quero mais informações.")}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="rounded-xl bg-green-500 py-2 text-center text-white"
+        >
+          WhatsApp
+        </a>
+      </div>
+    </nav>
+  );
+}
+
 // =============================
 // BOTÃO FLUTUANTE DO WHATSAPP
 // =============================
@@ -1214,7 +1284,7 @@ function WhatsAppFloat() {
       href={criarLinkWhatsApp("Olá! Vim pelo site e quero mais informações.")}
       target="_blank"
       rel="noopener noreferrer"
-      className="fixed bottom-5 right-5 z-[60] flex items-center gap-2 rounded-full bg-green-500 px-4 sm:px-5 py-3 text-sm sm:text-base font-black text-white shadow-[0_0_28px_rgba(34,197,94,0.65)] hover:scale-110 hover:bg-green-400 transition"
+      className="hidden md:flex fixed bottom-6 right-6 z-[60] items-center gap-2 rounded-full bg-green-500 px-5 py-3 font-black text-white shadow-[0_0_28px_rgba(34,197,94,0.65)] hover:scale-110 hover:bg-green-400 transition"
     >
       WhatsApp
     </a>
