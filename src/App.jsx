@@ -7,6 +7,8 @@ import {
   ChevronLeft,
   ChevronRight,
   ArrowLeft,
+  Menu,
+  X,
 } from "lucide-react";
 
 // =============================
@@ -91,14 +93,10 @@ const imagensProdutos = {
 //   "/images/produtos/produto-3.jpg",
 // ],
 const imagensGaleriaProdutos = {
-  "Alicate Mundial 522": "/images/produtos/alicate-mundial-522.jpg",
-  "Alicate Mundial 722": "/images/produtos/alicate-mundial-722.jpg",
-  "Alicate Mundial 772": "/images/produtos/alicate-mundial-772.jpg",
-  "Alicate Mundial 777": "/images/produtos/alicate-mundial-777.jpg",
-  "Alicate Mundial 735": "/images/produtos/alicate-mundial-735.jpg",
-  "Alicate Mundial 775": "/images/produtos/alicate-mundial-775.jpg",
-  "Alicate Mundial 787": "/images/produtos/alicate-mundial-787.jpg",
-  "Alicate Mundial 577": "/images/produtos/alicate-mundial-577.jpg",
+  "Alicate Mundial 522": ["/images/produtos/alicate-mundial-522.jpg"],
+  "Alicate Mundial 722": ["/images/produtos/alicate-mundial-722.jpg"],
+  "Alicate Mundial 772": ["/images/produtos/alicate-mundial-772.jpg"],
+  "Alicate Mundial 777": ["/images/produtos/alicate-mundial-777.jpg"],
 };
 
 // =============================
@@ -349,7 +347,7 @@ export default function App() {
       <div className="bg-black text-white min-h-screen">
         <Header voltarInicio={voltarInicio} termoBusca={termoBusca} setTermoBusca={setTermoBusca} abrirProduto={abrirProduto} resultadosBusca={resultadosBusca} />
 
-        <main className="pt-32">
+        <main className="pt-24 md:pt-32">
           <section className="relative min-h-[430px] overflow-hidden border-b border-yellow-400/20">
             <img
               src={produtoAberto.img}
@@ -428,8 +426,7 @@ export default function App() {
         </main>
 
         <WhatsAppFloat />
-        <WhatsAppFloat />
-      <Footer />
+        <Footer />
       </div>
     );
   }
@@ -442,7 +439,7 @@ export default function App() {
       <div className="bg-black text-white min-h-screen">
         <Header voltarInicio={voltarInicio} termoBusca={termoBusca} setTermoBusca={setTermoBusca} abrirProduto={abrirProduto} resultadosBusca={resultadosBusca} />
 
-        <main className="pt-32">
+        <main className="pt-24 md:pt-32">
           <section className="relative min-h-[360px] overflow-hidden border-b border-yellow-400/20">
             <img
               src={categoriaAberta.img}
@@ -514,8 +511,7 @@ export default function App() {
         </main>
 
         <WhatsAppFloat />
-        <WhatsAppFloat />
-      <Footer />
+        <Footer />
       </div>
     );
   }
@@ -528,8 +524,8 @@ export default function App() {
       <Header voltarInicio={voltarInicio} termoBusca={termoBusca} setTermoBusca={setTermoBusca} abrirProduto={abrirProduto} resultadosBusca={resultadosBusca} />
 
       {/* HERO / BANNER ROTATIVO */}
-      <section id="inicio" className="pt-32">
-        <div className="relative h-[560px] md:h-[640px] overflow-hidden">
+      <section id="inicio" className="pt-24 md:pt-32">
+        <div className="relative h-[520px] sm:h-[580px] md:h-[640px] overflow-hidden">
           {banners.map((banner, i) => (
             <img
               key={i}
@@ -544,13 +540,13 @@ export default function App() {
           <div className="absolute inset-0 bg-gradient-to-r from-black via-black/60 to-black/20" />
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(250,204,21,0.12),transparent_35%)]" />
 
-          <div className="absolute inset-0 flex items-center px-6 md:px-10">
+          <div className="absolute inset-0 flex items-center px-5 sm:px-6 md:px-10">
             <div className="max-w-3xl">
               <p className="text-yellow-400 uppercase tracking-[0.35em] text-xs md:text-sm mb-4">
                 Empório da Afiação
               </p>
 
-              <h2 className="text-4xl md:text-7xl text-yellow-400 font-black mb-5 leading-tight drop-shadow-2xl">
+              <h2 className="text-3xl sm:text-4xl md:text-7xl text-yellow-400 font-black mb-5 leading-tight drop-shadow-2xl">
                 {banners[bannerIndex].titulo}
               </h2>
 
@@ -560,7 +556,7 @@ export default function App() {
                 </span>
               )}
 
-              <p className="text-lg md:text-2xl text-gray-200 max-w-2xl leading-relaxed">
+              <p className="text-base sm:text-lg md:text-2xl text-gray-200 max-w-2xl leading-relaxed">
                 {banners[bannerIndex].subtitulo}
               </p>
 
@@ -802,7 +798,7 @@ function ProductCard({ produto, abrirProduto }) {
       )}
 
       {/* IMAGEM DO CARD DO PRODUTO */}
-      <div className="h-64 w-full bg-white flex items-center justify-center overflow-hidden rounded-t-3xl">
+      <div className="h-60 sm:h-64 w-full bg-white flex items-center justify-center overflow-hidden rounded-t-3xl">
         <img
           src={produto.img}
           alt={produto.nome}
@@ -866,7 +862,7 @@ function ProdutoImagemZoom({ imagens = [], nome }) {
         onMouseMove={moverMouse}
         onMouseEnter={() => setZoomAtivo(true)}
         onMouseLeave={() => setZoomAtivo(false)}
-        className="relative h-[520px] bg-white rounded-3xl border border-yellow-400/20 overflow-hidden shadow-[0_0_35px_rgba(250,204,21,0.12)] cursor-zoom-in"
+        className="relative h-[360px] sm:h-[430px] md:h-[520px] bg-white rounded-3xl border border-yellow-400/20 overflow-hidden shadow-[0_0_35px_rgba(250,204,21,0.12)] cursor-zoom-in"
       >
         <img
           src={imagemAtiva}
@@ -920,6 +916,7 @@ function ProdutoImagemZoom({ imagens = [], nome }) {
 function Header({ voltarInicio, termoBusca, setTermoBusca, abrirProduto, resultadosBusca }) {
   const [scrolled, setScrolled] = useState(false);
   const [searchActive, setSearchActive] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -931,25 +928,87 @@ function Header({ voltarInicio, termoBusca, setTermoBusca, abrirProduto, resulta
 
   const irPara = (id) => {
     voltarInicio();
+    setMobileMenuOpen(false);
+
     setTimeout(() => {
       document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
     }, 80);
   };
 
+  const selecionarProdutoBusca = (slug) => {
+    abrirProduto(slug);
+    setTermoBusca("");
+    setSearchActive(false);
+    setMobileMenuOpen(false);
+  };
+
+  const SearchResults = ({ mobile = false }) => {
+    if (!termoBusca || !searchActive) return null;
+
+    return (
+      <div
+        className={`absolute left-0 right-0 top-[calc(100%+10px)] z-[10000] max-h-[360px] overflow-y-auto rounded-2xl border border-yellow-400/35 bg-black shadow-[0_20px_70px_rgba(0,0,0,0.85),0_0_35px_rgba(250,204,21,0.28)] backdrop-blur-xl ${
+          mobile ? "mx-0" : ""
+        }`}
+      >
+        {resultadosBusca.length > 0 ? (
+          resultadosBusca.slice(0, 8).map((produto) => (
+            <button
+              key={produto.slug}
+              onMouseDown={(e) => {
+                e.preventDefault();
+                selecionarProdutoBusca(produto.slug);
+              }}
+              onTouchStart={() => selecionarProdutoBusca(produto.slug)}
+              className="flex w-full items-center gap-4 border-b border-yellow-400/10 p-4 text-left hover:bg-yellow-400/10 transition"
+            >
+              <div className="h-14 w-14 shrink-0 rounded-xl bg-white p-1 overflow-hidden">
+                <img
+                  src={produto.img}
+                  alt={produto.nome}
+                  className="h-full w-full object-contain"
+                />
+              </div>
+
+              <div>
+                <p className="font-bold text-yellow-400">
+                  {produto.nome}
+                </p>
+                <p className="text-xs text-gray-400">
+                  {produto.categoriaNome}
+                  {produto.subcategoria ? ` • ${produto.subcategoria}` : ""}
+                </p>
+              </div>
+            </button>
+          ))
+        ) : (
+          <div className="p-5 text-center">
+            <p className="text-yellow-400 font-bold">
+              Nenhum produto encontrado
+            </p>
+            <p className="text-sm text-gray-400 mt-1">
+              Tente buscar por outro nome.
+            </p>
+          </div>
+        )}
+      </div>
+    );
+  };
+
   return (
     <header
-      className={`fixed w-full z-[9999] bg-black/95 backdrop-blur-md border-b border-yellow-400/20 transition-all duration-700 ${
+      className={`fixed w-full z-[9999] bg-black/95 backdrop-blur-md border-b border-yellow-400/20 transition-all duration-500 ${
         scrolled
-          ? "py-0 shadow-[0_0_18px_rgba(250,204,21,0.18)]"
-          : "py-2 shadow-[0_0_0_rgba(250,204,21,0)]"
+          ? "shadow-[0_0_18px_rgba(250,204,21,0.18)]"
+          : "shadow-[0_0_0_rgba(250,204,21,0)]"
       }`}
     >
+      {/* HEADER DESKTOP */}
       <div
-        className={`max-w-7xl mx-auto flex items-center justify-between px-6 gap-6 transition-all duration-700 overflow-visible ${
+        className={`hidden md:flex max-w-7xl mx-auto items-center justify-between px-6 gap-6 transition-all duration-700 overflow-visible ${
           scrolled ? "min-h-[8px]" : "min-h-[120px]"
         }`}
       >
-        {/* LOGOTIPO */}
         <button
           onClick={voltarInicio}
           className={`flex items-center shrink-0 transition-all duration-700 ${
@@ -967,7 +1026,6 @@ function Header({ voltarInicio, termoBusca, setTermoBusca, abrirProduto, resulta
           />
         </button>
 
-        {/* PESQUISA ANIMADA */}
         <div
           className={`hidden md:flex flex-1 justify-center transition-all duration-700 overflow-visible ${
             scrolled ? "opacity-0 scale-75 pointer-events-none" : "opacity-100 scale-100"
@@ -1001,55 +1059,12 @@ function Header({ voltarInicio, termoBusca, setTermoBusca, abrirProduto, resulta
             {termoBusca && searchActive && (
               <>
                 <div className="fixed inset-0 top-[120px] z-[9998] bg-black/45 backdrop-blur-[2px] pointer-events-none"></div>
-
-                <div className="absolute left-0 right-0 top-[calc(100%+12px)] z-[10000] max-h-[420px] overflow-y-auto rounded-2xl border border-yellow-400/35 bg-black/98 shadow-[0_20px_70px_rgba(0,0,0,0.85),0_0_35px_rgba(250,204,21,0.28)] backdrop-blur-xl">
-                {resultadosBusca.length > 0 ? (
-                  resultadosBusca.slice(0, 8).map((produto) => (
-                    <button
-                      key={produto.slug}
-                      onMouseDown={(e) => {
-                        e.preventDefault();
-                        abrirProduto(produto.slug);
-                        setTermoBusca("");
-                      }}
-                      className="flex w-full items-center gap-4 border-b border-yellow-400/10 p-4 text-left hover:bg-yellow-400/10 transition"
-                    >
-                      <div className="h-14 w-14 shrink-0 rounded-xl bg-white p-1 overflow-hidden">
-                        <img
-                          src={produto.img}
-                          alt={produto.nome}
-                          className="h-full w-full object-contain"
-                        />
-                      </div>
-
-                      <div>
-                        <p className="font-bold text-yellow-400">
-                          {produto.nome}
-                        </p>
-                        <p className="text-xs text-gray-400">
-                          {produto.categoriaNome}
-                          {produto.subcategoria ? ` • ${produto.subcategoria}` : ""}
-                        </p>
-                      </div>
-                    </button>
-                  ))
-                ) : (
-                  <div className="p-5 text-center">
-                    <p className="text-yellow-400 font-bold">
-                      Nenhum produto encontrado
-                    </p>
-                    <p className="text-sm text-gray-400 mt-1">
-                      Tente buscar por outro nome.
-                    </p>
-                  </div>
-                )}
-                </div>
+                <SearchResults />
               </>
             )}
           </div>
         </div>
 
-        {/* MENU */}
         <nav
           className={`hidden md:flex gap-8 items-center transition-all duration-700 ${
             scrolled ? "opacity-0 scale-75 pointer-events-none" : "opacity-100 scale-100"
@@ -1083,10 +1098,112 @@ function Header({ voltarInicio, termoBusca, setTermoBusca, abrirProduto, resulta
           </button>
         </nav>
       </div>
+
+      {/* HEADER MOBILE */}
+      <div className="md:hidden px-4 py-2">
+        <div className="flex items-center justify-between gap-3">
+          <button onClick={voltarInicio} className="shrink-0">
+            <img
+              src="/logo.png"
+              alt="Empório da Afiação"
+              className={`w-auto object-contain transition-all duration-500 drop-shadow-[0_0_18px_rgba(250,204,21,0.75)] ${
+                scrolled ? "h-14" : "h-20"
+              }`}
+            />
+          </button>
+
+          <div className="flex items-center gap-3">
+            <a
+              href={criarLinkWhatsApp("Olá! Vim pelo site e quero mais informações.")}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="rounded-xl border border-yellow-400/40 px-3 py-2 text-xs font-bold text-yellow-400 hover:bg-yellow-400 hover:text-black transition"
+            >
+              WhatsApp
+            </a>
+
+            <button
+              onClick={() => setMobileMenuOpen((prev) => !prev)}
+              className="rounded-xl border border-yellow-400/40 p-2 text-yellow-400 hover:bg-yellow-400 hover:text-black transition"
+              aria-label="Abrir menu"
+            >
+              {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
+        </div>
+
+        {/* BUSCA MOBILE */}
+        <div className="relative mt-2">
+          <div className="flex rounded-xl shadow-[0_0_18px_rgba(250,204,21,0.12)] focus-within:shadow-[0_0_28px_rgba(250,204,21,0.55)] transition">
+            <input
+              value={termoBusca}
+              onChange={(e) => setTermoBusca(e.target.value)}
+              onFocus={() => setSearchActive(true)}
+              onBlur={() => {
+                setTimeout(() => setSearchActive(false), 220);
+              }}
+              placeholder="Buscar produtos..."
+              className="min-w-0 flex-1 bg-black border-2 border-yellow-400/55 border-r-0 rounded-l-xl px-3 py-2 text-sm text-yellow-200 placeholder:text-gray-500 outline-none"
+            />
+
+            <button
+              type="button"
+              className="bg-yellow-400 border-2 border-yellow-400 border-l-0 px-3 rounded-r-xl"
+            >
+              <Search size={18} className="text-black" />
+            </button>
+          </div>
+
+          {termoBusca && searchActive && <SearchResults mobile />}
+        </div>
+      </div>
+
+      {/* MENU MOBILE ABERTO */}
+      {mobileMenuOpen && (
+        <div className="md:hidden absolute left-0 right-0 top-full z-[9999] border-t border-yellow-400/20 bg-black/98 backdrop-blur-xl shadow-[0_20px_60px_rgba(0,0,0,0.85)]">
+          <nav className="px-5 py-5 flex flex-col gap-3">
+            <button
+              onClick={() => irPara("inicio")}
+              className="rounded-2xl border border-yellow-400/15 px-4 py-3 text-left text-yellow-400 font-bold hover:bg-yellow-400 hover:text-black transition"
+            >
+              Início
+            </button>
+
+            <button
+              onClick={() => irPara("produtos")}
+              className="rounded-2xl border border-yellow-400/15 px-4 py-3 text-left text-yellow-400 font-bold hover:bg-yellow-400 hover:text-black transition"
+            >
+              Produtos
+            </button>
+
+            <button
+              onClick={() => irPara("avaliacoes")}
+              className="rounded-2xl border border-yellow-400/15 px-4 py-3 text-left text-yellow-400 font-bold hover:bg-yellow-400 hover:text-black transition"
+            >
+              Avaliações
+            </button>
+
+            <button
+              onClick={() => irPara("contato")}
+              className="rounded-2xl border border-yellow-400/15 px-4 py-3 text-left text-yellow-400 font-bold hover:bg-yellow-400 hover:text-black transition"
+            >
+              Contato
+            </button>
+
+            <a
+              href={criarLinkWhatsApp("Olá! Vim pelo site e quero mais informações.")}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-2 rounded-2xl bg-yellow-400 px-4 py-3 text-center text-black font-black hover:bg-yellow-300 transition"
+            >
+              Chamar no WhatsApp
+            </a>
+          </nav>
+        </div>
+      )}
     </header>
   );
 }
-
 
 // =============================
 // BOTÃO FLUTUANTE DO WHATSAPP
@@ -1097,7 +1214,7 @@ function WhatsAppFloat() {
       href={criarLinkWhatsApp("Olá! Vim pelo site e quero mais informações.")}
       target="_blank"
       rel="noopener noreferrer"
-      className="fixed bottom-6 right-6 z-[60] flex items-center gap-2 rounded-full bg-green-500 px-5 py-3 font-black text-white shadow-[0_0_28px_rgba(34,197,94,0.65)] hover:scale-110 hover:bg-green-400 transition"
+      className="fixed bottom-5 right-5 z-[60] flex items-center gap-2 rounded-full bg-green-500 px-4 sm:px-5 py-3 text-sm sm:text-base font-black text-white shadow-[0_0_28px_rgba(34,197,94,0.65)] hover:scale-110 hover:bg-green-400 transition"
     >
       WhatsApp
     </a>
