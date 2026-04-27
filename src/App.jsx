@@ -527,7 +527,7 @@ export default function App() {
 
       {/* HERO / BANNER ROTATIVO */}
       <section id="inicio" className="pt-28 md:pt-32">
-        <div className="relative h-[430px] sm:h-[520px] md:h-[640px] overflow-hidden">
+        <div className="relative h-[500px] sm:h-[560px] md:h-[640px] overflow-hidden">
           {banners.map((banner, i) => (
             <img
               key={i}
@@ -543,17 +543,17 @@ export default function App() {
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(250,204,21,0.12),transparent_35%)]" />
 
           <div className="absolute inset-0 flex items-end md:items-center px-4 sm:px-6 md:px-10 pb-20 md:pb-0">
-            <div className="max-w-3xl">
-              <p className="text-yellow-400 uppercase tracking-[0.35em] text-xs md:text-sm mb-4">
+            <div className="max-w-3xl w-full md:w-auto rounded-[1.7rem] md:rounded-none border border-yellow-400/20 md:border-0 bg-black/55 md:bg-transparent backdrop-blur-md md:backdrop-blur-0 p-5 md:p-0 shadow-[0_0_35px_rgba(0,0,0,0.55)] md:shadow-none">
+              <p className="text-yellow-400 uppercase tracking-[0.25em] md:tracking-[0.35em] text-[10px] md:text-sm mb-3 md:mb-4">
                 Empório da Afiação
               </p>
 
-              <h2 className="text-3xl sm:text-4xl md:text-7xl text-yellow-400 font-black mb-4 md:mb-5 leading-tight drop-shadow-2xl">
+              <h2 className="text-2xl sm:text-4xl md:text-7xl text-yellow-400 font-black mb-3 md:mb-5 leading-tight drop-shadow-2xl">
                 {banners[bannerIndex].titulo}
               </h2>
 
               {banners[bannerIndex].badge && (
-                <span className="inline-flex items-center mt-2 mb-4 px-4 py-2 rounded-full bg-yellow-400 text-black text-sm font-black uppercase tracking-[0.18em] shadow-[0_0_24px_rgba(250,204,21,0.55)]">
+                <span className="inline-flex items-center mt-1 mb-3 md:mb-4 px-3 md:px-4 py-1.5 md:py-2 rounded-full bg-yellow-400 text-black text-[10px] md:text-sm font-black uppercase tracking-[0.14em] md:tracking-[0.18em] shadow-[0_0_24px_rgba(250,204,21,0.55)]">
                   {banners[bannerIndex].badge}
                 </span>
               )}
@@ -566,7 +566,7 @@ export default function App() {
                 {banners[bannerIndex].produtoSlug && (
                   <button
                     onClick={() => abrirProduto(banners[bannerIndex].produtoSlug)}
-                    className="w-full sm:w-auto text-center px-5 sm:px-6 py-3 rounded-xl bg-yellow-400 text-black font-bold hover:bg-yellow-300 hover:scale-105 transition"
+                    className="w-full sm:w-auto text-center px-5 sm:px-6 py-3 rounded-xl bg-yellow-400 text-black font-black hover:bg-yellow-300 hover:scale-105 transition shadow-[0_0_22px_rgba(250,204,21,0.28)]"
                   >
                     Ver destaque
                   </button>
@@ -576,7 +576,7 @@ export default function App() {
                   href={criarLinkWhatsApp(banners[bannerIndex].whatsappMensagem || "Olá! Vim pelo site e quero mais informações.")}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full sm:w-auto text-center px-5 sm:px-6 py-3 rounded-xl border border-yellow-400/60 text-yellow-400 font-bold hover:bg-yellow-400 hover:text-black hover:scale-105 transition"
+                  className="w-full sm:w-auto text-center px-5 sm:px-6 py-3 rounded-xl border border-yellow-400/60 text-yellow-400 font-black hover:bg-yellow-400 hover:text-black hover:scale-105 transition bg-black/35"
                 >
                   Chamar no WhatsApp
                 </a>
@@ -584,8 +584,20 @@ export default function App() {
             </div>
           </div>
 
+          {/* FAIXA MOBILE DE BENEFÍCIOS DO BANNER */}
+          <div className="md:hidden absolute left-4 right-4 top-[120px] z-20 grid grid-cols-3 gap-2">
+            {["Produtos", "Serviços", "WhatsApp"].map((item) => (
+              <div
+                key={item}
+                className="rounded-full border border-yellow-400/20 bg-black/55 px-3 py-2 text-center text-[11px] font-bold text-yellow-400 backdrop-blur-md"
+              >
+                {item}
+              </div>
+            ))}
+          </div>
+
           {/* BOLINHAS DO BANNER */}
-          <div className="absolute left-1/2 bottom-8 md:bottom-10 -translate-x-1/2 z-20">
+          <div className="absolute left-1/2 bottom-3 md:bottom-10 -translate-x-1/2 z-20">
             <div className="flex items-center justify-center gap-3">
               {banners.map((banner, i) => (
                 <button
@@ -609,7 +621,7 @@ export default function App() {
                 prev === 0 ? banners.length - 1 : prev - 1
               )
             }
-            className="absolute left-5 top-1/2 -translate-y-1/2 bg-black/55 border border-yellow-400/30 p-3 rounded-full hover:bg-yellow-400 hover:text-black transition"
+            className="hidden md:block absolute left-5 top-1/2 -translate-y-1/2 bg-black/55 border border-yellow-400/30 p-3 rounded-full hover:bg-yellow-400 hover:text-black transition"
           >
             <ChevronLeft />
           </button>
@@ -619,7 +631,7 @@ export default function App() {
             onClick={() =>
               setBannerIndex((prev) => (prev + 1) % banners.length)
             }
-            className="absolute right-5 top-1/2 -translate-y-1/2 bg-black/55 border border-yellow-400/30 p-3 rounded-full hover:bg-yellow-400 hover:text-black transition"
+            className="hidden md:block absolute right-5 top-1/2 -translate-y-1/2 bg-black/55 border border-yellow-400/30 p-3 rounded-full hover:bg-yellow-400 hover:text-black transition"
           >
             <ChevronRight />
           </button>
@@ -1127,7 +1139,7 @@ function Header({ voltarInicio, termoBusca, setTermoBusca, abrirProduto, resulta
                 src="/logo.png"
                 alt="Empório da Afiação"
                 className={`w-auto object-contain transition-all duration-500 drop-shadow-[0_0_18px_rgba(250,204,21,0.75)] ${
-                  scrolled ? "h-12" : "h-16"
+                  scrolled ? "h-14 scale-105" : "h-16"
                 }`}
               />
             </button>
@@ -1139,7 +1151,7 @@ function Header({ voltarInicio, termoBusca, setTermoBusca, abrirProduto, resulta
                     setMobileSearchOpen((prev) => !prev);
                     setSearchActive(true);
                   }}
-                  className="rounded-full bg-yellow-400 p-2.5 text-black shadow-[0_0_20px_rgba(250,204,21,0.45)]"
+                  className="rounded-full bg-yellow-400 p-2 text-black scale-90 opacity-85 shadow-[0_0_16px_rgba(250,204,21,0.35)]"
                   aria-label="Abrir busca"
                 >
                   <Search size={20} />
