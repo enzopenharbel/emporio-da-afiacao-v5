@@ -472,7 +472,7 @@ export default function App() {
             </div>
           </section>
 
-          <section className="py-20 px-6 max-w-7xl mx-auto">
+          <section className="py-14 sm:py-20 px-4 sm:px-6 max-w-7xl mx-auto">
             <h2 className="text-3xl font-bold text-yellow-400 mb-10">
               Produtos e serviços em {categoriaAberta.nome}
             </h2>
@@ -485,7 +485,7 @@ export default function App() {
                       {subcategoria.nome}
                     </h3>
 
-                    <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-8">
                       {subcategoria.produtos.map((produto) => (
                         <ProductCard
                           key={produto.slug}
@@ -498,7 +498,7 @@ export default function App() {
                 ))}
               </div>
             ) : (
-              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+              <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-8">
                 {categoriaAberta.produtos.map((produto) => (
                   <ProductCard
                     key={produto.slug}
@@ -627,7 +627,7 @@ export default function App() {
       </section>
 
       {/* CATEGORIAS */}
-      <section id="produtos" className="py-20">
+      <section id="produtos" className="py-14 sm:py-20">
         <div className="bg-[#0a0a0a] py-7 text-center border-y border-yellow-400/20 mb-12">
           <h2 className="text-4xl text-yellow-400 relative inline-block group font-bold">
             Categorias de Produtos
@@ -792,39 +792,39 @@ function ProductCard({ produto, abrirProduto }) {
   return (
     <article
       onClick={() => abrirProduto(produto.slug)}
-      className="relative cursor-pointer bg-[#0b0b0b] border border-yellow-400/15 rounded-3xl overflow-hidden shadow-[0_0_35px_rgba(250,204,21,0.08)] hover:border-yellow-400/60 hover:shadow-[0_0_38px_rgba(250,204,21,0.2)] transition group"
+      className="relative cursor-pointer bg-[#0b0b0b] border border-yellow-400/15 rounded-2xl sm:rounded-3xl overflow-hidden shadow-[0_0_24px_rgba(250,204,21,0.06)] hover:border-yellow-400/60 hover:shadow-[0_0_38px_rgba(250,204,21,0.2)] transition group"
     >
       {produto.badge && (
-        <div className="absolute top-3 left-3 z-20 bg-yellow-400 text-black text-[10px] sm:text-xs font-black uppercase tracking-[0.12em] px-3 py-1.5 rounded-full shadow-[0_0_18px_rgba(250,204,21,0.75)]">
+        <div className="absolute top-2 left-2 sm:top-3 sm:left-3 z-20 bg-yellow-400 text-black text-[9px] sm:text-xs font-black uppercase tracking-[0.08em] sm:tracking-[0.12em] px-2 sm:px-3 py-1 sm:py-1.5 rounded-full shadow-[0_0_18px_rgba(250,204,21,0.75)]">
           {produto.badge}
         </div>
       )}
 
       {/* IMAGEM DO CARD DO PRODUTO */}
-      <div className="h-52 sm:h-64 w-full bg-white flex items-center justify-center overflow-hidden rounded-t-3xl">
+      <div className="h-40 sm:h-64 w-full bg-white flex items-center justify-center overflow-hidden rounded-t-2xl sm:rounded-t-3xl">
         <img
           src={produto.img}
           alt={produto.nome}
-          className="max-h-full max-w-full object-contain p-4 transition-transform duration-700 group-hover:scale-110"
+          className="max-h-full max-w-full object-contain p-3 sm:p-4 transition-transform duration-700 group-hover:scale-110"
         />
       </div>
 
-      <div className="p-4 sm:p-6">
-        <h3 className="text-base sm:text-xl text-yellow-400 font-black mb-2 sm:mb-3 leading-tight">
+      <div className="p-3 sm:p-6">
+        <h3 className="text-sm sm:text-xl text-yellow-400 font-black mb-1.5 sm:mb-3 leading-tight line-clamp-2 min-h-[38px] sm:min-h-0">
           {produto.nome}
         </h3>
 
-        <p className="text-xs sm:text-base text-gray-300 leading-relaxed line-clamp-2">
+        <p className="text-[11px] sm:text-base text-gray-300 leading-relaxed line-clamp-2 min-h-[34px] sm:min-h-0">
           {produto.descricao}
         </p>
 
-        <div className="mt-5 flex flex-col gap-2 sm:gap-3">
+        <div className="mt-4 sm:mt-5 flex flex-col gap-2 sm:gap-3">
           <button
             onClick={(e) => {
               e.stopPropagation();
               abrirProduto(produto.slug);
             }}
-            className="rounded-xl bg-yellow-400 px-4 py-2.5 text-center text-sm font-black text-black hover:bg-yellow-300 transition"
+            className="rounded-xl bg-yellow-400 px-3 sm:px-4 py-2 text-center text-xs sm:text-sm font-black text-black hover:bg-yellow-300 transition"
           >
             Ver detalhes
           </button>
@@ -834,7 +834,7 @@ function ProductCard({ produto, abrirProduto }) {
             target="_blank"
             rel="noopener noreferrer"
             onClick={(e) => e.stopPropagation()}
-            className="inline-flex justify-center items-center rounded-xl border border-yellow-400/50 px-4 py-2 text-xs sm:text-sm font-bold text-yellow-400 hover:bg-yellow-400 hover:text-black hover:shadow-[0_0_22px_rgba(250,204,21,0.45)] transition"
+            className="hidden sm:inline-flex justify-center items-center rounded-xl border border-yellow-400/50 px-4 py-2 text-sm font-bold text-yellow-400 hover:bg-yellow-400 hover:text-black hover:shadow-[0_0_22px_rgba(250,204,21,0.45)] transition"
           >
             WhatsApp
           </a>
@@ -920,6 +920,7 @@ function Header({ voltarInicio, termoBusca, setTermoBusca, abrirProduto, resulta
   const [scrolled, setScrolled] = useState(false);
   const [searchActive, setSearchActive] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -1111,7 +1112,11 @@ function Header({ voltarInicio, termoBusca, setTermoBusca, abrirProduto, resulta
 
       {/* HEADER MOBILE MARKETPLACE */}
       <div className="md:hidden">
-        <div className="px-3 pt-2 pb-2 bg-gradient-to-b from-black via-black to-[#090909]">
+        <div
+          className={`px-3 pt-2 bg-gradient-to-b from-black via-black to-[#090909] transition-all duration-500 ${
+            scrolled ? "pb-2" : "pb-3"
+          }`}
+        >
           <div className="flex items-center justify-between gap-3">
             <button onClick={voltarInicio} className="shrink-0">
               <img
@@ -1124,16 +1129,35 @@ function Header({ voltarInicio, termoBusca, setTermoBusca, abrirProduto, resulta
             </button>
 
             <div className="flex flex-1 items-center justify-end gap-2">
+              {scrolled && (
+                <button
+                  onClick={() => {
+                    setMobileSearchOpen((prev) => !prev);
+                    setSearchActive(true);
+                  }}
+                  className="rounded-full bg-yellow-400 p-2.5 text-black shadow-[0_0_20px_rgba(250,204,21,0.45)]"
+                  aria-label="Abrir busca"
+                >
+                  <Search size={20} />
+                </button>
+              )}
+
               <a
                 href={criarLinkWhatsApp("Olá! Vim pelo site e quero mais informações.")}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="rounded-full bg-green-500 px-3 py-2 text-[11px] font-black text-white shadow-[0_0_18px_rgba(34,197,94,0.45)]"
+                className={`rounded-full bg-green-500 px-3 py-2 text-[11px] font-black text-white shadow-[0_0_18px_rgba(34,197,94,0.45)] transition-all duration-500 ${
+                  scrolled ? "hidden" : "inline-flex"
+                }`}
               >
                 WhatsApp
               </a>
 
-              <button className="relative rounded-full border border-yellow-400/30 p-2 text-yellow-400">
+              <button
+                className={`relative rounded-full border border-yellow-400/30 p-2 text-yellow-400 transition-all duration-500 ${
+                  scrolled ? "hidden" : "inline-flex"
+                }`}
+              >
                 <ShoppingCart size={20} />
                 <span className="absolute -top-1 -right-1 bg-yellow-400 text-black text-[10px] px-1 rounded-full">
                   0
@@ -1142,7 +1166,9 @@ function Header({ voltarInicio, termoBusca, setTermoBusca, abrirProduto, resulta
 
               <button
                 onClick={() => setMobileMenuOpen((prev) => !prev)}
-                className="rounded-full border border-yellow-400/40 p-2 text-yellow-400 hover:bg-yellow-400 hover:text-black transition"
+                className={`rounded-full border border-yellow-400/40 p-2 text-yellow-400 hover:bg-yellow-400 hover:text-black transition-all duration-500 ${
+                  scrolled ? "hidden" : "inline-flex"
+                }`}
                 aria-label="Abrir menu"
               >
                 {mobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
@@ -1151,24 +1177,33 @@ function Header({ voltarInicio, termoBusca, setTermoBusca, abrirProduto, resulta
           </div>
 
           {/* BUSCA MOBILE DESTACADA */}
-          <div className="relative mt-2">
+          <div
+            className={`relative overflow-visible transition-all duration-500 ${
+              scrolled && !mobileSearchOpen
+                ? "max-h-0 opacity-0 mt-0 pointer-events-none"
+                : "max-h-28 opacity-100 mt-2"
+            }`}
+          >
             <div className="flex rounded-full bg-white shadow-[0_0_24px_rgba(250,204,21,0.18)] focus-within:shadow-[0_0_32px_rgba(250,204,21,0.55)] transition">
               <input
                 value={termoBusca}
                 onChange={(e) => setTermoBusca(e.target.value)}
                 onFocus={() => setSearchActive(true)}
                 onBlur={() => {
-                  setTimeout(() => setSearchActive(false), 220);
+                  setTimeout(() => {
+                    setSearchActive(false);
+                    if (scrolled && !termoBusca) setMobileSearchOpen(false);
+                  }, 220);
                 }}
-                placeholder="Buscar alicates, facas, molas..."
-                className="min-w-0 flex-1 rounded-l-full bg-white px-4 py-3 text-sm text-black placeholder:text-gray-500 outline-none"
+                placeholder="Buscar produtos..."
+                className="min-w-0 flex-1 rounded-l-full bg-white px-4 py-2.5 text-sm text-black placeholder:text-gray-500 outline-none"
               />
 
               <button
                 type="button"
                 className="rounded-r-full bg-yellow-400 px-4"
               >
-                <Search size={20} className="text-black" />
+                <Search size={19} className="text-black" />
               </button>
             </div>
 
@@ -1176,7 +1211,11 @@ function Header({ voltarInicio, termoBusca, setTermoBusca, abrirProduto, resulta
           </div>
 
           {/* ATALHOS MOBILE HORIZONTAIS */}
-          <div className="mt-3 flex gap-2 overflow-x-auto pb-1 [-ms-overflow-style:none] [scrollbar-width:none]">
+          <div
+            className={`mt-3 flex gap-2 overflow-x-auto pb-1 transition-all duration-500 [-ms-overflow-style:none] [scrollbar-width:none] ${
+              scrolled ? "max-h-0 opacity-0 mt-0 pb-0 pointer-events-none" : "max-h-12 opacity-100"
+            }`}
+          >
             {atalhosMobile.map((atalho) => (
               <button
                 key={atalho.nome}
