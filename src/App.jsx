@@ -626,8 +626,10 @@ export default function App() {
         </div>
       </section>
 
+      <MobileMarketplaceHome abrirProduto={abrirProduto} abrirCategoria={abrirCategoria} />
+
       {/* CATEGORIAS */}
-      <section id="produtos" className="py-14 sm:py-20">
+      <section id="produtos" className="hidden md:block py-14 sm:py-20">
         <div className="bg-[#0a0a0a] py-7 text-center border-y border-yellow-400/20 mb-12">
           <h2 className="text-4xl text-yellow-400 relative inline-block group font-bold">
             Categorias de Produtos
@@ -672,8 +674,10 @@ export default function App() {
 
       <SecaoDiferenciais />
 
+      <MobileAvaliacoesCompactas />
+
       {/* AVALIAÇÕES / PROVA SOCIAL */}
-      <section id="avaliacoes" className="py-20 bg-[#060606] border-y border-yellow-400/10">
+      <section id="avaliacoes" className="hidden md:block py-20 bg-[#060606] border-y border-yellow-400/10">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-12">
             <p className="text-yellow-400 uppercase tracking-[0.35em] text-xs mb-3">
@@ -754,9 +758,9 @@ export default function App() {
       </section>
 
       {/* MAPA */}
-      <section id="contato" className="py-20">
+      <section id="contato" className="py-12 md:py-20">
         <div className="relative text-center mb-10">
-          <h2 className="text-4xl text-yellow-400 inline-block relative group font-bold">
+          <h2 className="text-2xl md:text-4xl text-yellow-400 inline-block relative group font-bold">
             Nossa Localização
             <span className="absolute left-0 -bottom-2 w-0 h-[2px] bg-yellow-400 group-hover:w-full transition-all"></span>
           </h2>
@@ -1277,6 +1281,234 @@ function Header({ voltarInicio, termoBusca, setTermoBusca, abrirProduto, resulta
 }
 
 
+
+
+// =============================
+// AVALIAÇÕES COMPACTAS MOBILE
+// =============================
+function MobileAvaliacoesCompactas() {
+  return (
+    <section className="md:hidden px-4 py-7 bg-[#060606] border-y border-yellow-400/10">
+      <div className="mb-4 flex items-end justify-between">
+        <div>
+          <p className="text-[11px] uppercase tracking-[0.25em] text-yellow-400/80">
+            Confiança
+          </p>
+          <h2 className="text-xl font-black text-yellow-400">Clientes satisfeitos</h2>
+        </div>
+        <span className="rounded-full bg-yellow-400 px-3 py-1 text-xs font-black text-black">
+          4.4★
+        </span>
+      </div>
+
+      <div className="flex gap-3 overflow-x-auto pb-2 [-ms-overflow-style:none] [scrollbar-width:none]">
+        {[
+          ["Juliana", "Manicure", "Meu alicate voltou com corte limpo."],
+          ["Carlos", "Cozinha", "As facas ficaram prontas para uso novamente."],
+          ["Marina", "Salão", "Resolvo afiação, mola e acessórios em um lugar."],
+        ].map(([nome, perfil, texto]) => (
+          <div
+            key={nome}
+            className="min-w-[230px] shrink-0 rounded-2xl border border-yellow-400/15 bg-[#0a0a0a] p-4"
+          >
+            <div className="mb-3 flex text-yellow-400">
+              {[1, 2, 3, 4, 5].map((item) => (
+                <Star key={item} size={14} fill="currentColor" />
+              ))}
+            </div>
+            <p className="text-sm text-gray-300">“{texto}”</p>
+            <p className="mt-4 font-black text-yellow-400">{nome}</p>
+            <p className="text-xs text-gray-500">{perfil}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+// =============================
+// VITRINE MOBILE ESTILO MARKETPLACE
+// =============================
+function MobileMarketplaceHome({ abrirProduto, abrirCategoria }) {
+  const produtosDestaque = todosProdutos.filter((produto) =>
+    ["Alicate Mundial 522", "Alicate Mundial 777", "Alicate Mundial 722", "Alicate Mundial 772"].includes(produto.nome)
+  );
+
+  const servicosRapidos = [
+    { titulo: "Afiação", texto: "Alicates, facas e tesouras", slug: "afiacao" },
+    { titulo: "Troca de molas", texto: "Manutenção rápida", slug: "troca-de-molas" },
+    { titulo: "Gravação", texto: "Identifique seus instrumentos", slug: "gravacao" },
+  ];
+
+  return (
+    <div className="md:hidden bg-black">
+      {/* FAIXA DE CONFIANÇA */}
+      <section className="px-4 pt-5">
+        <div className="grid grid-cols-3 gap-2">
+          {[
+            ["4.4★", "Google"],
+            ["Rápido", "Atendimento"],
+            ["SP", "Local"],
+          ].map(([titulo, texto]) => (
+            <div
+              key={titulo}
+              className="rounded-2xl border border-yellow-400/15 bg-[#0a0a0a] px-3 py-4 text-center shadow-[0_0_18px_rgba(250,204,21,0.06)]"
+            >
+              <p className="text-lg font-black text-yellow-400">{titulo}</p>
+              <p className="text-[11px] text-gray-400">{texto}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ATALHOS DE CATEGORIAS */}
+      <section className="px-4 pt-6">
+        <div className="mb-3 flex items-center justify-between">
+          <h2 className="text-xl font-black text-yellow-400">Categorias</h2>
+          <span className="text-xs text-gray-500">toque para abrir</span>
+        </div>
+
+        <div className="flex gap-3 overflow-x-auto pb-2 [-ms-overflow-style:none] [scrollbar-width:none]">
+          {categorias.map((cat) => (
+            <button
+              key={cat.slug}
+              onClick={() => abrirCategoria(cat.slug)}
+              className="min-w-[110px] shrink-0 overflow-hidden rounded-2xl border border-yellow-400/15 bg-[#0a0a0a] text-left shadow-[0_0_18px_rgba(250,204,21,0.05)]"
+            >
+              <div className="h-20 bg-white">
+                <img
+                  src={cat.img}
+                  alt={cat.nome}
+                  className="h-full w-full object-cover"
+                />
+              </div>
+
+              <div className="p-3">
+                <p className="text-sm font-black text-yellow-400 leading-tight">
+                  {cat.nome}
+                </p>
+              </div>
+            </button>
+          ))}
+        </div>
+      </section>
+
+      {/* VITRINE MAIS VENDIDOS */}
+      <section className="px-4 pt-7">
+        <div className="mb-3 flex items-center justify-between">
+          <div>
+            <p className="text-[11px] uppercase tracking-[0.25em] text-yellow-400/80">
+              Vitrine rápida
+            </p>
+            <h2 className="text-xl font-black text-yellow-400">Mais procurados</h2>
+          </div>
+          <button
+            onClick={() => abrirCategoria("alicates")}
+            className="rounded-full border border-yellow-400/25 px-3 py-1.5 text-xs font-bold text-yellow-400"
+          >
+            Ver todos
+          </button>
+        </div>
+
+        <div className="flex gap-3 overflow-x-auto pb-2 [-ms-overflow-style:none] [scrollbar-width:none]">
+          {produtosDestaque.map((produto) => (
+            <button
+              key={produto.slug}
+              onClick={() => abrirProduto(produto.slug)}
+              className="relative min-w-[155px] shrink-0 overflow-hidden rounded-2xl border border-yellow-400/15 bg-[#0b0b0b] text-left shadow-[0_0_22px_rgba(250,204,21,0.07)]"
+            >
+              {produto.badge && (
+                <span className="absolute left-2 top-2 z-10 rounded-full bg-yellow-400 px-2 py-1 text-[9px] font-black uppercase text-black">
+                  {produto.badge}
+                </span>
+              )}
+
+              <div className="h-36 bg-white p-3">
+                <img
+                  src={produto.img}
+                  alt={produto.nome}
+                  className="h-full w-full object-contain"
+                />
+              </div>
+
+              <div className="p-3">
+                <p className="line-clamp-2 min-h-[34px] text-sm font-black leading-tight text-yellow-400">
+                  {produto.nome}
+                </p>
+                <p className="mt-1 line-clamp-2 text-[11px] leading-snug text-gray-400">
+                  {produto.descricao}
+                </p>
+                <p className="mt-3 rounded-xl bg-yellow-400 py-2 text-center text-xs font-black text-black">
+                  Ver produto
+                </p>
+              </div>
+            </button>
+          ))}
+        </div>
+      </section>
+
+      {/* SERVIÇOS EM CARDS */}
+      <section className="px-4 pt-7">
+        <div className="rounded-[1.7rem] border border-yellow-400/15 bg-gradient-to-br from-[#111] via-black to-[#080808] p-4 shadow-[0_0_30px_rgba(250,204,21,0.08)]">
+          <div className="mb-4">
+            <p className="text-[11px] uppercase tracking-[0.25em] text-yellow-400/80">
+              Serviços
+            </p>
+            <h2 className="text-xl font-black text-yellow-400">Resolva em poucos passos</h2>
+          </div>
+
+          <div className="grid gap-3">
+            {servicosRapidos.map((servico) => (
+              <button
+                key={servico.slug}
+                onClick={() => abrirProduto(servico.slug)}
+                className="flex items-center justify-between rounded-2xl border border-yellow-400/10 bg-black/50 p-4 text-left"
+              >
+                <div>
+                  <p className="font-black text-yellow-400">{servico.titulo}</p>
+                  <p className="text-xs text-gray-400">{servico.texto}</p>
+                </div>
+                <span className="rounded-full bg-yellow-400 px-3 py-1 text-xs font-black text-black">
+                  Abrir
+                </span>
+              </button>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CHAMADA ESPECIAL */}
+      <section className="px-4 py-7">
+        <div className="relative overflow-hidden rounded-[1.7rem] border border-yellow-400/20 bg-yellow-400 p-5 text-black shadow-[0_0_35px_rgba(250,204,21,0.18)]">
+          <div className="absolute -right-8 -top-8 h-28 w-28 rounded-full bg-black/10"></div>
+          <div className="absolute -bottom-10 left-10 h-24 w-24 rounded-full bg-black/10"></div>
+
+          <div className="relative">
+            <p className="text-xs font-black uppercase tracking-[0.2em]">
+              Atendimento direto
+            </p>
+            <h2 className="mt-2 text-2xl font-black leading-tight">
+              Não achou o que procura?
+            </h2>
+            <p className="mt-2 text-sm font-semibold text-black/75">
+              Fale pelo WhatsApp e peça informação sobre produtos, afiação ou manutenção.
+            </p>
+
+            <a
+              href={criarLinkWhatsApp("Olá! Vim pelo site e quero ajuda para encontrar um produto ou serviço.")}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-4 inline-flex rounded-xl bg-black px-5 py-3 text-sm font-black text-yellow-400"
+            >
+              Chamar agora
+            </a>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+}
+
 // =============================
 // BARRA INFERIOR MOBILE ESTILO MARKETPLACE
 // =============================
@@ -1335,7 +1567,7 @@ function WhatsAppFloat() {
 // =============================
 function SecaoDestaque({ abrirProduto }) {
   return (
-    <section className="py-20 px-6 bg-[#070707] border-y border-yellow-400/10">
+    <section className="hidden md:block py-20 px-6 bg-[#070707] border-y border-yellow-400/10">
       <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
         <div>
           <span className="inline-flex bg-yellow-400 text-black px-4 py-2 rounded-full text-xs font-black uppercase tracking-[0.18em] shadow-[0_0_24px_rgba(250,204,21,0.55)]">
@@ -1396,7 +1628,7 @@ function SecaoComoFunciona() {
   ];
 
   return (
-    <section className="py-20 px-6 bg-black">
+    <section className="hidden md:block py-20 px-6 bg-black">
       <div className="max-w-7xl mx-auto text-center">
         <p className="text-yellow-400 uppercase tracking-[0.35em] text-xs mb-3">
           Processo simples
@@ -1439,7 +1671,7 @@ function SecaoParaQuemE() {
   ];
 
   return (
-    <section className="py-20 px-6 bg-[#060606] border-y border-yellow-400/10">
+    <section className="hidden md:block py-20 px-6 bg-[#060606] border-y border-yellow-400/10">
       <div className="max-w-7xl mx-auto text-center">
         <p className="text-yellow-400 uppercase tracking-[0.35em] text-xs mb-3">
           Atendimento local
@@ -1482,7 +1714,7 @@ function SecaoDiferenciais() {
   ];
 
   return (
-    <section className="py-20 px-6 bg-black">
+    <section className="hidden md:block py-20 px-6 bg-black">
       <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
         <div>
           <p className="text-yellow-400 uppercase tracking-[0.35em] text-xs mb-3">
