@@ -347,7 +347,7 @@ export default function App() {
       <div className="bg-black text-white min-h-screen pb-20 md:pb-0">
         <Header voltarInicio={voltarInicio} termoBusca={termoBusca} setTermoBusca={setTermoBusca} abrirProduto={abrirProduto} resultadosBusca={resultadosBusca} />
 
-        <main className="pt-28 md:pt-32">
+        <main className="pt-0 md:pt-32">
           <section className="relative min-h-[430px] overflow-hidden border-b border-yellow-400/20">
             <img
               src={produtoAberto.img}
@@ -440,7 +440,7 @@ export default function App() {
       <div className="bg-black text-white min-h-screen pb-20 md:pb-0">
         <Header voltarInicio={voltarInicio} termoBusca={termoBusca} setTermoBusca={setTermoBusca} abrirProduto={abrirProduto} resultadosBusca={resultadosBusca} />
 
-        <main className="pt-28 md:pt-32">
+        <main className="pt-0 md:pt-32">
           <section className="relative min-h-[360px] overflow-hidden border-b border-yellow-400/20">
             <img
               src={categoriaAberta.img}
@@ -526,8 +526,8 @@ export default function App() {
       <Header voltarInicio={voltarInicio} termoBusca={termoBusca} setTermoBusca={setTermoBusca} abrirProduto={abrirProduto} resultadosBusca={resultadosBusca} />
 
       {/* HERO / BANNER ROTATIVO */}
-      <section id="inicio" className="pt-28 md:pt-32">
-        <div className="relative h-[500px] sm:h-[560px] md:h-[640px] overflow-hidden">
+      <section id="inicio" className="pt-0 md:pt-32">
+        <div className="relative h-[430px] sm:h-[520px] md:h-[640px] overflow-hidden">
           {banners.map((banner, i) => (
             <img
               key={i}
@@ -582,18 +582,6 @@ export default function App() {
                 </a>
               </div>
             </div>
-          </div>
-
-          {/* FAIXA MOBILE DE BENEFÍCIOS DO BANNER */}
-          <div className="md:hidden absolute left-4 right-4 top-[120px] z-20 grid grid-cols-3 gap-2">
-            {["Produtos", "Serviços", "WhatsApp"].map((item) => (
-              <div
-                key={item}
-                className="rounded-full border border-yellow-400/20 bg-black/55 px-3 py-2 text-center text-[11px] font-bold text-yellow-400 backdrop-blur-md"
-              >
-                {item}
-              </div>
-            ))}
           </div>
 
           {/* BOLINHAS DO BANNER */}
@@ -1024,7 +1012,7 @@ function Header({ voltarInicio, termoBusca, setTermoBusca, abrirProduto, resulta
 
   return (
     <header
-      className={`fixed w-full z-[9999] bg-black/95 backdrop-blur-md border-b border-yellow-400/20 transition-all duration-500 ${
+      className={`sticky md:fixed top-0 w-full z-[9999] bg-black/95 backdrop-blur-md border-b border-yellow-400/20 transition-all duration-500 ${
         scrolled
           ? "shadow-[0_0_18px_rgba(250,204,21,0.18)]"
           : "shadow-[0_0_0_rgba(250,204,21,0)]"
@@ -1228,7 +1216,7 @@ function Header({ voltarInicio, termoBusca, setTermoBusca, abrirProduto, resulta
 
           {/* ATALHOS MOBILE HORIZONTAIS */}
           <div
-            className={`mt-3 flex gap-2 overflow-x-auto pb-1 transition-all duration-500 [-ms-overflow-style:none] [scrollbar-width:none] ${
+            className={`hidden mt-3 gap-2 overflow-x-auto pb-1 transition-all duration-500 [-ms-overflow-style:none] [scrollbar-width:none] ${
               scrolled ? "max-h-0 opacity-0 mt-0 pb-0 pointer-events-none" : "max-h-12 opacity-100"
             }`}
           >
