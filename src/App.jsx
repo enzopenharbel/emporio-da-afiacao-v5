@@ -485,7 +485,7 @@ export default function App() {
                       {subcategoria.nome}
                     </h3>
 
-                    <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-8">
+                    <div className="grid grid-cols-2 lg:grid-cols-2 gap-4 sm:gap-8">
                       {subcategoria.produtos.map((produto) => (
                         <ProductCard
                           key={produto.slug}
@@ -498,7 +498,7 @@ export default function App() {
                 ))}
               </div>
             ) : (
-              <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-8">
+              <div className="grid grid-cols-2 lg:grid-cols-2 gap-4 sm:gap-8">
                 {categoriaAberta.produtos.map((produto) => (
                   <ProductCard
                     key={produto.slug}
@@ -695,7 +695,7 @@ export default function App() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-6 mb-12">
+          <div className="grid md:grid-cols-2 gap-6 mb-12">
             {[
               { numero: "+500", texto: "instrumentos atendidos" },
               { numero: "4.4★", texto: "avaliação média no Google" },
@@ -715,7 +715,7 @@ export default function App() {
             ))}
           </div>
 
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-2 gap-6">
             {[
               {
                 nome: "Juliana",
@@ -916,7 +916,7 @@ function ProdutoImagemZoom({ imagens = [], nome }) {
 
 // =============================
 // CABEÇALHO / HEADER
-// Onde editar redução do header:
+// Onde editar redução do header className='relative z-50 bg-black':
 // - altura normal: min-h-[120px]
 // - altura ao rolar: min-h-[8px]
 // - tamanho do logo normal: h-28 md:h-32 lg:h-36
@@ -1013,7 +1013,7 @@ function Header({ voltarInicio, termoBusca, setTermoBusca, abrirProduto, resulta
   ];
 
   return (
-    <header
+    <header className='relative z-50 bg-black'
       className={`sticky md:fixed top-0 w-full z-[9999] bg-black/95 backdrop-blur-md border-b border-yellow-400/20 transition-all duration-500 ${
         scrolled
           ? "shadow-[0_0_18px_rgba(250,204,21,0.18)]"
@@ -1278,7 +1278,7 @@ function Header({ voltarInicio, termoBusca, setTermoBusca, abrirProduto, resulta
           </nav>
         </div>
       )}
-    </header>
+    </header className='relative z-50 bg-black'>
   );
 }
 
@@ -1346,7 +1346,7 @@ function MobileMarketplaceHome({ abrirProduto, abrirCategoria }) {
     <div className="md:hidden bg-black">
       {/* FAIXA DE CONFIANÇA */}
       <section className="px-4 pt-5">
-        <div className="grid grid-cols-3 gap-2">
+        <div className="grid grid-cols-2 gap-2">
           {[
             ["4.4★", "Google"],
             ["Rápido", "Atendimento"],
@@ -1400,7 +1400,7 @@ function MobileMarketplaceHome({ abrirProduto, abrirCategoria }) {
         <div className="mb-3 flex items-center justify-between">
           <div>
             <p className="text-[11px] uppercase tracking-[0.25em] text-yellow-400/80">
-              Vitrine rápida
+               rápida
             </p>
             <h2 className="text-xl font-black text-yellow-400">Mais procurados</h2>
           </div>
@@ -1532,7 +1532,7 @@ function MobileProdutosMarketplace({ abrirProduto, abrirCategoria }) {
       <div className="mb-5 flex items-end justify-between">
         <div>
           <p className="text-[11px] uppercase tracking-[0.25em] text-yellow-400/80">
-            Vitrine
+            
           </p>
           <h2 className="text-2xl font-black text-yellow-400">
             Produtos e serviços
@@ -1635,7 +1635,7 @@ function MobileBottomNav({ voltarInicio }) {
 
   return (
     <nav className="md:hidden fixed bottom-0 left-0 right-0 z-[70] border-t border-yellow-400/20 bg-black/95 backdrop-blur-xl px-3 py-2 shadow-[0_-12px_40px_rgba(0,0,0,0.75)]">
-      <div className="grid grid-cols-4 gap-2 text-[11px] font-bold">
+      <div className="grid grid-cols-2 gap-2 text-[11px] font-bold">
         <button onClick={() => irPara("inicio")} className="rounded-xl py-2 text-yellow-400">
           Início
         </button>
@@ -1667,7 +1667,7 @@ function WhatsAppFloat() {
       href={criarLinkWhatsApp("Olá! Vim pelo site e quero mais informações.")}
       target="_blank"
       rel="noopener noreferrer"
-      className="hidden md:flex fixed bottom-6 right-6 z-[60] items-center gap-2 rounded-full bg-green-500 px-5 py-3 font-black text-white shadow-[0_0_28px_rgba(34,197,94,0.65)] hover:scale-110 hover:bg-green-400 transition"
+      className="hidden md:flex fixed bottom-4 right-4 scale-75 z-[60] items-center gap-2 rounded-full bg-green-500 px-5 py-3 font-black text-white shadow-[0_0_28px_rgba(34,197,94,0.65)] hover:scale-110 hover:bg-green-400 transition"
     >
       WhatsApp
     </a>
@@ -1750,7 +1750,7 @@ function SecaoComoFunciona() {
           Como funciona
         </h2>
 
-        <div className="grid md:grid-cols-4 gap-6">
+        <div className="grid md:grid-cols-2 gap-6">
           {passos.map((item, i) => (
             <div
               key={i}
@@ -1793,7 +1793,7 @@ function SecaoParaQuemE() {
           Para quem é
         </h2>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-2 gap-6">
           {publicos.map((item, i) => (
             <div
               key={i}
@@ -1905,7 +1905,7 @@ function Footer() {
           </a>
         </div>
 
-        <div className="grid md:grid-cols-4 gap-10 relative">
+        <div className="grid md:grid-cols-2 gap-10 relative">
           <div className="md:col-span-1">
             <h3 className="text-yellow-400 text-2xl font-black mb-4 flex items-center gap-2">
               <Scissors size={22} /> Empório da Afiação
