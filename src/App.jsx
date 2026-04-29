@@ -37,7 +37,7 @@ const banners = [
   {
     titulo: "Alicate Mundial 522",
     subtitulo: "Um dos modelos mais procurados para uso doméstico.",
-    img: "/images/banners/banner-alicates.jpg",
+    img: "/images/banners/banner-facas.avif",
     badge: "Mais vendido",
     produtoSlug: "alicate-mundial-522",
     whatsappMensagem: "Olá! Quero saber mais sobre o Alicate Mundial 522.",
@@ -407,7 +407,7 @@ export default function App() {
                 rel="noopener noreferrer"
                 className="mb-7 inline-flex w-full justify-center items-center rounded-xl bg-yellow-400 px-6 py-3 font-black text-black hover:bg-yellow-300 hover:scale-[1.02] hover:shadow-[0_0_26px_rgba(250,204,21,0.55)] transition"
               >
-                Chamar no WhatsApp
+                WhatsApp
               </a>
 
               <div className="space-y-3 text-gray-300">
@@ -485,7 +485,7 @@ export default function App() {
                       {subcategoria.nome}
                     </h3>
 
-                    <div className="grid grid-cols-2 lg:grid-cols-2 gap-4 sm:gap-8">
+                    <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-8">
                       {subcategoria.produtos.map((produto) => (
                         <ProductCard
                           key={produto.slug}
@@ -498,7 +498,7 @@ export default function App() {
                 ))}
               </div>
             ) : (
-              <div className="grid grid-cols-2 lg:grid-cols-2 gap-4 sm:gap-8">
+              <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-8">
                 {categoriaAberta.produtos.map((produto) => (
                   <ProductCard
                     key={produto.slug}
@@ -527,7 +527,7 @@ export default function App() {
 
       {/* HERO / BANNER ROTATIVO */}
       <section id="inicio" className="pt-0 md:pt-32">
-        <div className="relative h-[430px] sm:h-[520px] md:h-[640px] overflow-hidden">
+        <div className="relative h-[470px] sm:h-[560px] md:h-[640px] overflow-hidden">
           {banners.map((banner, i) => (
             <img
               key={i}
@@ -539,16 +539,16 @@ export default function App() {
             />
           ))}
 
-          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/35 to-black/5 md:bg-gradient-to-r md:from-black md:via-black/60 md:to-black/20" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/55 to-black/15 md:bg-gradient-to-r md:from-black md:via-black/60 md:to-black/20" />
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(250,204,21,0.10),transparent_38%)] md:bg-[radial-gradient(circle_at_center,rgba(250,204,21,0.12),transparent_35%)]" />
 
-          <div className="absolute inset-0 flex items-end md:items-center px-4 sm:px-6 md:px-10 pb-20 md:pb-0">
-            <div className="max-w-3xl w-full md:w-auto rounded-[1.7rem] md:rounded-none border border-yellow-400/20 md:border-0 bg-black/55 md:bg-transparent backdrop-blur-md md:backdrop-blur-0 p-5 md:p-0 shadow-[0_0_35px_rgba(0,0,0,0.55)] md:shadow-none">
+          <div className="absolute inset-0 flex items-end md:items-center px-4 sm:px-6 md:px-10 pb-16 md:pb-0">
+            <div className="max-w-3xl w-full md:w-auto rounded-[2rem] md:rounded-none border border-yellow-400/25 md:border-0 bg-gradient-to-br from-black/78 via-black/62 to-black/38 md:bg-transparent backdrop-blur-xl md:backdrop-blur-0 p-5 md:p-0 shadow-[0_22px_70px_rgba(0,0,0,0.72),0_0_28px_rgba(250,204,21,0.12)] md:shadow-none">
               <p className="text-yellow-400 uppercase tracking-[0.25em] md:tracking-[0.35em] text-[10px] md:text-sm mb-3 md:mb-4">
                 Empório da Afiação
               </p>
 
-              <h2 className="text-2xl sm:text-4xl md:text-7xl text-yellow-400 font-black mb-3 md:mb-5 leading-tight drop-shadow-2xl">
+              <h2 className="text-3xl sm:text-4xl md:text-7xl text-yellow-400 font-black mb-3 md:mb-5 leading-[0.98] tracking-[-0.04em] drop-shadow-2xl">
                 {banners[bannerIndex].titulo}
               </h2>
 
@@ -558,7 +558,7 @@ export default function App() {
                 </span>
               )}
 
-              <p className="text-sm sm:text-base md:text-2xl text-gray-200 max-w-2xl leading-relaxed">
+              <p className="text-[15px] sm:text-base md:text-2xl text-gray-100 max-w-2xl leading-relaxed">
                 {banners[bannerIndex].subtitulo}
               </p>
 
@@ -578,7 +578,7 @@ export default function App() {
                   rel="noopener noreferrer"
                   className="w-auto text-center px-4 sm:px-6 py-2.5 sm:py-3 rounded-xl border border-yellow-400/60 text-yellow-400 text-sm sm:text-base font-black hover:bg-yellow-400 hover:text-black hover:scale-105 transition bg-black/35"
                 >
-                  Chamar no WhatsApp
+                  WhatsApp
                 </a>
               </div>
             </div>
@@ -695,7 +695,7 @@ export default function App() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-6 mb-12">
+          <div className="grid md:grid-cols-3 gap-6 mb-12">
             {[
               { numero: "+500", texto: "instrumentos atendidos" },
               { numero: "4.4★", texto: "avaliação média no Google" },
@@ -715,7 +715,7 @@ export default function App() {
             ))}
           </div>
 
-          <div className="grid md:grid-cols-2 gap-6">
+          <div className="grid md:grid-cols-3 gap-6">
             {[
               {
                 nome: "Juliana",
@@ -916,7 +916,7 @@ function ProdutoImagemZoom({ imagens = [], nome }) {
 
 // =============================
 // CABEÇALHO / HEADER
-// Onde editar redução do header className='relative z-50 bg-black':
+// Onde editar redução do header:
 // - altura normal: min-h-[120px]
 // - altura ao rolar: min-h-[8px]
 // - tamanho do logo normal: h-28 md:h-32 lg:h-36
@@ -1013,7 +1013,7 @@ function Header({ voltarInicio, termoBusca, setTermoBusca, abrirProduto, resulta
   ];
 
   return (
-    <header className='relative z-50 bg-black'
+    <header
       className={`sticky md:fixed top-0 w-full z-[9999] bg-black/95 backdrop-blur-md border-b border-yellow-400/20 transition-all duration-500 ${
         scrolled
           ? "shadow-[0_0_18px_rgba(250,204,21,0.18)]"
@@ -1152,17 +1152,13 @@ function Header({ voltarInicio, termoBusca, setTermoBusca, abrirProduto, resulta
                 href={criarLinkWhatsApp("Olá! Vim pelo site e quero mais informações.")}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`rounded-full bg-green-500 px-3 py-2 text-[11px] font-black text-white shadow-[0_0_18px_rgba(34,197,94,0.45)] transition-all duration-500 ${
-                  scrolled ? "hidden" : "inline-flex"
-                }`}
+                className="hidden"
               >
                 WhatsApp
               </a>
 
               <button
-                className={`relative rounded-full border border-yellow-400/30 p-2 text-yellow-400 transition-all duration-500 ${
-                  scrolled ? "hidden" : "inline-flex"
-                }`}
+                className="hidden"
               >
                 <ShoppingCart size={20} />
                 <span className="absolute -top-1 -right-1 bg-yellow-400 text-black text-[10px] px-1 rounded-full">
@@ -1273,12 +1269,12 @@ function Header({ voltarInicio, termoBusca, setTermoBusca, abrirProduto, resulta
               rel="noopener noreferrer"
               className="mt-2 rounded-2xl bg-yellow-400 px-4 py-3 text-center text-black font-black hover:bg-yellow-300 transition"
             >
-              Chamar no WhatsApp
+              WhatsApp
             </a>
           </nav>
         </div>
       )}
-    </header className='relative z-50 bg-black'>
+    </header>
   );
 }
 
@@ -1329,119 +1325,72 @@ function MobileAvaliacoesCompactas() {
 }
 
 // =============================
-// VITRINE MOBILE ESTILO MARKETPLACE
+// HOME MOBILE ESTILO MARKETPLACE
 // =============================
 function MobileMarketplaceHome({ abrirProduto, abrirCategoria }) {
-  const produtosDestaque = todosProdutos.filter((produto) =>
-    ["Alicate Mundial 522", "Alicate Mundial 777", "Alicate Mundial 722", "Alicate Mundial 772"].includes(produto.nome)
-  );
-
   const servicosRapidos = [
     { titulo: "Afiação", texto: "Alicates, facas e tesouras", slug: "afiacao" },
     { titulo: "Troca de molas", texto: "Manutenção rápida", slug: "troca-de-molas" },
-    { titulo: "Gravação", texto: "Identifique seus instrumentos", slug: "gravacao" },
+    { titulo: "Gravação", texto: "Identificação de instrumentos", slug: "gravacao" },
   ];
 
   return (
     <div className="md:hidden bg-black">
-      {/* FAIXA DE CONFIANÇA */}
       <section className="px-4 pt-5">
-        <div className="grid grid-cols-2 gap-2">
-          {[
-            ["4.4★", "Google"],
-            ["Rápido", "Atendimento"],
-            ["SP", "Local"],
-          ].map(([titulo, texto]) => (
-            <div
-              key={titulo}
-              className="rounded-2xl border border-yellow-400/15 bg-[#0a0a0a] px-3 py-4 text-center shadow-[0_0_18px_rgba(250,204,21,0.06)]"
-            >
-              <p className="text-lg font-black text-yellow-400">{titulo}</p>
-              <p className="text-[11px] text-gray-400">{texto}</p>
-            </div>
-          ))}
+        <div className="rounded-[1.8rem] border border-yellow-400/20 bg-gradient-to-br from-[#15110a] via-[#080808] to-black p-4 shadow-[0_0_34px_rgba(250,204,21,0.1)]">
+          <div className="grid grid-cols-3 gap-2">
+            {[
+              ["4.4★", "Google"],
+              ["Rápido", "Atendimento"],
+              ["SP", "Local"],
+            ].map(([titulo, texto]) => (
+              <div
+                key={titulo}
+                className="rounded-2xl border border-yellow-400/15 bg-black/55 px-2 py-4 text-center"
+              >
+                <p className="text-lg font-black text-yellow-400">{titulo}</p>
+                <p className="text-[11px] text-gray-400">{texto}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* ATALHOS DE CATEGORIAS */}
-      <section className="px-4 pt-6">
-        <div className="mb-3 flex items-center justify-between">
-          <h2 className="text-xl font-black text-yellow-400">Categorias</h2>
-          <span className="text-xs text-gray-500">toque para abrir</span>
+      <section className="px-4 pt-7">
+        <div className="mb-4 flex items-end justify-between">
+          <div>
+            <p className="text-[11px] uppercase tracking-[0.25em] text-yellow-400/80">
+              Marketplace
+            </p>
+            <h2 className="text-2xl font-black text-yellow-400">Categorias</h2>
+          </div>
+          <span className="rounded-full border border-yellow-400/25 px-3 py-1.5 text-xs font-bold text-yellow-400">
+            2 por linha
+          </span>
         </div>
 
-        <div className="flex gap-3 overflow-x-auto pb-2 [-ms-overflow-style:none] [scrollbar-width:none]">
+        <div className="grid grid-cols-2 gap-3">
           {categorias.map((cat) => (
             <button
               key={cat.slug}
               onClick={() => abrirCategoria(cat.slug)}
-              className="min-w-[110px] shrink-0 overflow-hidden rounded-2xl border border-yellow-400/15 bg-[#0a0a0a] text-left shadow-[0_0_18px_rgba(250,204,21,0.05)]"
+              className="group overflow-hidden rounded-[1.35rem] border border-yellow-400/15 bg-[#0b0b0b] text-left shadow-[0_0_22px_rgba(250,204,21,0.06)] active:scale-[0.98] transition"
             >
-              <div className="h-20 bg-white">
+              <div className="relative h-28 overflow-hidden bg-white">
                 <img
                   src={cat.img}
                   alt={cat.nome}
-                  className="h-full w-full object-cover"
+                  className="h-full w-full object-cover transition duration-700 group-hover:scale-110"
                 />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent" />
               </div>
 
               <div className="p-3">
-                <p className="text-sm font-black text-yellow-400 leading-tight">
+                <p className="text-base font-black text-yellow-400 leading-tight">
                   {cat.nome}
                 </p>
-              </div>
-            </button>
-          ))}
-        </div>
-      </section>
-
-      {/* VITRINE MAIS VENDIDOS */}
-      <section className="px-4 pt-7">
-        <div className="mb-3 flex items-center justify-between">
-          <div>
-            <p className="text-[11px] uppercase tracking-[0.25em] text-yellow-400/80">
-               rápida
-            </p>
-            <h2 className="text-xl font-black text-yellow-400">Mais procurados</h2>
-          </div>
-          <button
-            onClick={() => abrirCategoria("alicates")}
-            className="rounded-full border border-yellow-400/25 px-3 py-1.5 text-xs font-bold text-yellow-400"
-          >
-            Ver todos
-          </button>
-        </div>
-
-        <div className="flex gap-3 overflow-x-auto pb-2 [-ms-overflow-style:none] [scrollbar-width:none]">
-          {produtosDestaque.map((produto) => (
-            <button
-              key={produto.slug}
-              onClick={() => abrirProduto(produto.slug)}
-              className="relative min-w-[155px] shrink-0 overflow-hidden rounded-2xl border border-yellow-400/15 bg-[#0b0b0b] text-left shadow-[0_0_22px_rgba(250,204,21,0.07)]"
-            >
-              {produto.badge && (
-                <span className="absolute left-2 top-2 z-10 rounded-full bg-yellow-400 px-2 py-1 text-[9px] font-black uppercase text-black">
-                  {produto.badge}
-                </span>
-              )}
-
-              <div className="h-36 bg-white p-3">
-                <img
-                  src={produto.img}
-                  alt={produto.nome}
-                  className="h-full w-full object-contain"
-                />
-              </div>
-
-              <div className="p-3">
-                <p className="line-clamp-2 min-h-[34px] text-sm font-black leading-tight text-yellow-400">
-                  {produto.nome}
-                </p>
-                <p className="mt-1 line-clamp-2 text-[11px] leading-snug text-gray-400">
-                  {produto.descricao}
-                </p>
-                <p className="mt-3 rounded-xl bg-yellow-400 py-2 text-center text-xs font-black text-black">
-                  Ver produto
+                <p className="mt-1 text-[11px] leading-snug text-gray-500">
+                  Abrir categoria
                 </p>
               </div>
             </button>
@@ -1449,9 +1398,8 @@ function MobileMarketplaceHome({ abrirProduto, abrirCategoria }) {
         </div>
       </section>
 
-      {/* SERVIÇOS EM CARDS */}
       <section className="px-4 pt-7">
-        <div className="rounded-[1.7rem] border border-yellow-400/15 bg-gradient-to-br from-[#111] via-black to-[#080808] p-4 shadow-[0_0_30px_rgba(250,204,21,0.08)]">
+        <div className="rounded-[1.8rem] border border-yellow-400/15 bg-gradient-to-br from-[#121212] via-black to-[#090909] p-4 shadow-[0_0_30px_rgba(250,204,21,0.08)]">
           <div className="mb-4">
             <p className="text-[11px] uppercase tracking-[0.25em] text-yellow-400/80">
               Serviços
@@ -1464,7 +1412,7 @@ function MobileMarketplaceHome({ abrirProduto, abrirCategoria }) {
               <button
                 key={servico.slug}
                 onClick={() => abrirProduto(servico.slug)}
-                className="flex items-center justify-between rounded-2xl border border-yellow-400/10 bg-black/50 p-4 text-left"
+                className="flex items-center justify-between rounded-2xl border border-yellow-400/10 bg-black/55 p-4 text-left active:scale-[0.98] transition"
               >
                 <div>
                   <p className="font-black text-yellow-400">{servico.titulo}</p>
@@ -1479,9 +1427,8 @@ function MobileMarketplaceHome({ abrirProduto, abrirCategoria }) {
         </div>
       </section>
 
-      {/* CHAMADA ESPECIAL */}
       <section className="px-4 py-7">
-        <div className="relative overflow-hidden rounded-[1.7rem] border border-yellow-400/20 bg-yellow-400 p-5 text-black shadow-[0_0_35px_rgba(250,204,21,0.18)]">
+        <div className="relative overflow-hidden rounded-[1.8rem] border border-yellow-400/20 bg-yellow-400 p-5 text-black shadow-[0_0_35px_rgba(250,204,21,0.18)]">
           <div className="absolute -right-8 -top-8 h-28 w-28 rounded-full bg-black/10"></div>
           <div className="absolute -bottom-10 left-10 h-24 w-24 rounded-full bg-black/10"></div>
 
@@ -1532,10 +1479,10 @@ function MobileProdutosMarketplace({ abrirProduto, abrirCategoria }) {
       <div className="mb-5 flex items-end justify-between">
         <div>
           <p className="text-[11px] uppercase tracking-[0.25em] text-yellow-400/80">
-            
+            Produtos
           </p>
           <h2 className="text-2xl font-black text-yellow-400">
-            Produtos e serviços
+            Mais procurados
           </h2>
         </div>
 
@@ -1552,7 +1499,7 @@ function MobileProdutosMarketplace({ abrirProduto, abrirCategoria }) {
           <button
             key={produto.slug}
             onClick={() => abrirProduto(produto.slug)}
-            className="relative overflow-hidden rounded-2xl border border-yellow-400/15 bg-[#0b0b0b] text-left shadow-[0_0_22px_rgba(250,204,21,0.07)]"
+            className="relative overflow-hidden rounded-[1.35rem] border border-yellow-400/15 bg-gradient-to-b from-[#101010] to-[#070707] text-left shadow-[0_0_24px_rgba(250,204,21,0.08)] active:scale-[0.98] transition"
           >
             {produto.badge && (
               <span className="absolute left-2 top-2 z-10 rounded-full bg-yellow-400 px-2 py-1 text-[9px] font-black uppercase text-black">
@@ -1585,37 +1532,9 @@ function MobileProdutosMarketplace({ abrirProduto, abrirCategoria }) {
         ))}
       </div>
 
-      <div className="mt-7">
-        <h3 className="mb-3 text-lg font-black text-yellow-400">
-          Categorias rápidas
-        </h3>
-
-        <div className="grid grid-cols-2 gap-3">
-          {categorias.slice(0, 6).map((cat) => (
-            <button
-              key={cat.slug}
-              onClick={() => abrirCategoria(cat.slug)}
-              className="overflow-hidden rounded-2xl border border-yellow-400/15 bg-[#0a0a0a] text-left"
-            >
-              <div className="h-24">
-                <img
-                  src={cat.img}
-                  alt={cat.nome}
-                  className="h-full w-full object-cover"
-                />
-              </div>
-
-              <div className="p-3">
-                <p className="text-sm font-black text-yellow-400">
-                  {cat.nome}
-                </p>
-                <p className="text-[11px] text-gray-500">
-                  Abrir categoria
-                </p>
-              </div>
-            </button>
-          ))}
-        </div>
+      <div className="mt-5 rounded-[1.5rem] border border-yellow-400/15 bg-[#0a0a0a] p-4">
+        <p className="text-sm font-black text-yellow-400">Atendimento rápido pelo WhatsApp</p>
+        <p className="mt-1 text-xs text-gray-400">Peça informações de produtos, afiação, molas ou gravação.</p>
       </div>
     </section>
   );
@@ -1635,7 +1554,7 @@ function MobileBottomNav({ voltarInicio }) {
 
   return (
     <nav className="md:hidden fixed bottom-0 left-0 right-0 z-[70] border-t border-yellow-400/20 bg-black/95 backdrop-blur-xl px-3 py-2 shadow-[0_-12px_40px_rgba(0,0,0,0.75)]">
-      <div className="grid grid-cols-2 gap-2 text-[11px] font-bold">
+      <div className="grid grid-cols-4 gap-2 text-[11px] font-bold">
         <button onClick={() => irPara("inicio")} className="rounded-xl py-2 text-yellow-400">
           Início
         </button>
@@ -1667,7 +1586,7 @@ function WhatsAppFloat() {
       href={criarLinkWhatsApp("Olá! Vim pelo site e quero mais informações.")}
       target="_blank"
       rel="noopener noreferrer"
-      className="hidden md:flex fixed bottom-4 right-4 scale-75 z-[60] items-center gap-2 rounded-full bg-green-500 px-5 py-3 font-black text-white shadow-[0_0_28px_rgba(34,197,94,0.65)] hover:scale-110 hover:bg-green-400 transition"
+      className="hidden md:flex fixed bottom-6 right-6 z-[60] items-center gap-2 rounded-full bg-green-500 px-5 py-3 font-black text-white shadow-[0_0_28px_rgba(34,197,94,0.65)] hover:scale-110 hover:bg-green-400 transition"
     >
       WhatsApp
     </a>
@@ -1708,7 +1627,7 @@ function SecaoDestaque({ abrirProduto }) {
               rel="noopener noreferrer"
               className="border border-yellow-400/60 text-yellow-400 px-7 py-3 rounded-xl font-black hover:bg-yellow-400 hover:text-black hover:scale-105 transition"
             >
-              Chamar no WhatsApp
+              WhatsApp
             </a>
           </div>
         </div>
@@ -1750,7 +1669,7 @@ function SecaoComoFunciona() {
           Como funciona
         </h2>
 
-        <div className="grid md:grid-cols-2 gap-6">
+        <div className="grid md:grid-cols-4 gap-6">
           {passos.map((item, i) => (
             <div
               key={i}
@@ -1793,7 +1712,7 @@ function SecaoParaQuemE() {
           Para quem é
         </h2>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-2 gap-6">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {publicos.map((item, i) => (
             <div
               key={i}
@@ -1905,7 +1824,7 @@ function Footer() {
           </a>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-10 relative">
+        <div className="grid md:grid-cols-4 gap-10 relative">
           <div className="md:col-span-1">
             <h3 className="text-yellow-400 text-2xl font-black mb-4 flex items-center gap-2">
               <Scissors size={22} /> Empório da Afiação
