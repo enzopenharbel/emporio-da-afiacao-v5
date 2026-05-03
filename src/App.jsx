@@ -543,8 +543,76 @@ export default function App() {
       <Header voltarInicio={voltarInicio} termoBusca={termoBusca} setTermoBusca={setTermoBusca} abrirProduto={abrirProduto} resultadosBusca={resultadosBusca} />
 
       {/* HERO / BANNER ROTATIVO */}
-      <section id="inicio" className="pt-0 md:pt-32">
-        <div className="relative h-[390px] sm:h-[500px] md:h-[640px] overflow-hidden">
+      <section id="inicio" className="pt-0 md:pt-32 bg-black">
+        {/* BANNER PREMIUM MOBILE - OPÇÃO 6 */}
+        <div className="md:hidden px-4 pt-5 pb-7 bg-[radial-gradient(circle_at_50%_0%,rgba(250,204,21,0.10),transparent_32%),linear-gradient(180deg,#030303,#000)]">
+          <div className="relative min-h-[640px] overflow-hidden rounded-[2rem] border border-yellow-400/55 bg-[#050505] shadow-[0_24px_80px_rgba(0,0,0,0.95),0_0_38px_rgba(250,204,21,0.12)]">
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_88%_18%,rgba(250,204,21,0.20),transparent_28%),radial-gradient(circle_at_8%_18%,rgba(250,204,21,0.13),transparent_24%),linear-gradient(135deg,rgba(255,255,255,0.05),transparent_45%)]" />
+            <div className="absolute inset-0 bg-gradient-to-b from-black/8 via-transparent to-black/45" />
+
+            <div className="absolute -left-10 top-12 h-24 w-24 rounded-full bg-yellow-400/16 blur-3xl" />
+            <div className="absolute -right-16 bottom-20 h-40 w-40 rounded-full bg-yellow-500/18 blur-3xl" />
+
+            <img
+              src="/images/produtos/alicate-mundial-522.jpg"
+              alt="Alicate Mundial 522"
+              className="absolute bottom-8 right-[-74px] z-10 h-[82%] w-[82%] object-contain drop-shadow-[0_22px_44px_rgba(0,0,0,0.95)]"
+            />
+
+            <div className="absolute left-5 top-[110px] z-20 w-[50%] rounded-[1.7rem] border border-yellow-400/65 bg-black/82 p-4 shadow-[0_18px_65px_rgba(0,0,0,0.95),0_0_22px_rgba(250,204,21,0.12)] backdrop-blur-md">
+              <div className="mb-5 flex items-center gap-2">
+                <span className="grid h-7 w-7 place-items-center rounded-full border border-yellow-400/60 text-yellow-400">
+                  <Star size={14} fill="currentColor" />
+                </span>
+                <span className="text-[10px] font-black uppercase tracking-[0.24em] text-yellow-400">
+                  Avaliações
+                </span>
+              </div>
+
+              <h2 className="font-serif text-[2.25rem] font-black leading-[0.9] tracking-[-0.04em] text-white drop-shadow-[0_4px_18px_rgba(0,0,0,0.95)]">
+                Alicate<br />Mundial<br />522
+              </h2>
+
+              <div className="my-4 h-[2px] w-12 rounded-full bg-yellow-400" />
+
+              <p className="text-[13px] leading-snug text-gray-300">
+                Um dos favoritos das manicures.
+              </p>
+
+              <div className="mt-4 inline-flex items-center gap-1.5 rounded-full border border-yellow-400/60 bg-black/55 px-3 py-1.5 text-[12px] font-bold text-gray-100">
+                <span>4.4</span>
+                <Star size={13} className="text-yellow-400" fill="currentColor" />
+                <span>Google</span>
+              </div>
+
+              <a
+                href={criarLinkWhatsApp("Olá! Quero saber mais sobre o Alicate Mundial 522.")}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-5 flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-yellow-500 via-yellow-300 to-yellow-500 px-2.5 py-3 text-center text-[12px] font-black text-black shadow-[0_0_26px_rgba(250,204,21,0.30)] active:scale-95"
+              >
+                WhatsApp
+              </a>
+            </div>
+
+            <div className="absolute bottom-6 left-1/2 z-30 flex -translate-x-1/2 items-center justify-center gap-4">
+              {banners.map((banner, i) => (
+                <button
+                  key={banner.titulo}
+                  onClick={() => setBannerIndex(i)}
+                  className={`h-3 w-3 rounded-full transition-all ${
+                    i === bannerIndex
+                      ? "bg-yellow-400 shadow-[0_0_14px_rgba(250,204,21,0.9)]"
+                      : "bg-gray-400/70"
+                  }`}
+                  aria-label={`Ir para banner ${i + 1}`}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <div className="hidden md:block relative h-[390px] sm:h-[500px] md:h-[640px] overflow-hidden">
           {banners.map((banner, i) => (
             <img
               key={i}
