@@ -611,7 +611,7 @@ export default function App() {
             };
 
             return (
-              <div className="relative min-h-[620px] overflow-hidden rounded-[2rem] border border-yellow-400/55 bg-[#050505] shadow-[0_24px_80px_rgba(0,0,0,0.95),0_0_38px_rgba(250,204,21,0.12)]">
+              <div className="relative min-h-[640px] overflow-hidden rounded-[2rem] border border-yellow-400/55 bg-[#050505] shadow-[0_24px_80px_rgba(0,0,0,0.95),0_0_38px_rgba(250,204,21,0.12)]">
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_18%,rgba(250,204,21,0.18),transparent_31%),radial-gradient(circle_at_18%_80%,rgba(250,204,21,0.10),transparent_34%),linear-gradient(180deg,rgba(255,255,255,0.05),transparent_38%,rgba(0,0,0,0.38))]" />
 
                 <img
@@ -628,40 +628,40 @@ export default function App() {
                   {mobileBanner.tipo}
                 </div>
 
-                <div className="absolute inset-x-5 bottom-16 z-20 rounded-[1.85rem] border border-yellow-300/55 bg-black/56 px-5 py-6 text-center shadow-[0_18px_70px_rgba(0,0,0,0.95),inset_0_1px_0_rgba(255,255,255,0.10),0_0_28px_rgba(250,204,21,0.12)] backdrop-blur-xl">
-                  <div className="mx-auto mb-3 flex max-w-[230px] items-center justify-center gap-3 text-yellow-200/90">
+                <div className="absolute left-1/2 bottom-20 z-20 w-[78%] max-w-[315px] -translate-x-1/2 rounded-[1.6rem] border border-yellow-300/45 bg-black/44 px-4 py-4 text-center shadow-[0_18px_70px_rgba(0,0,0,0.95),inset_0_1px_0_rgba(255,255,255,0.10),0_0_28px_rgba(250,204,21,0.12)] backdrop-blur-xl">
+                  <div className="mx-auto mb-2 flex max-w-[180px] items-center justify-center gap-2 text-yellow-200/90">
                     <span className="h-px flex-1 bg-yellow-400/35" />
-                    <span className="text-[11px] font-black uppercase tracking-[0.45em]">
+                    <span className="text-[9px] font-black uppercase tracking-[0.34em]">
                       {mobileBanner.badge}
                     </span>
                     <span className="h-px flex-1 bg-yellow-400/35" />
                   </div>
 
-                  <div className="mx-auto mb-3 flex w-28 items-center justify-center gap-3 text-yellow-300/85">
+                  <div className="mx-auto mb-2 flex w-20 items-center justify-center gap-2 text-yellow-300/80">
                     <span className="h-px flex-1 bg-yellow-400/45" />
                     <span className="text-[13px] leading-none">✦</span>
                     <span className="h-px flex-1 bg-yellow-400/45" />
                   </div>
 
-                  <h2 className="font-serif text-[2.75rem] font-medium leading-[0.95] tracking-[-0.055em] text-yellow-100 drop-shadow-[0_6px_26px_rgba(0,0,0,0.95)]">
+                  <h2 className="font-serif text-[2.05rem] font-medium leading-[0.96] tracking-[-0.045em] text-yellow-100 drop-shadow-[0_6px_26px_rgba(0,0,0,0.95)]">
                     {mobileBanner.titulo}
                   </h2>
 
-                  <p className="mx-auto mt-3 max-w-[270px] text-[14px] leading-snug text-gray-100/90">
+                  <p className="mx-auto mt-2 max-w-[230px] text-[12.5px] leading-snug text-gray-100/88">
                     {mobileBanner.subtitulo}
                   </p>
 
                   <button
                     type="button"
                     onClick={abrirAcaoMobile}
-                    className="mx-auto mt-5 inline-flex min-w-[220px] items-center justify-center gap-3 rounded-full border border-yellow-300/75 bg-black/35 px-6 py-3 text-[14px] font-black text-yellow-200 shadow-[inset_0_1px_0_rgba(255,255,255,0.10),0_0_24px_rgba(250,204,21,0.14)] active:scale-95"
+                    className="mx-auto mt-3 inline-flex min-w-[170px] items-center justify-center gap-2 rounded-full border border-yellow-300/70 bg-black/30 px-5 py-2.5 text-[12.5px] font-black text-yellow-200 shadow-[inset_0_1px_0_rgba(255,255,255,0.10),0_0_24px_rgba(250,204,21,0.14)] active:scale-95"
                   >
                     {mobileBanner.cta}
                     <ChevronRight size={18} />
                   </button>
                 </div>
 
-                <div className="absolute bottom-6 left-1/2 z-30 flex -translate-x-1/2 items-center justify-center gap-3">
+                <div className="absolute bottom-7 left-1/2 z-30 flex -translate-x-1/2 items-center justify-center gap-3">
                   {mobileBannersOpcao7.map((banner, i) => (
                     <button
                       key={`${banner.titulo}-${i}`}
