@@ -80,7 +80,24 @@ const imagensProdutos = {
   "Alicate Mundial 522": "/images/produtos/alicate-mundial-522.jpg",
   "Alicate Mundial 722": "/images/produtos/alicate-mundial-722.jpg",
   "Alicate Mundial 772": "/images/produtos/alicate-mundial-772.jpg",
+  "Alicate Mundial 775": "/images/produtos/alicate-mundial-775.jpg",
   "Alicate Mundial 777": "/images/produtos/alicate-mundial-777.jpg",
+  "Alicate Mundial 735": "/images/produtos/alicate-mundial-735.jpg",
+  "Alicate Mundial 787": "/images/produtos/alicate-mundial-787.jpg",
+  "Alicate Mundial 577": "/images/produtos/alicate-mundial-577.jpg",
+  "Alicate Mundial Precision": "/images/produtos/alicate-mundial-777.jpg",
+  "Alicate CAIXA BONITA": "/images/produtos/alicate-mundial-522.jpg",
+  "Alicate Mundial 520": "/images/produtos/alicate-mundial-522.jpg",
+  "Alicate Mundial INOX 786": "/images/produtos/alicate-mundial-787.jpg",
+  "Alicate Mundial INOX 776": "/images/produtos/alicate-mundial-775.jpg",
+  "Tesoura Mundial": "/images/banners/banner-tesouras.avif",
+  "Tesoura Corneta": "/images/banners/banner-tesouras.avif",
+  "Cutelo": "/images/banners/banner-facas.avif",
+  "Faca Corneta": "/images/banners/banner-facas.avif",
+  "Facas de carne": "/images/banners/banner-facas.avif",
+  "Afiação": "/images/banners/banner-alicates.jpg",
+  "Troca de molas": "/images/banners/banner-alicates.jpg",
+  "Gravação": "/images/banners/banner-tesouras.avif",
 };
 
 // =============================
@@ -357,7 +374,7 @@ export default function App() {
 
             <div className="absolute inset-0 bg-gradient-to-r from-black via-black/85 to-black/35" />
 
-            <div className="relative max-w-7xl mx-auto px-6 py-20">
+            <div className="relative max-w-7xl mx-auto px-4 md:px-6 py-12 md:py-20">
               <button
                 onClick={() => voltarCategoria(produtoAberto.categoriaSlug)}
                 className="mb-8 inline-flex items-center gap-2 text-yellow-400 hover:text-yellow-300 transition"
@@ -379,7 +396,7 @@ export default function App() {
                 {produtoAberto.nome}
               </h1>
 
-              <p className="max-w-2xl text-lg text-gray-200 leading-relaxed">
+              <p className="max-w-2xl text-base md:text-lg text-gray-200 leading-relaxed">
                 {produtoAberto.descricao}
               </p>
             </div>
@@ -441,7 +458,7 @@ export default function App() {
         <Header voltarInicio={voltarInicio} termoBusca={termoBusca} setTermoBusca={setTermoBusca} abrirProduto={abrirProduto} resultadosBusca={resultadosBusca} />
 
         <main className="pt-0 md:pt-32">
-          <section className="relative min-h-[360px] overflow-hidden border-b border-yellow-400/20">
+          <section className="relative min-h-[290px] md:min-h-[360px] overflow-hidden border-b border-yellow-400/20">
             <img
               src={categoriaAberta.img}
               alt={categoriaAberta.nome}
@@ -450,7 +467,7 @@ export default function App() {
 
             <div className="absolute inset-0 bg-gradient-to-r from-black via-black/80 to-black/30" />
 
-            <div className="relative max-w-7xl mx-auto px-6 py-20">
+            <div className="relative max-w-7xl mx-auto px-4 md:px-6 py-12 md:py-20">
               <button
                 onClick={voltarInicio}
                 className="mb-8 inline-flex items-center gap-2 text-yellow-400 hover:text-yellow-300 transition"
@@ -462,11 +479,11 @@ export default function App() {
                 Categoria
               </p>
 
-              <h1 className="text-5xl md:text-6xl font-black text-yellow-400 mb-5">
+              <h1 className="text-4xl md:text-6xl font-black text-yellow-400 mb-4 md:mb-5">
                 {categoriaAberta.nome}
               </h1>
 
-              <p className="max-w-2xl text-lg text-gray-200 leading-relaxed">
+              <p className="max-w-2xl text-base md:text-lg text-gray-200 leading-relaxed">
                 {categoriaAberta.chamada}
               </p>
             </div>
@@ -527,7 +544,7 @@ export default function App() {
 
       {/* HERO / BANNER ROTATIVO */}
       <section id="inicio" className="pt-0 md:pt-32">
-        <div className="relative h-[430px] sm:h-[520px] md:h-[640px] overflow-hidden">
+        <div className="relative h-[390px] sm:h-[500px] md:h-[640px] overflow-hidden">
           {banners.map((banner, i) => (
             <img
               key={i}
@@ -542,13 +559,13 @@ export default function App() {
           <div className="absolute inset-0 bg-gradient-to-t from-black via-black/55 to-black/15 md:bg-gradient-to-r md:from-black md:via-black/60 md:to-black/20" />
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(250,204,21,0.10),transparent_38%)] md:bg-[radial-gradient(circle_at_center,rgba(250,204,21,0.12),transparent_35%)]" />
 
-          <div className="absolute inset-0 flex items-end md:items-center px-4 sm:px-6 md:px-10 pb-10 md:pb-0">
-            <div className="max-w-3xl w-full md:w-auto rounded-[2rem] md:rounded-none border border-yellow-400/25 md:border-0 bg-gradient-to-br from-black/78 via-black/62 to-black/38 md:bg-transparent backdrop-blur-xl md:backdrop-blur-0 p-5 md:p-0 shadow-[0_22px_70px_rgba(0,0,0,0.72),0_0_28px_rgba(250,204,21,0.12)] md:shadow-none">
+          <div className="absolute inset-0 flex items-end md:items-center px-3 sm:px-6 md:px-10 pb-8 md:pb-0">
+            <div className="max-w-3xl w-full md:w-auto rounded-[1.6rem] md:rounded-none border border-yellow-400/20 md:border-0 bg-gradient-to-br from-black/82 via-black/66 to-black/42 md:bg-transparent backdrop-blur-xl md:backdrop-blur-0 p-4 md:p-0 shadow-[0_22px_70px_rgba(0,0,0,0.72),0_0_28px_rgba(250,204,21,0.12)] md:shadow-none">
               <p className="text-yellow-400 uppercase tracking-[0.25em] md:tracking-[0.35em] text-[10px] md:text-sm mb-3 md:mb-4">
                 Empório da Afiação
               </p>
 
-              <h2 className="text-3xl sm:text-4xl md:text-7xl text-yellow-400 font-black mb-3 md:mb-5 leading-[0.98] tracking-[-0.04em] drop-shadow-2xl">
+              <h2 className="text-[1.85rem] sm:text-4xl md:text-7xl text-yellow-400 font-black mb-2 md:mb-5 leading-[0.98] tracking-[-0.04em] drop-shadow-2xl">
                 {banners[bannerIndex].titulo}
               </h2>
 
@@ -558,7 +575,7 @@ export default function App() {
                 </span>
               )}
 
-              <p className="text-[15px] sm:text-base md:text-2xl text-gray-100 max-w-2xl leading-relaxed">
+              <p className="text-[13.5px] sm:text-base md:text-2xl text-gray-100 max-w-2xl leading-relaxed">
                 {banners[bannerIndex].subtitulo}
               </p>
 
@@ -566,7 +583,7 @@ export default function App() {
                 {banners[bannerIndex].produtoSlug && (
                   <button
                     onClick={() => abrirProduto(banners[bannerIndex].produtoSlug)}
-                    className="w-auto text-center px-3.5 sm:px-6 py-2 sm:py-3 rounded-xl bg-yellow-400 text-black text-sm sm:text-base font-black hover:bg-yellow-300 hover:scale-105 transition shadow-[0_0_22px_rgba(250,204,21,0.28)]"
+                    className="w-auto text-center px-3.5 sm:px-6 py-2 sm:py-3 rounded-xl bg-yellow-400 text-black text-xs sm:text-base font-black hover:bg-yellow-300 hover:scale-105 transition shadow-[0_0_22px_rgba(250,204,21,0.28)]"
                   >
                     Ver destaque
                   </button>
@@ -576,7 +593,7 @@ export default function App() {
                   href={criarLinkWhatsApp(banners[bannerIndex].whatsappMensagem || "Olá! Vim pelo site e quero mais informações.")}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-auto text-center px-3.5 sm:px-6 py-2 sm:py-3 rounded-xl border border-yellow-400/60 text-yellow-400 text-sm sm:text-base font-black hover:bg-yellow-400 hover:text-black hover:scale-105 transition bg-black/35"
+                  className="w-auto text-center px-3.5 sm:px-6 py-2 sm:py-3 rounded-xl border border-yellow-400/60 text-yellow-400 text-xs sm:text-base font-black hover:bg-yellow-400 hover:text-black hover:scale-105 transition bg-black/35"
                 >
                   WhatsApp
                 </a>
@@ -807,7 +824,7 @@ function ProductCard({ produto, abrirProduto }) {
       )}
 
       {/* IMAGEM DO CARD DO PRODUTO */}
-      <div className="h-40 sm:h-64 w-full bg-white flex items-center justify-center overflow-hidden rounded-t-2xl sm:rounded-t-3xl">
+      <div className="h-32 sm:h-64 w-full bg-white flex items-center justify-center overflow-hidden rounded-t-2xl sm:rounded-t-3xl">
         <img
           src={produto.img}
           alt={produto.nome}
@@ -824,7 +841,7 @@ function ProductCard({ produto, abrirProduto }) {
           {produto.descricao}
         </p>
 
-        <div className="mt-4 sm:mt-5 flex flex-col gap-2 sm:gap-3">
+        <div className="mt-3 sm:mt-5 flex flex-col gap-2 sm:gap-3">
           <button
             onClick={(e) => {
               e.stopPropagation();
@@ -1015,7 +1032,7 @@ function Header({ voltarInicio, termoBusca, setTermoBusca, abrirProduto, resulta
 
   return (
     <header
-      className={`sticky md:fixed top-0 w-full z-[90] bg-black/95 backdrop-blur-md border-b border-yellow-400/20 transition-all duration-500 ${
+      className={`sticky md:fixed top-0 w-full z-[90] bg-black/96 backdrop-blur-xl border-b border-yellow-400/15 transition-all duration-500 ${
         scrolled
           ? "shadow-[0_0_18px_rgba(250,204,21,0.18)]"
           : "shadow-[0_0_0_rgba(250,204,21,0)]"
@@ -1120,7 +1137,7 @@ function Header({ voltarInicio, termoBusca, setTermoBusca, abrirProduto, resulta
       {/* HEADER MOBILE MARKETPLACE */}
       <div className="md:hidden">
         <div
-          className={`px-3 pt-2 bg-gradient-to-b from-black via-black to-[#090909] transition-all duration-500 ${
+          className={`px-3 pt-2 bg-gradient-to-b from-black via-[#050505] to-[#0b0b0b] transition-all duration-500 ${
             scrolled ? "pb-2" : "pb-2"
           }`}
         >
@@ -1130,7 +1147,7 @@ function Header({ voltarInicio, termoBusca, setTermoBusca, abrirProduto, resulta
                 src="/logo.png"
                 alt="Empório da Afiação"
                 className={`w-auto object-contain transition-all duration-500 drop-shadow-[0_0_18px_rgba(250,204,21,0.75)] ${
-                  scrolled ? "h-11 scale-100" : "h-12"
+                  scrolled ? "h-9 scale-100" : "h-11"
                 }`}
               />
             </button>
@@ -1141,7 +1158,7 @@ function Header({ voltarInicio, termoBusca, setTermoBusca, abrirProduto, resulta
                     setMobileSearchOpen((prev) => !prev);
                     setSearchActive(true);
                   }}
-                  className="rounded-full bg-yellow-400 p-2 text-black scale-90 opacity-85 shadow-[0_0_16px_rgba(250,204,21,0.35)]"
+                  className="rounded-full bg-yellow-400 p-2 text-black scale-90 opacity-95 shadow-[0_0_16px_rgba(250,204,21,0.35)] active:scale-95"
                   aria-label="Abrir busca"
                 >
                   <Search size={20} />
@@ -1167,7 +1184,7 @@ function Header({ voltarInicio, termoBusca, setTermoBusca, abrirProduto, resulta
 
               <button
                 onClick={() => setMobileMenuOpen((prev) => !prev)}
-                className="inline-flex rounded-full border border-yellow-400/40 p-2 text-yellow-400 hover:bg-yellow-400 hover:text-black transition-all duration-500"
+                className="inline-flex rounded-full border border-yellow-400/35 bg-[#111] p-2 text-yellow-400 hover:bg-yellow-400 hover:text-black active:scale-95 transition-all duration-500"
                 aria-label="Abrir menu"
               >
                 {mobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
@@ -1180,10 +1197,10 @@ function Header({ voltarInicio, termoBusca, setTermoBusca, abrirProduto, resulta
             className={`relative overflow-visible transition-all duration-500 ${
               scrolled && !mobileSearchOpen
                 ? "max-h-0 opacity-0 mt-0 pointer-events-none"
-                : "max-h-20 opacity-100 mt-2"
+                : "max-h-16 opacity-100 mt-2"
             }`}
           >
-            <div className="flex rounded-full bg-white shadow-[0_0_24px_rgba(250,204,21,0.18)] focus-within:shadow-[0_0_32px_rgba(250,204,21,0.55)] transition">
+            <div className="flex rounded-2xl bg-white shadow-[0_0_24px_rgba(250,204,21,0.18)] focus-within:shadow-[0_0_32px_rgba(250,204,21,0.55)] transition">
               <input
                 value={termoBusca}
                 onChange={(e) => setTermoBusca(e.target.value)}
@@ -1195,12 +1212,12 @@ function Header({ voltarInicio, termoBusca, setTermoBusca, abrirProduto, resulta
                   }, 220);
                 }}
                 placeholder="Buscar produtos..."
-                className="min-w-0 flex-1 rounded-l-full bg-white px-4 py-2.5 text-sm text-black placeholder:text-gray-500 outline-none"
+                className="min-w-0 flex-1 rounded-l-2xl bg-white px-4 py-2.5 text-sm text-black placeholder:text-gray-500 outline-none"
               />
 
               <button
                 type="button"
-                className="rounded-r-full bg-yellow-400 px-4"
+                className="rounded-r-2xl bg-yellow-400 px-4"
               >
                 <Search size={19} className="text-black" />
               </button>
@@ -1230,7 +1247,7 @@ function Header({ voltarInicio, termoBusca, setTermoBusca, abrirProduto, resulta
 
       {/* MENU MOBILE ABERTO */}
       {mobileMenuOpen && (
-        <div className="md:hidden fixed left-0 right-0 top-[64px] z-[95] border-t border-yellow-400/20 bg-black/98 backdrop-blur-xl shadow-[0_20px_60px_rgba(0,0,0,0.85)]">
+        <div className={`md:hidden fixed left-0 right-0 ${scrolled && !mobileSearchOpen ? "top-[56px]" : "top-[96px]"} z-[95] border-t border-yellow-400/20 bg-black/98 backdrop-blur-xl shadow-[0_20px_60px_rgba(0,0,0,0.85)]`}>
           <nav className="px-5 py-5 flex flex-col gap-3">
             <button
               onClick={() => irPara("inicio")}
@@ -1373,7 +1390,7 @@ function MobileMarketplaceHome({ abrirProduto, abrirCategoria }) {
               onClick={() => abrirCategoria(cat.slug)}
               className="group overflow-hidden rounded-[1.35rem] border border-yellow-400/15 bg-[#0b0b0b] text-left shadow-[0_0_22px_rgba(250,204,21,0.06)] active:scale-[0.98] transition"
             >
-              <div className="relative h-28 overflow-hidden bg-white">
+              <div className="relative h-24 overflow-hidden bg-white">
                 <img
                   src={cat.img}
                   alt={cat.nome}
@@ -1551,7 +1568,7 @@ function MobileBottomNav({ voltarInicio }) {
   };
 
   return (
-    <nav className="md:hidden fixed bottom-0 left-0 right-0 z-[70] border-t border-yellow-400/20 bg-black/95 backdrop-blur-xl px-3 py-2 shadow-[0_-12px_40px_rgba(0,0,0,0.75)]">
+    <nav className="md:hidden fixed bottom-0 left-0 right-0 z-[70] border-t border-yellow-400/15 bg-black/95 backdrop-blur-xl px-3 pt-2 pb-[calc(0.5rem+env(safe-area-inset-bottom))] shadow-[0_-12px_40px_rgba(0,0,0,0.75)]">
       <div className="grid grid-cols-4 gap-2 text-[11px] font-bold">
         <button onClick={() => irPara("inicio")} className="rounded-xl py-2 text-yellow-400">
           Início
