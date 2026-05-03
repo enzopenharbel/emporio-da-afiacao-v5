@@ -52,6 +52,60 @@ const banners = [
   },
 ];
 
+
+// =============================
+// BANNERS MOBILE - ESTILO OPÇÃO 7
+// =============================
+const mobileBannersOpcao7 = [
+  {
+    tipo: "produto",
+    badge: "LANÇAMENTO",
+    titulo: "Mundial 522",
+    subtitulo: "O alicate mais procurado da vitrine",
+    img: "/images/produtos/alicate-mundial-522.jpg",
+    produtoSlug: "alicate-mundial-522",
+    cta: "Ver destaque",
+    whatsappMensagem: "Olá! Quero saber mais sobre o Alicate Mundial 522.",
+  },
+  {
+    tipo: "serviço",
+    badge: "SERVIÇO",
+    titulo: "Afiação Profissional",
+    subtitulo: "Corte preciso, limpo e pronto para o uso",
+    img: "/images/banners/banner-alicates.jpg",
+    cta: "Solicitar serviço",
+    whatsappMensagem: "Olá! Quero solicitar um orçamento para afiação profissional.",
+  },
+  {
+    tipo: "produto",
+    badge: "DESTAQUE",
+    titulo: "Alicates Profissionais",
+    subtitulo: "Modelos Mundial para cutícula, unha e acabamento",
+    img: "/images/produtos/alicate-mundial-777.jpg",
+    produtoSlug: "alicate-mundial-777",
+    cta: "Ver produto",
+    whatsappMensagem: "Olá! Quero saber mais sobre os alicates profissionais.",
+  },
+  {
+    tipo: "serviço",
+    badge: "MANUTENÇÃO",
+    titulo: "Troca de Molas",
+    subtitulo: "Recuperação e ajuste para instrumentos de trabalho",
+    img: "/images/banners/banner-tesouras.avif",
+    cta: "Ver serviço",
+    whatsappMensagem: "Olá! Quero saber mais sobre troca de molas.",
+  },
+  {
+    tipo: "produto",
+    badge: "VITRINE",
+    titulo: "Facas e Lâminas",
+    subtitulo: "Produtos e serviços para corte com acabamento superior",
+    img: "/images/banners/banner-facas.avif",
+    cta: "Ver vitrine",
+    whatsappMensagem: "Olá! Quero saber mais sobre facas, lâminas e afiação.",
+  },
+];
+
 // =============================
 // IMAGENS PADRÃO POR CATEGORIA
 // Troque depois pelas suas imagens reais.
@@ -544,72 +598,86 @@ export default function App() {
 
       {/* HERO / BANNER ROTATIVO */}
       <section id="inicio" className="pt-0 md:pt-32 bg-black">
-        {/* BANNER PREMIUM MOBILE - OPÇÃO 6 */}
+        {/* BANNER PREMIUM MOBILE - OPÇÃO 7 */}
         <div className="md:hidden px-4 pt-5 pb-7 bg-[radial-gradient(circle_at_50%_0%,rgba(250,204,21,0.10),transparent_32%),linear-gradient(180deg,#030303,#000)]">
-          <div className="relative min-h-[640px] overflow-hidden rounded-[2rem] border border-yellow-400/55 bg-[#050505] shadow-[0_24px_80px_rgba(0,0,0,0.95),0_0_38px_rgba(250,204,21,0.12)]">
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_88%_18%,rgba(250,204,21,0.20),transparent_28%),radial-gradient(circle_at_8%_18%,rgba(250,204,21,0.13),transparent_24%),linear-gradient(135deg,rgba(255,255,255,0.05),transparent_45%)]" />
-            <div className="absolute inset-0 bg-gradient-to-b from-black/8 via-transparent to-black/45" />
+          {(() => {
+            const mobileBanner = mobileBannersOpcao7[bannerIndex % mobileBannersOpcao7.length];
+            const abrirAcaoMobile = () => {
+              if (mobileBanner.produtoSlug) {
+                abrirProduto(mobileBanner.produtoSlug);
+              } else {
+                window.open(criarLinkWhatsApp(mobileBanner.whatsappMensagem), "_blank", "noopener,noreferrer");
+              }
+            };
 
-            <div className="absolute -left-10 top-12 h-24 w-24 rounded-full bg-yellow-400/16 blur-3xl" />
-            <div className="absolute -right-16 bottom-20 h-40 w-40 rounded-full bg-yellow-500/18 blur-3xl" />
+            return (
+              <div className="relative min-h-[620px] overflow-hidden rounded-[2rem] border border-yellow-400/55 bg-[#050505] shadow-[0_24px_80px_rgba(0,0,0,0.95),0_0_38px_rgba(250,204,21,0.12)]">
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_18%,rgba(250,204,21,0.18),transparent_31%),radial-gradient(circle_at_18%_80%,rgba(250,204,21,0.10),transparent_34%),linear-gradient(180deg,rgba(255,255,255,0.05),transparent_38%,rgba(0,0,0,0.38))]" />
 
-            <img
-              src="/images/produtos/alicate-mundial-522.jpg"
-              alt="Alicate Mundial 522"
-              className="absolute bottom-8 right-[-74px] z-10 h-[82%] w-[82%] object-contain drop-shadow-[0_22px_44px_rgba(0,0,0,0.95)]"
-            />
-
-            <div className="absolute left-5 top-[110px] z-20 w-[50%] rounded-[1.7rem] border border-yellow-400/65 bg-black/82 p-4 shadow-[0_18px_65px_rgba(0,0,0,0.95),0_0_22px_rgba(250,204,21,0.12)] backdrop-blur-md">
-              <div className="mb-5 flex items-center gap-2">
-                <span className="grid h-7 w-7 place-items-center rounded-full border border-yellow-400/60 text-yellow-400">
-                  <Star size={14} fill="currentColor" />
-                </span>
-                <span className="text-[10px] font-black uppercase tracking-[0.24em] text-yellow-400">
-                  Avaliações
-                </span>
-              </div>
-
-              <h2 className="font-serif text-[2.25rem] font-black leading-[0.9] tracking-[-0.04em] text-white drop-shadow-[0_4px_18px_rgba(0,0,0,0.95)]">
-                Alicate<br />Mundial<br />522
-              </h2>
-
-              <div className="my-4 h-[2px] w-12 rounded-full bg-yellow-400" />
-
-              <p className="text-[13px] leading-snug text-gray-300">
-                Um dos favoritos das manicures.
-              </p>
-
-              <div className="mt-4 inline-flex items-center gap-1.5 rounded-full border border-yellow-400/60 bg-black/55 px-3 py-1.5 text-[12px] font-bold text-gray-100">
-                <span>4.4</span>
-                <Star size={13} className="text-yellow-400" fill="currentColor" />
-                <span>Google</span>
-              </div>
-
-              <a
-                href={criarLinkWhatsApp("Olá! Quero saber mais sobre o Alicate Mundial 522.")}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-5 flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-yellow-500 via-yellow-300 to-yellow-500 px-2.5 py-3 text-center text-[12px] font-black text-black shadow-[0_0_26px_rgba(250,204,21,0.30)] active:scale-95"
-              >
-                WhatsApp
-              </a>
-            </div>
-
-            <div className="absolute bottom-6 left-1/2 z-30 flex -translate-x-1/2 items-center justify-center gap-4">
-              {banners.map((banner, i) => (
-                <button
-                  key={banner.titulo}
-                  onClick={() => setBannerIndex(i)}
-                  className={`h-3 w-3 rounded-full transition-all ${
-                    i === bannerIndex
-                      ? "bg-yellow-400 shadow-[0_0_14px_rgba(250,204,21,0.9)]"
-                      : "bg-gray-400/70"
-                  }`}
-                  aria-label={`Ir para banner ${i + 1}`}
+                <img
+                  src={mobileBanner.img}
+                  alt={mobileBanner.titulo}
+                  className="absolute inset-0 h-full w-full object-cover opacity-95 transition-all duration-[1600ms] ease-in-out scale-[1.02]"
                 />
-              ))}
-            </div>
-          </div>
+
+                <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.10)_0%,rgba(0,0,0,0.05)_38%,rgba(0,0,0,0.70)_100%)]" />
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_25%,transparent_0%,rgba(0,0,0,0.08)_35%,rgba(0,0,0,0.70)_100%)]" />
+                <div className="absolute left-0 top-0 h-full w-full bg-[linear-gradient(120deg,rgba(250,204,21,0.14),transparent_28%,transparent_70%,rgba(250,204,21,0.12))] opacity-70" />
+
+                <div className="absolute left-4 top-4 z-20 rounded-full border border-yellow-400/40 bg-black/30 px-3 py-1 text-[10px] font-black uppercase tracking-[0.22em] text-yellow-300/90 backdrop-blur-md">
+                  {mobileBanner.tipo}
+                </div>
+
+                <div className="absolute inset-x-5 bottom-16 z-20 rounded-[1.85rem] border border-yellow-300/55 bg-black/56 px-5 py-6 text-center shadow-[0_18px_70px_rgba(0,0,0,0.95),inset_0_1px_0_rgba(255,255,255,0.10),0_0_28px_rgba(250,204,21,0.12)] backdrop-blur-xl">
+                  <div className="mx-auto mb-3 flex max-w-[230px] items-center justify-center gap-3 text-yellow-200/90">
+                    <span className="h-px flex-1 bg-yellow-400/35" />
+                    <span className="text-[11px] font-black uppercase tracking-[0.45em]">
+                      {mobileBanner.badge}
+                    </span>
+                    <span className="h-px flex-1 bg-yellow-400/35" />
+                  </div>
+
+                  <div className="mx-auto mb-3 flex w-28 items-center justify-center gap-3 text-yellow-300/85">
+                    <span className="h-px flex-1 bg-yellow-400/45" />
+                    <span className="text-[13px] leading-none">✦</span>
+                    <span className="h-px flex-1 bg-yellow-400/45" />
+                  </div>
+
+                  <h2 className="font-serif text-[2.75rem] font-medium leading-[0.95] tracking-[-0.055em] text-yellow-100 drop-shadow-[0_6px_26px_rgba(0,0,0,0.95)]">
+                    {mobileBanner.titulo}
+                  </h2>
+
+                  <p className="mx-auto mt-3 max-w-[270px] text-[14px] leading-snug text-gray-100/90">
+                    {mobileBanner.subtitulo}
+                  </p>
+
+                  <button
+                    type="button"
+                    onClick={abrirAcaoMobile}
+                    className="mx-auto mt-5 inline-flex min-w-[220px] items-center justify-center gap-3 rounded-full border border-yellow-300/75 bg-black/35 px-6 py-3 text-[14px] font-black text-yellow-200 shadow-[inset_0_1px_0_rgba(255,255,255,0.10),0_0_24px_rgba(250,204,21,0.14)] active:scale-95"
+                  >
+                    {mobileBanner.cta}
+                    <ChevronRight size={18} />
+                  </button>
+                </div>
+
+                <div className="absolute bottom-6 left-1/2 z-30 flex -translate-x-1/2 items-center justify-center gap-3">
+                  {mobileBannersOpcao7.map((banner, i) => (
+                    <button
+                      key={`${banner.titulo}-${i}`}
+                      onClick={() => setBannerIndex(i)}
+                      className={`h-3 w-3 rounded-full border transition-all duration-500 ${
+                        i === bannerIndex % mobileBannersOpcao7.length
+                          ? "scale-125 border-yellow-300 bg-yellow-400 shadow-[0_0_16px_rgba(250,204,21,0.95)]"
+                          : "border-gray-300/45 bg-gray-300/55"
+                      }`}
+                      aria-label={`Ir para banner mobile ${i + 1}`}
+                    />
+                  ))}
+                </div>
+              </div>
+            );
+          })()}
         </div>
 
         <div className="hidden md:block relative h-[390px] sm:h-[500px] md:h-[640px] overflow-hidden">
