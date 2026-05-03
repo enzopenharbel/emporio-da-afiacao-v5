@@ -559,31 +559,81 @@ export default function App() {
           <div className="absolute inset-0 bg-gradient-to-t from-black via-black/55 to-black/15 md:bg-gradient-to-r md:from-black md:via-black/60 md:to-black/20" />
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(250,204,21,0.10),transparent_38%)] md:bg-[radial-gradient(circle_at_center,rgba(250,204,21,0.12),transparent_35%)]" />
 
-          <div className="absolute inset-0 flex items-end md:items-center px-3 sm:px-6 md:px-10 pb-8 md:pb-0">
-            <div className="max-w-3xl w-full md:w-auto rounded-[1.6rem] md:rounded-none border border-yellow-400/20 md:border-0 bg-gradient-to-br from-black/82 via-black/66 to-black/42 md:bg-transparent backdrop-blur-xl md:backdrop-blur-0 p-4 md:p-0 shadow-[0_22px_70px_rgba(0,0,0,0.72),0_0_28px_rgba(250,204,21,0.12)] md:shadow-none">
-              <p className="text-yellow-400 uppercase tracking-[0.25em] md:tracking-[0.35em] text-[10px] md:text-sm mb-3 md:mb-4">
+          {/* TEXTO DO BANNER - MOBILE */}
+          <div className="absolute inset-x-0 bottom-7 z-10 px-4 md:hidden">
+            <div className="rounded-[1.35rem] border border-yellow-400/25 bg-black/78 p-4 shadow-[0_18px_55px_rgba(0,0,0,0.75),0_0_26px_rgba(250,204,21,0.13)] backdrop-blur-md">
+              <div className="mb-2 flex items-center justify-between gap-2">
+                <span className="rounded-full bg-yellow-400 px-3 py-1 text-[10px] font-black uppercase tracking-[0.14em] text-black">
+                  {banners[bannerIndex].badge || "Destaque"}
+                </span>
+                <span className="text-[10px] font-bold uppercase tracking-[0.22em] text-yellow-400/80">
+                  Empório
+                </span>
+              </div>
+
+              <h2 className="max-w-[92%] text-[1.72rem] font-black leading-[0.98] tracking-[-0.045em] text-yellow-400 drop-shadow-[0_3px_16px_rgba(0,0,0,0.9)]">
+                {banners[bannerIndex].titulo}
+              </h2>
+
+              <p className="mt-2 max-w-[95%] text-[13px] leading-snug text-gray-100">
+                {banners[bannerIndex].subtitulo}
+              </p>
+
+              <div className="mt-4 grid grid-cols-2 gap-2">
+                {banners[bannerIndex].produtoSlug ? (
+                  <button
+                    onClick={() => abrirProduto(banners[bannerIndex].produtoSlug)}
+                    className="rounded-xl bg-yellow-400 px-3 py-2.5 text-sm font-black text-black shadow-[0_0_20px_rgba(250,204,21,0.28)] active:scale-95"
+                  >
+                    Ver destaque
+                  </button>
+                ) : (
+                  <button
+                    onClick={() => document.getElementById("produtos-mobile")?.scrollIntoView({ behavior: "smooth" })}
+                    className="rounded-xl bg-yellow-400 px-3 py-2.5 text-sm font-black text-black shadow-[0_0_20px_rgba(250,204,21,0.28)] active:scale-95"
+                  >
+                    Ver produtos
+                  </button>
+                )}
+
+                <a
+                  href={criarLinkWhatsApp(banners[bannerIndex].whatsappMensagem || "Olá! Vim pelo site e quero mais informações.")}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="rounded-xl border border-yellow-400/65 bg-black/45 px-3 py-2.5 text-center text-sm font-black text-yellow-400 active:scale-95"
+                >
+                  WhatsApp
+                </a>
+              </div>
+            </div>
+          </div>
+
+          {/* TEXTO DO BANNER - DESKTOP */}
+          <div className="absolute inset-0 hidden md:flex items-center px-10 pb-0">
+            <div className="max-w-3xl">
+              <p className="text-yellow-400 uppercase tracking-[0.35em] text-sm mb-4">
                 Empório da Afiação
               </p>
 
-              <h2 className="text-[1.85rem] sm:text-4xl md:text-7xl text-yellow-400 font-black mb-2 md:mb-5 leading-[0.98] tracking-[-0.04em] drop-shadow-2xl">
+              <h2 className="text-7xl text-yellow-400 font-black mb-5 leading-[0.98] tracking-[-0.04em] drop-shadow-2xl">
                 {banners[bannerIndex].titulo}
               </h2>
 
               {banners[bannerIndex].badge && (
-                <span className="inline-flex items-center mt-1 mb-3 md:mb-4 px-3 md:px-4 py-1.5 md:py-2 rounded-full bg-yellow-400 text-black text-[10px] md:text-sm font-black uppercase tracking-[0.14em] md:tracking-[0.18em] shadow-[0_0_24px_rgba(250,204,21,0.55)]">
+                <span className="inline-flex items-center mt-1 mb-4 px-4 py-2 rounded-full bg-yellow-400 text-black text-sm font-black uppercase tracking-[0.18em] shadow-[0_0_24px_rgba(250,204,21,0.55)]">
                   {banners[bannerIndex].badge}
                 </span>
               )}
 
-              <p className="text-[13.5px] sm:text-base md:text-2xl text-gray-100 max-w-2xl leading-relaxed">
+              <p className="text-2xl text-gray-100 max-w-2xl leading-relaxed">
                 {banners[bannerIndex].subtitulo}
               </p>
 
-              <div className="flex flex-row flex-wrap gap-2 sm:gap-4 mt-5 md:mt-8">
+              <div className="flex flex-row flex-wrap gap-4 mt-8">
                 {banners[bannerIndex].produtoSlug && (
                   <button
                     onClick={() => abrirProduto(banners[bannerIndex].produtoSlug)}
-                    className="w-auto text-center px-3.5 sm:px-6 py-2 sm:py-3 rounded-xl bg-yellow-400 text-black text-xs sm:text-base font-black hover:bg-yellow-300 hover:scale-105 transition shadow-[0_0_22px_rgba(250,204,21,0.28)]"
+                    className="w-auto text-center px-6 py-3 rounded-xl bg-yellow-400 text-black text-base font-black hover:bg-yellow-300 hover:scale-105 transition shadow-[0_0_22px_rgba(250,204,21,0.28)]"
                   >
                     Ver destaque
                   </button>
@@ -593,7 +643,7 @@ export default function App() {
                   href={criarLinkWhatsApp(banners[bannerIndex].whatsappMensagem || "Olá! Vim pelo site e quero mais informações.")}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-auto text-center px-3.5 sm:px-6 py-2 sm:py-3 rounded-xl border border-yellow-400/60 text-yellow-400 text-xs sm:text-base font-black hover:bg-yellow-400 hover:text-black hover:scale-105 transition bg-black/35"
+                  className="w-auto text-center px-6 py-3 rounded-xl border border-yellow-400/60 text-yellow-400 text-base font-black hover:bg-yellow-400 hover:text-black hover:scale-105 transition bg-black/35"
                 >
                   WhatsApp
                 </a>
@@ -1247,32 +1297,32 @@ function Header({ voltarInicio, termoBusca, setTermoBusca, abrirProduto, resulta
 
       {/* MENU MOBILE ABERTO */}
       {mobileMenuOpen && (
-        <div className={`md:hidden fixed left-0 right-0 ${scrolled && !mobileSearchOpen ? "top-[56px]" : "top-[96px]"} z-[95] border-t border-yellow-400/20 bg-black/98 backdrop-blur-xl shadow-[0_20px_60px_rgba(0,0,0,0.85)]`}>
-          <nav className="px-5 py-5 flex flex-col gap-3">
+        <div className="md:hidden relative z-[95] border-t border-yellow-400/20 bg-black/98 backdrop-blur-xl shadow-[0_18px_45px_rgba(0,0,0,0.75)]">
+          <nav className="px-5 py-4 flex flex-col gap-2">
             <button
               onClick={() => irPara("inicio")}
-              className="rounded-2xl border border-yellow-400/15 px-4 py-3 text-left text-yellow-400 font-bold hover:bg-yellow-400 hover:text-black transition"
+              className="rounded-xl border border-yellow-400/20 px-4 py-2.5 text-left text-yellow-400 font-bold hover:bg-yellow-400 hover:text-black transition"
             >
               Início
             </button>
 
             <button
               onClick={() => irPara("produtos")}
-              className="rounded-2xl border border-yellow-400/15 px-4 py-3 text-left text-yellow-400 font-bold hover:bg-yellow-400 hover:text-black transition"
+              className="rounded-xl border border-yellow-400/20 px-4 py-2.5 text-left text-yellow-400 font-bold hover:bg-yellow-400 hover:text-black transition"
             >
               Produtos
             </button>
 
             <button
               onClick={() => irPara("avaliacoes")}
-              className="rounded-2xl border border-yellow-400/15 px-4 py-3 text-left text-yellow-400 font-bold hover:bg-yellow-400 hover:text-black transition"
+              className="rounded-xl border border-yellow-400/20 px-4 py-2.5 text-left text-yellow-400 font-bold hover:bg-yellow-400 hover:text-black transition"
             >
               Avaliações
             </button>
 
             <button
               onClick={() => irPara("contato")}
-              className="rounded-2xl border border-yellow-400/15 px-4 py-3 text-left text-yellow-400 font-bold hover:bg-yellow-400 hover:text-black transition"
+              className="rounded-xl border border-yellow-400/20 px-4 py-2.5 text-left text-yellow-400 font-bold hover:bg-yellow-400 hover:text-black transition"
             >
               Contato
             </button>
@@ -1281,7 +1331,7 @@ function Header({ voltarInicio, termoBusca, setTermoBusca, abrirProduto, resulta
               href={criarLinkWhatsApp("Olá! Vim pelo site e quero mais informações.")}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-2 rounded-2xl bg-yellow-400 px-4 py-3 text-center text-black font-black hover:bg-yellow-300 transition"
+              className="mt-1 rounded-xl bg-yellow-400 px-4 py-2.5 text-center text-black font-black hover:bg-yellow-300 transition"
             >
               WhatsApp
             </a>
