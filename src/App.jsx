@@ -54,55 +54,84 @@ const banners = [
 
 
 // =============================
-// BANNERS MOBILE - ESTILO OPÇÃO 7
+// BANNERS MOBILE - MODELO OPÇÃO 4
 // =============================
-const mobileBannersOpcao7 = [
+// Todos os textos abaixo são editáveis.
+// Para trocar as imagens futuramente, coloque o arquivo em /public/images/banners
+// ou /public/images/produtos e altere apenas os campos "bg", "produtoImg" e "miniImg".
+const mobileBannersOpcao4 = [
+  {
+    tipo: "servicos",
+    eyebrow: "EMPÓRIO DA AFIAÇÃO",
+    titulo: "SERVIÇOS QUE",
+    destaque: "FAZEM A DIFERENÇA",
+    subtitulo: "Precisão, cuidado e qualidade em cada detalhe.",
+    bg: "/images/banners/banner-alicates.jpg",
+    produtoImg: "/images/produtos/alicate-mundial-522.jpg",
+    miniImg: "/images/produtos/alicate-mundial-522.jpg",
+    cta: "SAIBA MAIS",
+    whatsappMensagem: "Olá! Quero conhecer os serviços do Empório da Afiação.",
+    itens: [
+      { icone: "✦", titulo: "AFIAÇÃO PROFISSIONAL", texto: "Cortes mais precisos e duradouros" },
+      { icone: "◎", titulo: "TROCA DE MOLAS", texto: "Mais leveza e desempenho" },
+      { icone: "G", titulo: "GRAVAÇÃO", texto: "Personalize com sua marca" },
+      { icone: "□", titulo: "VENDA DE PRODUTOS", texto: "As melhores marcas para você" },
+    ],
+  },
   {
     tipo: "produto",
-    badge: "LANÇAMENTO",
-    titulo: "Mundial 522",
-    subtitulo: "O alicate mais procurado da vitrine",
-    img: "/images/produtos/alicate-mundial-522.jpg",
+    eyebrow: "EMPÓRIO DA AFIAÇÃO",
+    titulo: "PRODUTOS QUE",
+    destaque: "VALORIZAM SEU TRABALHO",
+    subtitulo: "Ferramentas selecionadas para rotina profissional.",
+    bg: "/images/produtos/alicate-mundial-522.jpg",
+    produtoImg: "/images/produtos/alicate-mundial-522.jpg",
+    miniImg: "/images/produtos/alicate-mundial-777.jpg",
+    cta: "VER PRODUTOS",
     produtoSlug: "alicate-mundial-522",
-    cta: "Ver destaque",
-    whatsappMensagem: "Olá! Quero saber mais sobre o Alicate Mundial 522.",
+    whatsappMensagem: "Olá! Quero saber mais sobre os produtos do Empório da Afiação.",
+    itens: [
+      { icone: "★", titulo: "MUNDIAL 522", texto: "Um dos modelos mais procurados" },
+      { icone: "✓", titulo: "COMPRA SEGURA", texto: "Atendimento direto pelo WhatsApp" },
+      { icone: "↯", titulo: "ENTREGA RÁPIDA", texto: "Consulte disponibilidade" },
+      { icone: "◇", titulo: "QUALIDADE", texto: "Produtos para uso profissional" },
+    ],
   },
   {
-    tipo: "serviço",
-    badge: "SERVIÇO",
-    titulo: "Afiação Profissional",
-    subtitulo: "Corte preciso, limpo e pronto para o uso",
-    img: "/images/banners/banner-alicates.jpg",
-    cta: "Solicitar serviço",
+    tipo: "afiacao",
+    eyebrow: "SERVIÇO PREMIUM",
+    titulo: "AFIAÇÃO",
+    destaque: "PROFISSIONAL",
+    subtitulo: "Corte preciso, limpo e pronto para o uso.",
+    bg: "/images/banners/banner-alicates.jpg",
+    produtoImg: "/images/banners/banner-alicates.jpg",
+    miniImg: "/images/produtos/alicate-mundial-522.jpg",
+    cta: "SOLICITAR SERVIÇO",
     whatsappMensagem: "Olá! Quero solicitar um orçamento para afiação profissional.",
+    itens: [
+      { icone: "✦", titulo: "CORTE PRECISO", texto: "Acabamento mais limpo" },
+      { icone: "✓", titulo: "USO PROFISSIONAL", texto: "Ideal para manicures e salões" },
+      { icone: "↯", titulo: "ATENDIMENTO RÁPIDO", texto: "Fale agora pelo WhatsApp" },
+      { icone: "◎", titulo: "CUIDADO", texto: "Manutenção com atenção ao detalhe" },
+    ],
   },
   {
-    tipo: "produto",
-    badge: "DESTAQUE",
-    titulo: "Alicates Profissionais",
-    subtitulo: "Modelos Mundial para cutícula, unha e acabamento",
-    img: "/images/produtos/alicate-mundial-777.jpg",
-    produtoSlug: "alicate-mundial-777",
-    cta: "Ver produto",
-    whatsappMensagem: "Olá! Quero saber mais sobre os alicates profissionais.",
-  },
-  {
-    tipo: "serviço",
-    badge: "MANUTENÇÃO",
-    titulo: "Troca de Molas",
-    subtitulo: "Recuperação e ajuste para instrumentos de trabalho",
-    img: "/images/banners/banner-tesouras.avif",
-    cta: "Ver serviço",
-    whatsappMensagem: "Olá! Quero saber mais sobre troca de molas.",
-  },
-  {
-    tipo: "produto",
-    badge: "VITRINE",
-    titulo: "Facas e Lâminas",
-    subtitulo: "Produtos e serviços para corte com acabamento superior",
-    img: "/images/banners/banner-facas.avif",
-    cta: "Ver vitrine",
-    whatsappMensagem: "Olá! Quero saber mais sobre facas, lâminas e afiação.",
+    tipo: "gravacao",
+    eyebrow: "PERSONALIZAÇÃO",
+    titulo: "GRAVAÇÃO",
+    destaque: "SUA MARCA",
+    subtitulo: "Identificação elegante para instrumentos profissionais.",
+    bg: "/images/banners/banner-facas.avif",
+    produtoImg: "/images/banners/banner-facas.avif",
+    miniImg: "/images/produtos/alicate-mundial-522.jpg",
+    cta: "PERSONALIZAR",
+    whatsappMensagem: "Olá! Quero saber mais sobre gravação em instrumentos.",
+    itens: [
+      { icone: "G", titulo: "GRAVAÇÃO", texto: "Nome, logo ou identificação" },
+      { icone: "◇", titulo: "EXCLUSIVO", texto: "Visual mais profissional" },
+      { icone: "✓", titulo: "ORÇAMENTO", texto: "Solicite pelo WhatsApp" },
+      { icone: "□", titulo: "PARA SALÕES", texto: "Organização dos instrumentos" },
+    ],
   },
 ];
 
@@ -598,10 +627,10 @@ export default function App() {
 
       {/* HERO / BANNER ROTATIVO */}
       <section id="inicio" className="pt-0 md:pt-32 bg-black">
-        {/* BANNER PREMIUM MOBILE - OPÇÃO 7 */}
-        <div className="md:hidden px-4 pt-5 pb-7 bg-[radial-gradient(circle_at_50%_0%,rgba(250,204,21,0.10),transparent_32%),linear-gradient(180deg,#030303,#000)]">
+        {/* BANNER PREMIUM MOBILE - MODELO OPÇÃO 4 */}
+        <div className="md:hidden px-3 pt-3 pb-7 bg-[radial-gradient(circle_at_55%_0%,rgba(250,204,21,0.12),transparent_28%),linear-gradient(180deg,#050505,#000)]">
           {(() => {
-            const mobileBanner = mobileBannersOpcao7[bannerIndex % mobileBannersOpcao7.length];
+            const mobileBanner = mobileBannersOpcao4[bannerIndex % mobileBannersOpcao4.length];
             const abrirAcaoMobile = () => {
               if (mobileBanner.produtoSlug) {
                 abrirProduto(mobileBanner.produtoSlug);
@@ -611,65 +640,95 @@ export default function App() {
             };
 
             return (
-              <div className="relative min-h-[640px] overflow-hidden rounded-[2rem] border border-yellow-400/55 bg-[#050505] shadow-[0_24px_80px_rgba(0,0,0,0.95),0_0_38px_rgba(250,204,21,0.12)]">
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_18%,rgba(250,204,21,0.18),transparent_31%),radial-gradient(circle_at_18%_80%,rgba(250,204,21,0.10),transparent_34%),linear-gradient(180deg,rgba(255,255,255,0.05),transparent_38%,rgba(0,0,0,0.38))]" />
+              <div className="relative overflow-hidden rounded-[1.45rem] border border-yellow-400/25 bg-[#050505] shadow-[0_20px_70px_rgba(0,0,0,0.96),0_0_24px_rgba(250,204,21,0.12)]">
+                <div className="relative min-h-[520px] overflow-hidden rounded-[1.45rem]">
+                  {/* Imagem de fundo editável no array mobileBannersOpcao4 */}
+                  <img
+                    src={mobileBanner.bg}
+                    alt={`${mobileBanner.titulo} ${mobileBanner.destaque}`}
+                    className="absolute inset-0 h-full w-full object-cover object-center opacity-70 scale-[1.06] transition-transform duration-[2500ms] ease-out"
+                  />
 
-                <img
-                  src={mobileBanner.img}
-                  alt={mobileBanner.titulo}
-                  className="absolute inset-0 h-full w-full object-cover opacity-95 transition-all duration-[1600ms] ease-in-out scale-[1.02]"
-                />
+                  {/* Camadas de luz/sombra para manter leitura sem virar bloco pesado */}
+                  <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(0,0,0,0.96)_0%,rgba(0,0,0,0.88)_42%,rgba(0,0,0,0.42)_70%,rgba(0,0,0,0.20)_100%)]" />
+                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_72%_38%,rgba(250,204,21,0.18),transparent_34%),radial-gradient(circle_at_12%_80%,rgba(250,204,21,0.10),transparent_30%)]" />
+                  <div className="absolute inset-y-0 right-0 w-[47%] bg-[linear-gradient(90deg,transparent,rgba(250,204,21,0.08))]" />
 
-                <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.10)_0%,rgba(0,0,0,0.05)_38%,rgba(0,0,0,0.70)_100%)]" />
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_25%,transparent_0%,rgba(0,0,0,0.08)_35%,rgba(0,0,0,0.70)_100%)]" />
-                <div className="absolute left-0 top-0 h-full w-full bg-[linear-gradient(120deg,rgba(250,204,21,0.14),transparent_28%,transparent_70%,rgba(250,204,21,0.12))] opacity-70" />
+                  {/* Produto/elemento visual editável */}
+                  {mobileBanner.produtoImg && (
+                    <img
+                      src={mobileBanner.produtoImg}
+                      alt="Destaque visual"
+                      className="absolute right-[-18px] top-[52px] z-10 h-[330px] w-[178px] rotate-[3deg] rounded-[1.1rem] border border-yellow-300/20 object-cover object-center opacity-95 shadow-[0_25px_60px_rgba(0,0,0,0.92),0_0_34px_rgba(250,204,21,0.12)]"
+                    />
+                  )}
 
-                <div className="absolute left-4 top-4 z-20 rounded-full border border-yellow-400/40 bg-black/30 px-3 py-1 text-[10px] font-black uppercase tracking-[0.22em] text-yellow-300/90 backdrop-blur-md">
-                  {mobileBanner.tipo}
+                  {mobileBanner.miniImg && (
+                    <img
+                      src={mobileBanner.miniImg}
+                      alt="Produto secundário"
+                      className="absolute bottom-7 right-4 z-20 h-[90px] w-[70px] rotate-[-8deg] rounded-xl border border-yellow-300/25 object-cover opacity-85 shadow-[0_16px_36px_rgba(0,0,0,0.9)]"
+                    />
+                  )}
+
+                  {/* Texto editável do banner */}
+                  <div className="relative z-30 flex min-h-[520px] flex-col justify-center px-5 py-6">
+                    <div className="max-w-[255px]">
+                      <p className="text-[10px] font-black uppercase tracking-[0.34em] text-yellow-300 drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]">
+                        {mobileBanner.eyebrow}
+                      </p>
+                      <span className="mt-2 mb-4 block h-[3px] w-11 rounded-full bg-yellow-400 shadow-[0_0_16px_rgba(250,204,21,0.8)]" />
+
+                      <h2 className="text-[2rem] font-black uppercase leading-[0.96] tracking-[-0.055em] text-white drop-shadow-[0_8px_26px_rgba(0,0,0,0.95)]">
+                        {mobileBanner.titulo}
+                        <span className="mt-1 block text-yellow-400">
+                          {mobileBanner.destaque}
+                        </span>
+                      </h2>
+
+                      <p className="mt-3 max-w-[235px] text-[14px] leading-snug text-gray-100/90 drop-shadow-[0_3px_12px_rgba(0,0,0,0.9)]">
+                        {mobileBanner.subtitulo}
+                      </p>
+
+                      <div className="mt-5 space-y-2.5">
+                        {mobileBanner.itens?.slice(0, 4).map((item, idx) => (
+                          <div key={`${item.titulo}-${idx}`} className="flex items-center gap-3">
+                            <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-yellow-400/80 bg-black/45 text-[16px] font-black text-yellow-300 shadow-[0_0_16px_rgba(250,204,21,0.11)] backdrop-blur-md">
+                              {item.icone}
+                            </div>
+                            <div className="min-w-0">
+                              <p className="text-[12px] font-black uppercase leading-tight tracking-[0.02em] text-white">
+                                {item.titulo}
+                              </p>
+                              <p className="mt-0.5 text-[11px] leading-tight text-gray-200/78">
+                                {item.texto}
+                              </p>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+
+                      <button
+                        type="button"
+                        onClick={abrirAcaoMobile}
+                        className="mt-5 inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-yellow-500 via-yellow-300 to-yellow-500 px-5 py-2.5 text-[12px] font-black uppercase tracking-[0.02em] text-black shadow-[0_12px_32px_rgba(250,204,21,0.20)] active:scale-95"
+                      >
+                        {mobileBanner.cta}
+                        <ChevronRight size={16} />
+                      </button>
+                    </div>
+                  </div>
                 </div>
 
-                <div className="absolute left-1/2 bottom-20 z-20 w-[78%] max-w-[315px] -translate-x-1/2 rounded-[1.6rem] border border-yellow-300/45 bg-black/44 px-4 py-4 text-center shadow-[0_18px_70px_rgba(0,0,0,0.95),inset_0_1px_0_rgba(255,255,255,0.10),0_0_28px_rgba(250,204,21,0.12)] backdrop-blur-xl">
-                  <div className="mx-auto mb-2 flex max-w-[180px] items-center justify-center gap-2 text-yellow-200/90">
-                    <span className="h-px flex-1 bg-yellow-400/35" />
-                    <span className="text-[9px] font-black uppercase tracking-[0.34em]">
-                      {mobileBanner.badge}
-                    </span>
-                    <span className="h-px flex-1 bg-yellow-400/35" />
-                  </div>
-
-                  <div className="mx-auto mb-2 flex w-20 items-center justify-center gap-2 text-yellow-300/80">
-                    <span className="h-px flex-1 bg-yellow-400/45" />
-                    <span className="text-[13px] leading-none">✦</span>
-                    <span className="h-px flex-1 bg-yellow-400/45" />
-                  </div>
-
-                  <h2 className="font-serif text-[2.05rem] font-medium leading-[0.96] tracking-[-0.045em] text-yellow-100 drop-shadow-[0_6px_26px_rgba(0,0,0,0.95)]">
-                    {mobileBanner.titulo}
-                  </h2>
-
-                  <p className="mx-auto mt-2 max-w-[230px] text-[12.5px] leading-snug text-gray-100/88">
-                    {mobileBanner.subtitulo}
-                  </p>
-
-                  <button
-                    type="button"
-                    onClick={abrirAcaoMobile}
-                    className="mx-auto mt-3 inline-flex min-w-[170px] items-center justify-center gap-2 rounded-full border border-yellow-300/70 bg-black/30 px-5 py-2.5 text-[12.5px] font-black text-yellow-200 shadow-[inset_0_1px_0_rgba(255,255,255,0.10),0_0_24px_rgba(250,204,21,0.14)] active:scale-95"
-                  >
-                    {mobileBanner.cta}
-                    <ChevronRight size={18} />
-                  </button>
-                </div>
-
-                <div className="absolute bottom-7 left-1/2 z-30 flex -translate-x-1/2 items-center justify-center gap-3">
-                  {mobileBannersOpcao7.map((banner, i) => (
+                <div className="flex items-center justify-center gap-3 py-4">
+                  {mobileBannersOpcao4.map((banner, i) => (
                     <button
-                      key={`${banner.titulo}-${i}`}
+                      key={`${banner.titulo}-${banner.destaque}-${i}`}
                       onClick={() => setBannerIndex(i)}
                       className={`h-3 w-3 rounded-full border transition-all duration-500 ${
-                        i === bannerIndex % mobileBannersOpcao7.length
+                        i === bannerIndex % mobileBannersOpcao4.length
                           ? "scale-125 border-yellow-300 bg-yellow-400 shadow-[0_0_16px_rgba(250,204,21,0.95)]"
-                          : "border-gray-300/45 bg-gray-300/55"
+                          : "border-yellow-300/65 bg-transparent"
                       }`}
                       aria-label={`Ir para banner mobile ${i + 1}`}
                     />
