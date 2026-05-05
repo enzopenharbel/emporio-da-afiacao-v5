@@ -136,6 +136,53 @@ const mobileBannersOpcao4 = [
   },
 ];
 
+
+
+// =============================
+// HERO MOBILE ESTILO HOSTINGER
+// =============================
+// Textos e imagens 100% editáveis. Para trocar as imagens depois,
+// suba os arquivos em /public/images/banners ou /public/images/produtos
+// e altere somente o campo "bg".
+const mobileVideoSlides = [
+  {
+    eyebrow: "EMPÓRIO DA AFIAÇÃO",
+    titulo: "Serviços que fazem a diferença.",
+    subtitulo:
+      "Afiação, troca de molas, gravação e produtos para quem exige precisão no dia a dia.",
+    cta: "Conhecer serviços",
+    bg: "/images/banners/banner-alicates.jpg",
+    whatsappMensagem: "Olá! Quero conhecer os serviços do Empório da Afiação.",
+  },
+  {
+    eyebrow: "PRODUTO EM DESTAQUE",
+    titulo: "Alicate Mundial 522.",
+    subtitulo:
+      "Um dos modelos mais procurados para cutículas, com acabamento limpo e atendimento direto.",
+    cta: "Ver produto",
+    bg: "/images/produtos/alicate-mundial-522.jpg",
+    produtoSlug: "alicate-mundial-522",
+    whatsappMensagem: "Olá! Quero saber mais sobre o Alicate Mundial 522.",
+  },
+  {
+    eyebrow: "MANUTENÇÃO PROFISSIONAL",
+    titulo: "Seu instrumento pronto para uso.",
+    subtitulo:
+      "Cuidado no corte, revisão de molas e orientação para manter suas ferramentas em dia.",
+    cta: "Solicitar orçamento",
+    bg: "/images/banners/banner-tesouras.avif",
+    whatsappMensagem: "Olá! Quero solicitar um orçamento de manutenção.",
+  },
+  {
+    eyebrow: "GRAVAÇÃO E IDENTIFICAÇÃO",
+    titulo: "Personalize seus instrumentos.",
+    subtitulo:
+      "Gravação para salões, profissionais e quem quer organizar melhor seus materiais.",
+    cta: "Falar no WhatsApp",
+    bg: "/images/banners/banner-facas.avif",
+    whatsappMensagem: "Olá! Quero saber mais sobre gravação em instrumentos.",
+  },
+];
 // =============================
 // IMAGENS PADRÃO POR CATEGORIA
 // Troque depois pelas suas imagens reais.
@@ -733,132 +780,82 @@ export default function App() {
 
       {/* HERO / BANNER ROTATIVO */}
       <section id="inicio" className="pt-0 md:pt-32 bg-black">
-        {/* BANNER PREMIUM MOBILE - MODELO OPÇÃO 4 */}
-        <div className="md:hidden px-3 pt-3 pb-7 bg-[radial-gradient(circle_at_55%_0%,rgba(250,204,21,0.12),transparent_28%),linear-gradient(180deg,#050505,#000)]">
+        {/* HERO MOBILE ESTILO HOSTINGER - VÍDEO VISUAL ROTATIVO */}
+        <div className="md:hidden bg-[#111] px-4 pb-8 pt-4">
           {(() => {
-            const mobileBanner = mobileBannersOpcao4[bannerIndex % mobileBannersOpcao4.length];
+            const mobileSlide = mobileVideoSlides[bannerIndex % mobileVideoSlides.length];
             const abrirAcaoMobile = () => {
-              if (mobileBanner.produtoSlug) {
-                abrirProduto(mobileBanner.produtoSlug);
+              if (mobileSlide.produtoSlug) {
+                abrirProduto(mobileSlide.produtoSlug);
               } else {
-                window.open(criarLinkWhatsApp(mobileBanner.whatsappMensagem), "_blank", "noopener,noreferrer");
+                window.open(
+                  criarLinkWhatsApp(mobileSlide.whatsappMensagem),
+                  "_blank",
+                  "noopener,noreferrer"
+                );
               }
             };
 
             return (
-              <div className="relative overflow-hidden rounded-[1.45rem] border border-yellow-400/25 bg-[#050505] shadow-[0_20px_70px_rgba(0,0,0,0.96),0_0_24px_rgba(250,204,21,0.12)]">
-                <div className="relative min-h-[520px] overflow-hidden rounded-[1.45rem]">
-                  {/* Imagem de fundo editável no array mobileBannersOpcao4 */}
+              <div className="relative overflow-hidden rounded-[1.7rem] min-h-[520px] bg-black shadow-[0_24px_80px_rgba(0,0,0,0.85)]">
+                {mobileVideoSlides.map((slide, i) => (
                   <img
-                    src={mobileBanner.bg}
-                    alt={`${mobileBanner.titulo} ${mobileBanner.destaque}`}
-                    className="absolute inset-0 h-full w-full object-cover object-center opacity-70 scale-[1.06] transition-transform duration-[2500ms] ease-out"
+                    key={`${slide.titulo}-${i}`}
+                    src={slide.bg}
+                    alt={slide.titulo}
+                    className={`absolute inset-0 h-full w-full object-cover transition-all duration-[1800ms] ease-in-out ${
+                      i === bannerIndex % mobileVideoSlides.length
+                        ? "opacity-100 scale-100"
+                        : "opacity-0 scale-110"
+                    }`}
                   />
+                ))}
 
-                  {/* Camadas de luz/sombra para manter leitura sem virar bloco pesado */}
-                  <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(0,0,0,0.96)_0%,rgba(0,0,0,0.88)_42%,rgba(0,0,0,0.42)_70%,rgba(0,0,0,0.20)_100%)]" />
-                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_72%_38%,rgba(250,204,21,0.18),transparent_34%),radial-gradient(circle_at_12%_80%,rgba(250,204,21,0.10),transparent_30%)]" />
-                  <div className="absolute inset-y-0 right-0 w-[47%] bg-[linear-gradient(90deg,transparent,rgba(250,204,21,0.08))]" />
+                <div className="absolute inset-0 bg-black/45" />
+                <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.12)_0%,rgba(0,0,0,0.30)_34%,rgba(0,0,0,0.86)_100%)]" />
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_22%_18%,rgba(250,204,21,0.18),transparent_28%),radial-gradient(circle_at_88%_70%,rgba(250,204,21,0.12),transparent_32%)]" />
 
-                  {/* Produto/elemento visual editável */}
-                  {mobileBanner.produtoImg && (
-                    <img
-                      src={mobileBanner.produtoImg}
-                      alt="Destaque visual"
-                      className="absolute right-[-18px] top-[52px] z-10 h-[330px] w-[178px] rotate-[3deg] rounded-[1.1rem] border border-yellow-300/20 object-cover object-center opacity-95 shadow-[0_25px_60px_rgba(0,0,0,0.92),0_0_34px_rgba(250,204,21,0.12)]"
-                    />
-                  )}
+                <div className="relative z-20 flex min-h-[520px] flex-col justify-end p-8 pb-7">
+                  <p className="mb-3 text-[11px] font-black uppercase tracking-[0.24em] text-yellow-300 drop-shadow-[0_3px_14px_rgba(0,0,0,0.9)]">
+                    {mobileSlide.eyebrow}
+                  </p>
 
-                  {mobileBanner.miniImg && (
-                    <img
-                      src={mobileBanner.miniImg}
-                      alt="Produto secundário"
-                      className="absolute bottom-7 right-4 z-20 h-[90px] w-[70px] rotate-[-8deg] rounded-xl border border-yellow-300/25 object-cover opacity-85 shadow-[0_16px_36px_rgba(0,0,0,0.9)]"
-                    />
-                  )}
+                  <h1 className="max-w-[96%] text-[3.18rem] font-black leading-[0.98] tracking-[-0.07em] text-white drop-shadow-[0_10px_32px_rgba(0,0,0,0.95)]">
+                    {mobileSlide.titulo}
+                  </h1>
 
-                  {/* Texto editável do banner */}
-                  <div className="relative z-30 flex min-h-[520px] flex-col justify-center px-5 py-6">
-                    <div className="max-w-[255px]">
-                      <p className="text-[10px] font-black uppercase tracking-[0.34em] text-yellow-300 drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]">
-                        {mobileBanner.eyebrow}
-                      </p>
-                      <span className="mt-2 mb-4 block h-[3px] w-11 rounded-full bg-yellow-400 shadow-[0_0_16px_rgba(250,204,21,0.8)]" />
+                  <p className="mt-5 max-w-[94%] text-[1.17rem] leading-[1.42] text-white/92 drop-shadow-[0_5px_18px_rgba(0,0,0,0.95)]">
+                    {mobileSlide.subtitulo}
+                  </p>
 
-                      <h2 className="text-[2rem] font-black uppercase leading-[0.96] tracking-[-0.055em] text-white drop-shadow-[0_8px_26px_rgba(0,0,0,0.95)]">
-                        {mobileBanner.titulo}
-                        <span className="mt-1 block text-yellow-400">
-                          {mobileBanner.destaque}
-                        </span>
-                      </h2>
+                  <button
+                    type="button"
+                    onClick={abrirAcaoMobile}
+                    className="mt-7 w-full rounded-2xl bg-white px-6 py-4 text-center text-[1.05rem] font-black text-black shadow-[0_18px_42px_rgba(0,0,0,0.55)] active:scale-[0.98]"
+                  >
+                    {mobileSlide.cta}
+                  </button>
 
-                      <p className="mt-3 max-w-[235px] text-[14px] leading-snug text-gray-100/90 drop-shadow-[0_3px_12px_rgba(0,0,0,0.9)]">
-                        {mobileBanner.subtitulo}
-                      </p>
-
-                      <div className="mt-5 space-y-2.5">
-                        {mobileBanner.itens?.slice(0, 4).map((item, idx) => (
-                          <div key={`${item.titulo}-${idx}`} className="flex items-center gap-3">
-                            <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-yellow-400/80 bg-black/45 text-[16px] font-black text-yellow-300 shadow-[0_0_16px_rgba(250,204,21,0.11)] backdrop-blur-md">
-                              {item.icone}
-                            </div>
-                            <div className="min-w-0">
-                              <p className="text-[12px] font-black uppercase leading-tight tracking-[0.02em] text-white">
-                                {item.titulo}
-                              </p>
-                              <p className="mt-0.5 text-[11px] leading-tight text-gray-200/78">
-                                {item.texto}
-                              </p>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-
-                      <button
-                        type="button"
-                        onClick={abrirAcaoMobile}
-                        className="mt-5 inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-yellow-500 via-yellow-300 to-yellow-500 px-5 py-2.5 text-[12px] font-black uppercase tracking-[0.02em] text-black shadow-[0_12px_32px_rgba(250,204,21,0.20)] active:scale-95"
-                      >
-                        {mobileBanner.cta}
-                        <ChevronRight size={16} />
-                      </button>
-                    </div>
+                  <div className="mt-5 flex items-center gap-2 text-white/92">
+                    <span className="inline-flex h-7 w-7 items-center justify-center rounded-full border border-white/45 text-[13px]">✓</span>
+                    <span className="text-[0.95rem] font-medium">Atendimento direto pelo WhatsApp</span>
                   </div>
                 </div>
 
-                <button
-                  type="button"
-                  onClick={() =>
-                    setBannerIndex((prev) =>
-                      prev === 0 ? mobileBannersOpcao4.length - 1 : prev - 1
-                    )
-                  }
-                  className="absolute left-2 top-1/2 z-40 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full border border-yellow-300/45 bg-black/55 text-yellow-300 shadow-[0_0_18px_rgba(0,0,0,0.8)] backdrop-blur-md active:scale-95"
-                  aria-label="Banner anterior"
-                >
-                  <ChevronLeft size={21} />
-                </button>
+                <div className="absolute bottom-5 right-5 z-30 flex h-10 w-10 items-center justify-center rounded-full border border-white/35 bg-black/35 text-white backdrop-blur-md">
+                  <span className="h-3.5 w-1 rounded-full bg-white/90"></span>
+                  <span className="ml-1 h-3.5 w-1 rounded-full bg-white/90"></span>
+                </div>
 
-                <button
-                  type="button"
-                  onClick={() =>
-                    setBannerIndex((prev) => (prev + 1) % mobileBannersOpcao4.length)
-                  }
-                  className="absolute right-2 top-1/2 z-40 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full border border-yellow-300/45 bg-black/55 text-yellow-300 shadow-[0_0_18px_rgba(0,0,0,0.8)] backdrop-blur-md active:scale-95"
-                  aria-label="Próximo banner"
-                >
-                  <ChevronRight size={21} />
-                </button>
-
-                <div className="flex items-center justify-center gap-3 py-4">
-                  {mobileBannersOpcao4.map((banner, i) => (
+                <div className="absolute left-8 top-6 z-30 flex gap-2">
+                  {mobileVideoSlides.map((slide, i) => (
                     <button
-                      key={`${banner.titulo}-${banner.destaque}-${i}`}
+                      key={`${slide.eyebrow}-${i}`}
                       onClick={() => setBannerIndex(i)}
-                      className={`h-3 w-3 rounded-full border transition-all duration-500 ${
-                        i === bannerIndex % mobileBannersOpcao4.length
-                          ? "scale-125 border-yellow-300 bg-yellow-400 shadow-[0_0_16px_rgba(250,204,21,0.95)]"
-                          : "border-yellow-300/65 bg-transparent"
+                      className={`h-2.5 rounded-full transition-all duration-500 ${
+                        i === bannerIndex % mobileVideoSlides.length
+                          ? "w-8 bg-white shadow-[0_0_14px_rgba(255,255,255,0.75)]"
+                          : "w-2.5 bg-white/45"
                       }`}
                       aria-label={`Ir para banner mobile ${i + 1}`}
                     />
@@ -1509,62 +1506,50 @@ function Header({ voltarInicio, termoBusca, setTermoBusca, abrirProduto, resulta
         </nav>
       </div>
 
-      {/* HEADER MOBILE MARKETPLACE */}
+      {/* HEADER MOBILE ESTILO HOSTINGER */}
       <div className="md:hidden">
         <div
-          className={`px-3 pt-2 bg-gradient-to-b from-black via-[#050505] to-[#0b0b0b] transition-all duration-500 ${
-            scrolled ? "pb-2" : "pb-2"
+          className={`px-5 transition-all duration-500 ${
+            scrolled
+              ? "bg-white text-black shadow-[0_8px_28px_rgba(0,0,0,0.16)] pt-4 pb-4"
+              : "bg-[#111] text-white pt-4 pb-5"
           }`}
         >
-          <div className="flex items-center justify-between gap-3">
+          <div className="flex items-center justify-between gap-4">
             <button onClick={voltarInicio} className="shrink-0">
               <img
                 src="/logo.png"
                 alt="Empório da Afiação"
-                className={`w-auto object-contain transition-all duration-500 drop-shadow-[0_0_18px_rgba(250,204,21,0.75)] ${
-                  scrolled ? "h-9 scale-100" : "h-11"
+                className={`w-auto object-contain transition-all duration-500 ${
+                  scrolled
+                    ? "h-[58px] drop-shadow-none"
+                    : "h-[72px] drop-shadow-[0_0_22px_rgba(250,204,21,0.65)]"
                 }`}
               />
             </button>
 
-            <div className="flex flex-1 items-center justify-end gap-2">
-              <a
-                href={criarLinkWhatsApp("Olá! Vim pelo site e quero mais informações.")}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hidden"
-              >
-                WhatsApp
-              </a>
-
-              <button
-                className="hidden"
-              >
-                <ShoppingCart size={20} />
-                <span className="absolute -top-1 -right-1 bg-yellow-400 text-black text-[10px] px-1 rounded-full">
-                  0
-                </span>
-              </button>
-
-              <button
-                onClick={() => setMobileMenuOpen((prev) => !prev)}
-                className="inline-flex rounded-full border border-yellow-400/35 bg-[#111] p-2 text-yellow-400 hover:bg-yellow-400 hover:text-black active:scale-95 transition-all duration-500"
-                aria-label="Abrir menu"
-              >
-                {mobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
-              </button>
-            </div>
+            <button
+              onClick={() => setMobileMenuOpen((prev) => !prev)}
+              className={`inline-flex h-12 w-12 items-center justify-center rounded-2xl transition-all duration-500 active:scale-95 ${
+                scrolled
+                  ? "text-black hover:bg-black/5"
+                  : "text-yellow-400 hover:bg-yellow-400/10"
+              }`}
+              aria-label="Abrir menu"
+            >
+              {mobileMenuOpen ? <X size={34} strokeWidth={2.4} /> : <Menu size={36} strokeWidth={2.4} />}
+            </button>
           </div>
 
-          {/* BUSCA MOBILE DESTACADA */}
+          {/* BUSCA MOBILE GRANDE */}
           <div
             className={`relative overflow-visible transition-all duration-500 ${
               scrolled && !mobileSearchOpen
-                ? "max-h-0 opacity-0 mt-0 pointer-events-none"
-                : "max-h-16 opacity-100 mt-2"
+                ? "mt-0 max-h-0 opacity-0 pointer-events-none"
+                : "mt-6 max-h-24 opacity-100"
             }`}
           >
-            <div className="flex rounded-2xl bg-white shadow-[0_0_24px_rgba(250,204,21,0.18)] focus-within:shadow-[0_0_32px_rgba(250,204,21,0.55)] transition">
+            <div className="flex rounded-[1.35rem] bg-white shadow-[0_14px_34px_rgba(0,0,0,0.24)] focus-within:shadow-[0_0_34px_rgba(250,204,21,0.50)] transition">
               <input
                 value={termoBusca}
                 onChange={(e) => setTermoBusca(e.target.value)}
@@ -1576,35 +1561,20 @@ function Header({ voltarInicio, termoBusca, setTermoBusca, abrirProduto, resulta
                   }, 220);
                 }}
                 placeholder="Buscar produtos..."
-                className="min-w-0 flex-1 rounded-l-2xl bg-white px-4 py-2.5 text-sm text-black placeholder:text-gray-500 outline-none"
+                className="min-w-0 flex-1 rounded-l-[1.35rem] bg-white px-5 py-4 text-[1.08rem] text-black placeholder:text-gray-500 outline-none"
               />
 
               <button
                 type="button"
-                className="rounded-r-2xl bg-yellow-400 px-4"
+                onClick={() => setSearchActive(true)}
+                className="m-1.5 inline-flex min-w-[72px] items-center justify-center rounded-[1.05rem] bg-yellow-400 text-black shadow-[0_10px_26px_rgba(250,204,21,0.30)]"
+                aria-label="Pesquisar"
               >
-                <Search size={19} className="text-black" />
+                <Search size={31} strokeWidth={2.4} />
               </button>
             </div>
 
             {termoBusca && searchActive && <SearchResults mobile />}
-          </div>
-
-          {/* ATALHOS MOBILE HORIZONTAIS */}
-          <div
-            className={`hidden mt-3 gap-2 overflow-x-auto pb-1 transition-all duration-500 [-ms-overflow-style:none] [scrollbar-width:none] ${
-              scrolled ? "max-h-0 opacity-0 mt-0 pb-0 pointer-events-none" : "max-h-12 opacity-100"
-            }`}
-          >
-            {atalhosMobile.map((atalho) => (
-              <button
-                key={atalho.nome}
-                onClick={() => irPara(atalho.id)}
-                className="shrink-0 rounded-full border border-yellow-400/25 bg-[#111] px-4 py-2 text-xs font-bold text-yellow-400"
-              >
-                {atalho.nome}
-              </button>
-            ))}
           </div>
         </div>
       </div>
