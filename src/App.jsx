@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
+import { products as editableProducts } from "./data/products";
 import {
   Search,
   Star,
@@ -242,7 +243,7 @@ function criarProduto(nome, descricao, categoriaSlug, subcategoria = "") {
 // CATEGORIAS, SUBCATEGORIAS E PRODUTOS
 // Para adicionar mais produtos depois, edite esta área.
 // =============================
-const categorias = [
+const categoriasBase = [
   {
     nome: "Alicates",
     slug: "alicates",
@@ -327,6 +328,110 @@ const categorias = [
     ],
   },
 ];
+
+
+
+// =============================
+// PRODUTOS EDITÁVEIS PELO GITHUB
+// =============================
+// Agora você pode editar produtos em src/data/products.js sem mexer neste App.jsx.
+// Formato aceito em products.js:
+// {
+//   id: "alicate-mundial-522",
+//   nome: "Alicate Mundial 522",
+//   categoria: "Alicates",
+//   subcategoria: "Alicates de Cutícula", // opcional
+//   descricao: "Descrição do produto",
+//   imagens: ["/images/produtos/foto-1.jpg", "/images/produtos/foto-2.jpg"],
+//   badge: "Mais vendido" // opcional
+// }
+const produtosEditaveis = (Array.isArray(editableProducts) ? editableProducts : []).map((produto) => {
+  const nome = produto.nome || produto.name || produto.titulo || "Produto sem nome";
+  const categoriaNome = produto.categoria || produto.categoriaNome || "Acessórios";
+  const categoriaSlug = produto.categoriaSlug || criarSlug(categoriaNome);
+  const imagensValidas = Array.isArray(produto.imagens) && produto.imagens.length > 0
+    ? produto.imagens
+    : [produto.img || produto.imagem || imagensProdutos[nome] || imagensPadrao[categoriaSlug] || imagensPadrao.acessorios];
+
+  return {
+    nome,
+    slug: produto.slug || produto.id || criarSlug(nome),
+    descricao: produto.descricao || produto.description || "Detalhes do produto para editar depois.",
+    categoriaSlug,
+    subcategoria: produto.subcategoria || "",
+    img: produto.img || produto.imagem || imagensValidas[0],
+    imagens: imagensValidas,
+    badge: produto.badge || badgesProdutos[nome] || "",
+  };
+});
+
+function atualizarProdutoNaLista(lista = [], produtoNovo) {
+  const indice = lista.findIndex((produto) => produto.slug === produtoNovo.slug || produto.nome === produtoNovo.nome);
+
+  if (indice >= 0) {
+    const atualizada = [...lista];
+    atualizada[indice] = {
+      ...atualizada[indice],
+      ...produtoNovo,
+      // Se você colocou várias imagens em products.js, elas entram na galeria da página do produto.
+      imagens: produtoNovo.imagens?.length ? produtoNovo.imagens : atualizada[indice].imagens,
+      img: produtoNovo.img || atualizada[indice].img,
+    };
+    return atualizada;
+  }
+
+  return [...lista, produtoNovo];
+}
+
+function mesclarProdutosEditaveis(categoriasOriginais, produtosNovos) {
+  const categoriasAtualizadas = categoriasOriginais.map((categoria) => ({
+    ...categoria,
+    produtos: categoria.produtos ? [...categoria.produtos] : undefined,
+    subcategorias: categoria.subcategorias
+      ? categoria.subcategorias.map((subcategoria) => ({
+          ...subcategoria,
+          produtos: [...subcategoria.produtos],
+        }))
+      : undefined,
+  }));
+
+  produtosNovos.forEach((produtoNovo) => {
+    const categoriaSlug = produtoNovo.categoriaSlug || "acessorios";
+    let categoria = categoriasAtualizadas.find((cat) => cat.slug === categoriaSlug);
+
+    if (!categoria) {
+      categoria = {
+        nome: categoriaSlug.replace(/-/g, " ").replace(/\b\w/g, (letra) => letra.toUpperCase()),
+        slug: categoriaSlug,
+        chamada: "Produtos adicionados pelo arquivo src/data/products.js.",
+        img: produtoNovo.img,
+        produtos: [],
+      };
+      categoriasAtualizadas.push(categoria);
+    }
+
+    if (categoria.subcategorias) {
+      const nomeSubcategoria = produtoNovo.subcategoria || categoria.subcategorias[0]?.nome || "Produtos";
+      let subcategoria = categoria.subcategorias.find((sub) => sub.nome === nomeSubcategoria);
+
+      if (!subcategoria) {
+        subcategoria = { nome: nomeSubcategoria, produtos: [] };
+        categoria.subcategorias.push(subcategoria);
+      }
+
+      subcategoria.produtos = atualizarProdutoNaLista(subcategoria.produtos, {
+        ...produtoNovo,
+        subcategoria: nomeSubcategoria,
+      });
+    } else {
+      categoria.produtos = atualizarProdutoNaLista(categoria.produtos || [], produtoNovo);
+    }
+  });
+
+  return categoriasAtualizadas;
+}
+
+const categorias = mesclarProdutosEditaveis(categoriasBase, produtosEditaveis);
 
 // =============================
 // LISTA ÚNICA DE PRODUTOS
