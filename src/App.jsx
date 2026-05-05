@@ -1318,10 +1318,28 @@ function Header({ voltarInicio, termoBusca, setTermoBusca, abrirProduto, resulta
   const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40);
-    onScroll();
+    let ticking = false;
 
-    window.addEventListener("scroll", onScroll);
+    const onScroll = () => {
+      if (ticking) return;
+
+      ticking = true;
+      window.requestAnimationFrame(() => {
+        const y = window.scrollY || 0;
+
+        // Histerese: evita piscar quando a altura do topo muda perto do ponto de corte.
+        setScrolled((atual) => {
+          if (!atual && y > 86) return true;
+          if (atual && y < 28) return false;
+          return atual;
+        });
+
+        ticking = false;
+      });
+    };
+
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
@@ -1509,9 +1527,9 @@ function Header({ voltarInicio, termoBusca, setTermoBusca, abrirProduto, resulta
       {/* HEADER MOBILE ESTILO HOSTINGER */}
       <div className="md:hidden">
         <div
-          className={`px-5 transition-all duration-500 ${
+          className={`px-5 transition-[background-color,color,box-shadow,padding] duration-700 ease-out ${
             scrolled
-              ? "bg-white text-black shadow-[0_8px_28px_rgba(0,0,0,0.16)] pt-4 pb-4"
+              ? "bg-white text-black shadow-[0_8px_28px_rgba(0,0,0,0.16)] pt-3 pb-3"
               : "bg-[#111] text-white pt-4 pb-5"
           }`}
         >
@@ -1520,17 +1538,17 @@ function Header({ voltarInicio, termoBusca, setTermoBusca, abrirProduto, resulta
               <img
                 src="/logo.png"
                 alt="Empório da Afiação"
-                className={`w-auto object-contain transition-all duration-500 ${
+                className={`object-contain object-left transition-all duration-700 ease-out [transform:scaleX(1.16)] [transform-origin:left_center] ${
                   scrolled
-                    ? "h-[58px] drop-shadow-none"
-                    : "h-[72px] drop-shadow-[0_0_22px_rgba(250,204,21,0.65)]"
+                    ? "h-[56px] w-[178px] drop-shadow-none"
+                    : "h-[76px] w-[218px] drop-shadow-[0_0_22px_rgba(250,204,21,0.65)]"
                 }`}
               />
             </button>
 
             <button
               onClick={() => setMobileMenuOpen((prev) => !prev)}
-              className={`inline-flex h-12 w-12 items-center justify-center rounded-2xl transition-all duration-500 active:scale-95 ${
+              className={`inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl transition-all duration-700 ease-out active:scale-95 ${
                 scrolled
                   ? "text-black hover:bg-black/5"
                   : "text-yellow-400 hover:bg-yellow-400/10"
@@ -1543,7 +1561,7 @@ function Header({ voltarInicio, termoBusca, setTermoBusca, abrirProduto, resulta
 
           {/* BUSCA MOBILE GRANDE */}
           <div
-            className={`relative overflow-visible transition-all duration-500 ${
+            className={`relative overflow-visible transition-[max-height,opacity,margin] duration-700 ease-out ${
               scrolled && !mobileSearchOpen
                 ? "mt-0 max-h-0 opacity-0 pointer-events-none"
                 : "mt-6 max-h-24 opacity-100"
