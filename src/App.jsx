@@ -396,9 +396,10 @@ export default function App() {
   // BANNER ROTATIVO
   // =============================
   useEffect(() => {
+    const totalSlides = Math.max(banners.length, mobileBannersOpcao4.length);
     const interval = setInterval(() => {
-      setBannerIndex((prev) => (prev + 1) % banners.length);
-    }, 4500);
+      setBannerIndex((prev) => (prev + 1) % totalSlides);
+    }, 8500);
 
     return () => clearInterval(interval);
   }, []);
@@ -720,6 +721,30 @@ export default function App() {
                   </div>
                 </div>
 
+                <button
+                  type="button"
+                  onClick={() =>
+                    setBannerIndex((prev) =>
+                      prev === 0 ? mobileBannersOpcao4.length - 1 : prev - 1
+                    )
+                  }
+                  className="absolute left-2 top-1/2 z-40 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full border border-yellow-300/45 bg-black/55 text-yellow-300 shadow-[0_0_18px_rgba(0,0,0,0.8)] backdrop-blur-md active:scale-95"
+                  aria-label="Banner anterior"
+                >
+                  <ChevronLeft size={21} />
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() =>
+                    setBannerIndex((prev) => (prev + 1) % mobileBannersOpcao4.length)
+                  }
+                  className="absolute right-2 top-1/2 z-40 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full border border-yellow-300/45 bg-black/55 text-yellow-300 shadow-[0_0_18px_rgba(0,0,0,0.8)] backdrop-blur-md active:scale-95"
+                  aria-label="Próximo banner"
+                >
+                  <ChevronRight size={21} />
+                </button>
+
                 <div className="flex items-center justify-center gap-3 py-4">
                   {mobileBannersOpcao4.map((banner, i) => (
                     <button
@@ -759,7 +784,7 @@ export default function App() {
             <div className="rounded-[1.35rem] border border-yellow-400/25 bg-black/78 p-4 shadow-[0_18px_55px_rgba(0,0,0,0.75),0_0_26px_rgba(250,204,21,0.13)] backdrop-blur-md">
               <div className="mb-2 flex items-center justify-between gap-2">
                 <span className="rounded-full bg-yellow-400 px-3 py-1 text-[10px] font-black uppercase tracking-[0.14em] text-black">
-                  {banners[bannerIndex].badge || "Destaque"}
+                  {banners[bannerIndex % banners.length].badge || "Destaque"}
                 </span>
                 <span className="text-[10px] font-bold uppercase tracking-[0.22em] text-yellow-400/80">
                   Empório
@@ -767,17 +792,17 @@ export default function App() {
               </div>
 
               <h2 className="max-w-[92%] text-[1.72rem] font-black leading-[0.98] tracking-[-0.045em] text-yellow-400 drop-shadow-[0_3px_16px_rgba(0,0,0,0.9)]">
-                {banners[bannerIndex].titulo}
+                {banners[bannerIndex % banners.length].titulo}
               </h2>
 
               <p className="mt-2 max-w-[95%] text-[13px] leading-snug text-gray-100">
-                {banners[bannerIndex].subtitulo}
+                {banners[bannerIndex % banners.length].subtitulo}
               </p>
 
               <div className="mt-4 grid grid-cols-2 gap-2">
-                {banners[bannerIndex].produtoSlug ? (
+                {banners[bannerIndex % banners.length].produtoSlug ? (
                   <button
-                    onClick={() => abrirProduto(banners[bannerIndex].produtoSlug)}
+                    onClick={() => abrirProduto(banners[bannerIndex % banners.length].produtoSlug)}
                     className="rounded-xl bg-yellow-400 px-3 py-2.5 text-sm font-black text-black shadow-[0_0_20px_rgba(250,204,21,0.28)] active:scale-95"
                   >
                     Ver destaque
@@ -792,7 +817,7 @@ export default function App() {
                 )}
 
                 <a
-                  href={criarLinkWhatsApp(banners[bannerIndex].whatsappMensagem || "Olá! Vim pelo site e quero mais informações.")}
+                  href={criarLinkWhatsApp(banners[bannerIndex % banners.length].whatsappMensagem || "Olá! Vim pelo site e quero mais informações.")}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="rounded-xl border border-yellow-400/65 bg-black/45 px-3 py-2.5 text-center text-sm font-black text-yellow-400 active:scale-95"
@@ -811,23 +836,23 @@ export default function App() {
               </p>
 
               <h2 className="text-7xl text-yellow-400 font-black mb-5 leading-[0.98] tracking-[-0.04em] drop-shadow-2xl">
-                {banners[bannerIndex].titulo}
+                {banners[bannerIndex % banners.length].titulo}
               </h2>
 
-              {banners[bannerIndex].badge && (
+              {banners[bannerIndex % banners.length].badge && (
                 <span className="inline-flex items-center mt-1 mb-4 px-4 py-2 rounded-full bg-yellow-400 text-black text-sm font-black uppercase tracking-[0.18em] shadow-[0_0_24px_rgba(250,204,21,0.55)]">
-                  {banners[bannerIndex].badge}
+                  {banners[bannerIndex % banners.length].badge}
                 </span>
               )}
 
               <p className="text-2xl text-gray-100 max-w-2xl leading-relaxed">
-                {banners[bannerIndex].subtitulo}
+                {banners[bannerIndex % banners.length].subtitulo}
               </p>
 
               <div className="flex flex-row flex-wrap gap-4 mt-8">
-                {banners[bannerIndex].produtoSlug && (
+                {banners[bannerIndex % banners.length].produtoSlug && (
                   <button
-                    onClick={() => abrirProduto(banners[bannerIndex].produtoSlug)}
+                    onClick={() => abrirProduto(banners[bannerIndex % banners.length].produtoSlug)}
                     className="w-auto text-center px-6 py-3 rounded-xl bg-yellow-400 text-black text-base font-black hover:bg-yellow-300 hover:scale-105 transition shadow-[0_0_22px_rgba(250,204,21,0.28)]"
                   >
                     Ver destaque
@@ -835,7 +860,7 @@ export default function App() {
                 )}
 
                 <a
-                  href={criarLinkWhatsApp(banners[bannerIndex].whatsappMensagem || "Olá! Vim pelo site e quero mais informações.")}
+                  href={criarLinkWhatsApp(banners[bannerIndex % banners.length].whatsappMensagem || "Olá! Vim pelo site e quero mais informações.")}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-auto text-center px-6 py-3 rounded-xl border border-yellow-400/60 text-yellow-400 text-base font-black hover:bg-yellow-400 hover:text-black hover:scale-105 transition bg-black/35"
@@ -1398,17 +1423,6 @@ function Header({ voltarInicio, termoBusca, setTermoBusca, abrirProduto, resulta
             </button>
 
             <div className="flex flex-1 items-center justify-end gap-2">
-              <button
-                  onClick={() => {
-                    setMobileSearchOpen((prev) => !prev);
-                    setSearchActive(true);
-                  }}
-                  className="rounded-full bg-yellow-400 p-2 text-black scale-90 opacity-95 shadow-[0_0_16px_rgba(250,204,21,0.35)] active:scale-95"
-                  aria-label="Abrir busca"
-                >
-                  <Search size={20} />
-                </button>
-
               <a
                 href={criarLinkWhatsApp("Olá! Vim pelo site e quero mais informações.")}
                 target="_blank"
