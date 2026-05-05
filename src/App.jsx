@@ -836,10 +836,6 @@ export default function App() {
                     {mobileSlide.cta}
                   </button>
 
-                  <div className="mt-5 flex items-center gap-2 text-white/92">
-                    <span className="inline-flex h-7 w-7 items-center justify-center rounded-full border border-white/45 text-[13px]">✓</span>
-                    <span className="text-[0.95rem] font-medium">Atendimento direto pelo WhatsApp</span>
-                  </div>
                 </div>
 
                 <div className="absolute bottom-5 right-5 z-30 flex h-10 w-10 items-center justify-center rounded-full border border-white/35 bg-black/35 text-white backdrop-blur-md">
@@ -1329,8 +1325,8 @@ function Header({ voltarInicio, termoBusca, setTermoBusca, abrirProduto, resulta
 
         // Histerese: evita piscar quando a altura do topo muda perto do ponto de corte.
         setScrolled((atual) => {
-          if (!atual && y > 340) return true;
-          if (atual && y < 80) return false;
+          if (!atual && y > 150) return true;
+          if (atual && y < 40) return false;
           return atual;
         });
 
@@ -1527,10 +1523,10 @@ function Header({ voltarInicio, termoBusca, setTermoBusca, abrirProduto, resulta
       {/* HEADER MOBILE ESTILO HOSTINGER - NO FLUXO, SEM COBRIR O BANNER */}
       <div className="md:hidden">
         <div
-          className={`px-8 transition-[background-color,color,box-shadow,padding,border-color,backdrop-filter] duration-500 ease-out ${
+          className={`transition-[background-color,color,box-shadow,padding,border-color,backdrop-filter] duration-300 ease-out ${
             scrolled
-              ? "bg-[#050505]/98 text-yellow-400 border-b border-yellow-400/15 pt-2 pb-2 shadow-[0_10px_28px_rgba(0,0,0,0.45),0_0_22px_rgba(250,204,21,0.10)] backdrop-blur-xl"
-              : "bg-[#141416] text-white border-b border-white/5 pt-6 pb-7 shadow-none"
+              ? "bg-[#151517] text-white border-b border-white/10 px-8 pt-3 pb-3 shadow-[0_8px_22px_rgba(0,0,0,0.32)]"
+              : "bg-[#151517] text-white border-b border-white/5 px-8 pt-7 pb-8 shadow-none"
           }`}
         >
           <div className="flex items-center justify-between gap-5">
@@ -1538,31 +1534,29 @@ function Header({ voltarInicio, termoBusca, setTermoBusca, abrirProduto, resulta
               <img
                 src="/logo.png"
                 alt="Empório da Afiação"
-                className={`object-contain object-left transition-[width,height,filter,transform] duration-500 ease-out [transform:scaleX(1.16)] [transform-origin:left_center] ${
+                className={`object-contain object-left transition-[width,height,filter,transform] duration-300 ease-out [transform:scaleX(1.18)] [transform-origin:left_center] ${
                   scrolled
-                    ? "h-[44px] w-[210px] drop-shadow-[0_0_14px_rgba(250,204,21,0.55)]"
-                    : "h-[78px] w-[255px] drop-shadow-[0_0_22px_rgba(250,204,21,0.55)]"
+                    ? "h-[42px] w-[198px] drop-shadow-[0_0_10px_rgba(250,204,21,0.45)]"
+                    : "h-[72px] w-[252px] drop-shadow-[0_0_22px_rgba(250,204,21,0.55)]"
                 }`}
               />
             </button>
 
             <button
               onClick={() => setMobileMenuOpen((prev) => !prev)}
-              className={`inline-flex shrink-0 items-center justify-center transition-colors duration-500 active:scale-95 ${
-                scrolled ? "text-yellow-400" : "text-white"
-              }`}
+              className="inline-flex shrink-0 items-center justify-center text-white transition-colors duration-300 active:scale-95"
               aria-label="Abrir menu"
             >
-              {mobileMenuOpen ? <X size={34} strokeWidth={2.8} /> : <Menu size={38} strokeWidth={2.8} />}
+              {mobileMenuOpen ? <X size={31} strokeWidth={2.7} /> : <Menu size={35} strokeWidth={2.7} />}
             </button>
           </div>
 
-          {/* BUSCA MOBILE GRANDE - VISÍVEL SÓ NO TOPO, COMO HOSTINGER */}
+          {/* BUSCA MOBILE GRANDE - igual Hostinger: visível no topo, some no scroll */}
           <div
-            className={`relative overflow-visible transition-[max-height,opacity,margin,transform] duration-500 ease-out ${
+            className={`relative overflow-visible transition-[max-height,opacity,margin,transform] duration-300 ease-out ${
               scrolled && !mobileSearchOpen
                 ? "mt-0 max-h-0 -translate-y-2 opacity-0 pointer-events-none"
-                : "mt-8 max-h-36 translate-y-0 opacity-100"
+                : "mt-8 max-h-32 translate-y-0 opacity-100"
             }`}
           >
             <div className="flex rounded-[1.15rem] bg-white shadow-[0_16px_35px_rgba(0,0,0,0.22)] ring-1 ring-white/10 transition focus-within:shadow-[0_0_34px_rgba(250,204,21,0.42)]">
@@ -1591,7 +1585,6 @@ function Header({ voltarInicio, termoBusca, setTermoBusca, abrirProduto, resulta
             </div>
 
             {termoBusca && searchActive && <SearchResults mobile />}
-
           </div>
         </div>
       </div>
