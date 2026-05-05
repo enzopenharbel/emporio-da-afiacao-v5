@@ -600,7 +600,7 @@ export default function App() {
       <div className="bg-black text-white min-h-screen pb-20 md:pb-0">
         <Header voltarInicio={voltarInicio} termoBusca={termoBusca} setTermoBusca={setTermoBusca} abrirProduto={abrirProduto} resultadosBusca={resultadosBusca} />
 
-        <main className="pt-0 md:pt-32">
+        <main className="pt-[150px] md:pt-32">
           <section className="relative min-h-[430px] overflow-hidden border-b border-yellow-400/20">
             <img
               src={produtoAberto.img}
@@ -693,7 +693,7 @@ export default function App() {
       <div className="bg-black text-white min-h-screen pb-20 md:pb-0">
         <Header voltarInicio={voltarInicio} termoBusca={termoBusca} setTermoBusca={setTermoBusca} abrirProduto={abrirProduto} resultadosBusca={resultadosBusca} />
 
-        <main className="pt-0 md:pt-32">
+        <main className="pt-[150px] md:pt-32">
           <section className="relative min-h-[290px] md:min-h-[360px] overflow-hidden border-b border-yellow-400/20">
             <img
               src={categoriaAberta.img}
@@ -779,7 +779,7 @@ export default function App() {
       <Header voltarInicio={voltarInicio} termoBusca={termoBusca} setTermoBusca={setTermoBusca} abrirProduto={abrirProduto} resultadosBusca={resultadosBusca} />
 
       {/* HERO / BANNER ROTATIVO */}
-      <section id="inicio" className="pt-0 md:pt-32 bg-black">
+      <section id="inicio" className="pt-[150px] md:pt-32 bg-black">
         {/* HERO MOBILE ESTILO HOSTINGER - VÍDEO VISUAL ROTATIVO */}
         <div className="md:hidden bg-[radial-gradient(circle_at_50%_0%,rgba(250,204,21,0.13),transparent_24%),linear-gradient(180deg,#050505,#111_42%,#050505)] px-4 pb-8 pt-5">
           {(() => {
@@ -1329,8 +1329,8 @@ function Header({ voltarInicio, termoBusca, setTermoBusca, abrirProduto, resulta
 
         // Histerese: evita piscar quando a altura do topo muda perto do ponto de corte.
         setScrolled((atual) => {
-          if (!atual && y > 86) return true;
-          if (atual && y < 28) return false;
+          if (!atual && y > 150) return true;
+          if (atual && y < 60) return false;
           return atual;
         });
 
@@ -1422,7 +1422,7 @@ function Header({ voltarInicio, termoBusca, setTermoBusca, abrirProduto, resulta
 
   return (
     <header
-      className={`sticky md:fixed top-0 w-full z-[90] bg-black/96 backdrop-blur-xl border-b border-yellow-400/15 transition-all duration-500 ${
+      className={`fixed top-0 w-full z-[90] bg-transparent backdrop-blur-xl border-b border-yellow-400/15 transition-all duration-500 ${
         scrolled
           ? "shadow-[0_0_18px_rgba(250,204,21,0.18)]"
           : "shadow-[0_0_0_rgba(250,204,21,0)]"
