@@ -781,7 +781,7 @@ export default function App() {
       {/* HERO / BANNER ROTATIVO */}
       <section id="inicio" className="pt-0 md:pt-32 bg-black">
         {/* HERO MOBILE ESTILO HOSTINGER - VÍDEO VISUAL ROTATIVO */}
-        <div className="md:hidden bg-[#111] px-4 pb-8 pt-4">
+        <div className="md:hidden bg-[radial-gradient(circle_at_50%_0%,rgba(250,204,21,0.13),transparent_24%),linear-gradient(180deg,#050505,#111_42%,#050505)] px-4 pb-8 pt-5">
           {(() => {
             const mobileSlide = mobileVideoSlides[bannerIndex % mobileVideoSlides.length];
             const abrirAcaoMobile = () => {
@@ -803,19 +803,19 @@ export default function App() {
                     key={`${slide.titulo}-${i}`}
                     src={slide.bg}
                     alt={slide.titulo}
-                    className={`absolute inset-0 h-full w-full object-cover transition-all duration-[1800ms] ease-in-out ${
+                    className={`absolute inset-0 h-full w-full object-cover transition-all duration-[4200ms] ease-out ${
                       i === bannerIndex % mobileVideoSlides.length
-                        ? "opacity-100 scale-100"
-                        : "opacity-0 scale-110"
+                        ? "opacity-100 scale-[1.08]"
+                        : "opacity-0 scale-[1.16]"
                     }`}
                   />
                 ))}
 
-                <div className="absolute inset-0 bg-black/45" />
+                <div className="absolute inset-0 bg-black/42" />
                 <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.12)_0%,rgba(0,0,0,0.30)_34%,rgba(0,0,0,0.86)_100%)]" />
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_22%_18%,rgba(250,204,21,0.18),transparent_28%),radial-gradient(circle_at_88%_70%,rgba(250,204,21,0.12),transparent_32%)]" />
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_22%_18%,rgba(250,204,21,0.22),transparent_30%),radial-gradient(circle_at_88%_70%,rgba(250,204,21,0.15),transparent_32%)]" />
 
-                <div className="relative z-20 flex min-h-[520px] flex-col justify-end p-8 pb-7">
+                <div className="relative z-20 flex min-h-[520px] flex-col justify-end p-8 pb-7 animate-[fadeIn_.55s_ease-out]">
                   <p className="mb-3 text-[11px] font-black uppercase tracking-[0.24em] text-yellow-300 drop-shadow-[0_3px_14px_rgba(0,0,0,0.9)]">
                     {mobileSlide.eyebrow}
                   </p>
@@ -1524,13 +1524,13 @@ function Header({ voltarInicio, termoBusca, setTermoBusca, abrirProduto, resulta
         </nav>
       </div>
 
-      {/* HEADER MOBILE ESTILO HOSTINGER */}
+      {/* HEADER MOBILE ESTILO HOSTINGER - TRANSPARENTE NO TOPO, SÓLIDO AO SCROLL */}
       <div className="md:hidden">
         <div
-          className={`px-5 transition-[background-color,color,box-shadow,padding] duration-700 ease-out ${
+          className={`px-5 transition-[background-color,background-image,color,box-shadow,padding,border-color,backdrop-filter] duration-700 ease-out will-change-transform ${
             scrolled
-              ? "bg-white text-black shadow-[0_8px_28px_rgba(0,0,0,0.16)] pt-3 pb-3"
-              : "bg-[#111] text-white pt-4 pb-5"
+              ? "bg-[linear-gradient(180deg,rgba(5,5,5,0.98)_0%,rgba(9,8,5,0.96)_58%,rgba(0,0,0,0.94)_100%)] text-white border-b border-yellow-400/25 shadow-[0_12px_38px_rgba(0,0,0,0.72),0_0_24px_rgba(250,204,21,0.12)] pt-1.5 pb-1.5 backdrop-blur-xl"
+              : "bg-gradient-to-b from-black/62 via-black/34 to-transparent text-white border-b border-transparent pt-3.5 pb-4 backdrop-blur-[2px]"
           }`}
         >
           <div className="flex items-center justify-between gap-4">
@@ -1538,36 +1538,36 @@ function Header({ voltarInicio, termoBusca, setTermoBusca, abrirProduto, resulta
               <img
                 src="/logo.png"
                 alt="Empório da Afiação"
-                className={`object-contain object-left transition-all duration-700 ease-out [transform:scaleX(1.16)] [transform-origin:left_center] ${
+                className={`object-contain object-left transition-[width,height,filter,transform] duration-700 ease-out [transform:scaleX(1.22)] [transform-origin:left_center] ${
                   scrolled
-                    ? "h-[56px] w-[178px] drop-shadow-none"
-                    : "h-[76px] w-[218px] drop-shadow-[0_0_22px_rgba(250,204,21,0.65)]"
+                    ? "h-[43px] w-[176px] drop-shadow-[0_0_10px_rgba(250,204,21,0.25)]"
+                    : "h-[76px] w-[236px] drop-shadow-[0_0_24px_rgba(250,204,21,0.75)]"
                 }`}
               />
             </button>
 
             <button
               onClick={() => setMobileMenuOpen((prev) => !prev)}
-              className={`inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl transition-all duration-700 ease-out active:scale-95 ${
+              className={`inline-flex shrink-0 items-center justify-center rounded-2xl transition-all duration-700 ease-out active:scale-95 ${
                 scrolled
-                  ? "text-black hover:bg-black/5"
-                  : "text-yellow-400 hover:bg-yellow-400/10"
+                  ? "h-10 w-10 border border-yellow-400/35 bg-black/35 text-yellow-400 shadow-[0_0_18px_rgba(250,204,21,0.10)] hover:bg-yellow-400 hover:text-black"
+                  : "h-12 w-12 text-yellow-400 hover:bg-yellow-400/10"
               }`}
               aria-label="Abrir menu"
             >
-              {mobileMenuOpen ? <X size={34} strokeWidth={2.4} /> : <Menu size={36} strokeWidth={2.4} />}
+              {mobileMenuOpen ? <X size={scrolled ? 25 : 34} strokeWidth={2.4} /> : <Menu size={scrolled ? 28 : 36} strokeWidth={2.4} />}
             </button>
           </div>
 
           {/* BUSCA MOBILE GRANDE */}
           <div
-            className={`relative overflow-visible transition-[max-height,opacity,margin] duration-700 ease-out ${
+            className={`relative overflow-visible transition-[max-height,opacity,margin,transform] duration-700 ease-out ${
               scrolled && !mobileSearchOpen
-                ? "mt-0 max-h-0 opacity-0 pointer-events-none"
-                : "mt-6 max-h-24 opacity-100"
+                ? "mt-0 max-h-0 -translate-y-1 opacity-0 pointer-events-none"
+                : "mt-6 max-h-24 translate-y-0 opacity-100"
             }`}
           >
-            <div className="flex rounded-[1.35rem] bg-white shadow-[0_14px_34px_rgba(0,0,0,0.24)] focus-within:shadow-[0_0_34px_rgba(250,204,21,0.50)] transition">
+            <div className="flex rounded-[1.35rem] bg-white shadow-[0_14px_34px_rgba(0,0,0,0.24)] ring-1 ring-yellow-400/10 focus-within:shadow-[0_0_34px_rgba(250,204,21,0.50)] transition">
               <input
                 value={termoBusca}
                 onChange={(e) => setTermoBusca(e.target.value)}
@@ -1593,6 +1593,22 @@ function Header({ voltarInicio, termoBusca, setTermoBusca, abrirProduto, resulta
             </div>
 
             {termoBusca && searchActive && <SearchResults mobile />}
+
+            <div className="mt-3 flex gap-2 overflow-x-auto pb-1 [-ms-overflow-style:none] [scrollbar-width:none]">
+              {["Alicates", "Afiação", "Tesouras"].map((atalho) => (
+                <button
+                  key={atalho}
+                  type="button"
+                  onClick={() => {
+                    setTermoBusca(atalho);
+                    setSearchActive(true);
+                  }}
+                  className="shrink-0 rounded-full border border-yellow-400/25 bg-black/42 px-3.5 py-1.5 text-xs font-bold text-yellow-300 backdrop-blur-md"
+                >
+                  {atalho}
+                </button>
+              ))}
+            </div>
           </div>
         </div>
       </div>
