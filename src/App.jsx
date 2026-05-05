@@ -1529,7 +1529,7 @@ function Header({ voltarInicio, termoBusca, setTermoBusca, abrirProduto, resulta
         <div
           className={`px-8 transition-[background-color,color,box-shadow,padding,border-color,backdrop-filter] duration-500 ease-out ${
             scrolled
-              ? "bg-white text-black border-b border-black/5 pt-4 pb-4 shadow-[0_10px_28px_rgba(0,0,0,0.12)]"
+              ? "bg-[#050505]/98 text-yellow-400 border-b border-yellow-400/15 pt-2 pb-2 shadow-[0_10px_28px_rgba(0,0,0,0.45),0_0_22px_rgba(250,204,21,0.10)] backdrop-blur-xl"
               : "bg-[#141416] text-white border-b border-white/5 pt-6 pb-7 shadow-none"
           }`}
         >
@@ -1540,7 +1540,7 @@ function Header({ voltarInicio, termoBusca, setTermoBusca, abrirProduto, resulta
                 alt="Empório da Afiação"
                 className={`object-contain object-left transition-[width,height,filter,transform] duration-500 ease-out [transform:scaleX(1.16)] [transform-origin:left_center] ${
                   scrolled
-                    ? "h-[54px] w-[230px] brightness-0 contrast-125"
+                    ? "h-[44px] w-[210px] drop-shadow-[0_0_14px_rgba(250,204,21,0.55)]"
                     : "h-[78px] w-[255px] drop-shadow-[0_0_22px_rgba(250,204,21,0.55)]"
                 }`}
               />
@@ -1549,7 +1549,7 @@ function Header({ voltarInicio, termoBusca, setTermoBusca, abrirProduto, resulta
             <button
               onClick={() => setMobileMenuOpen((prev) => !prev)}
               className={`inline-flex shrink-0 items-center justify-center transition-colors duration-500 active:scale-95 ${
-                scrolled ? "text-black" : "text-white"
+                scrolled ? "text-yellow-400" : "text-white"
               }`}
               aria-label="Abrir menu"
             >
@@ -1592,9 +1592,6 @@ function Header({ voltarInicio, termoBusca, setTermoBusca, abrirProduto, resulta
 
             {termoBusca && searchActive && <SearchResults mobile />}
 
-            <p className="mt-5 text-[1.02rem] leading-snug text-white/90">
-              <strong className="font-black text-white">Atendimento direto</strong> pelo WhatsApp em produtos e serviços.
-            </p>
           </div>
         </div>
       </div>
